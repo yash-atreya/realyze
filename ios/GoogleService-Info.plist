@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>68887475033-335g12ijc6tn612tvsv339ijrm7o3o3u.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.68887475033-335g12ijc6tn612tvsv339ijrm7o3o3u</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBOX84dljGNmq9CUweMjCjiJ7f84f2xUIg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>68887475033</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.realze</string>
+	<key>PROJECT_ID</key>
+	<string>realyze-07</string>
+	<key>STORAGE_BUCKET</key>
+	<string>realyze-07.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:68887475033:ios:ccd4a8f9a346fb9d3b9248</string>
+	<key>DATABASE_URL</key>
+	<string>https://realyze-07.firebaseio.com</string>
+</dict>
+</plist>

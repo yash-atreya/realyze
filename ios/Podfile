@@ -34,6 +34,9 @@ target 'realyze' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+  #Firebase
+  pod 'Firebase/Analytics'
+
   target 'realyzeTests' do
     inherit! :search_paths
     # Pods for testing
