@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {View, Text, Button, TextInput} from 'react-native';
 import auth from '@react-native-firebase/auth';
+import NetInfo from '@react-native-community/netinfo';
+
 
 class LogInScreen extends Component {
   constructor(props) {
@@ -14,6 +16,17 @@ class LogInScreen extends Component {
       loading: Boolean,
       isOnline: Boolean,
     };
+  }
+
+  componentDidMount() {
+    NetInfo.fetch().then(state => {
+        if(state.isInternetReachable) {
+            this.setState({isOnline: true});
+        }
+        else {
+            this.setState({isOnline: false});
+        }
+      });
   }
 
   onSignIn() {

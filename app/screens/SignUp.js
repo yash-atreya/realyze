@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, Button, TextInput} from 'react-native';
 import auth from '@react-native-firebase/auth';
+import NetInfo from '@react-native-community/netinfo';
 // import firestore from '@react-native-firebase/firestore';
 
 class SignUpScreen extends Component {
@@ -18,7 +19,18 @@ class SignUpScreen extends Component {
     };
   }
 
-  onButtonPress() {
+  componentDidMount() {
+    NetInfo.fetch().then(state => {
+        if(state.isInternetReachable) {
+            this.setState({isOnline: true});
+        }
+        else {
+            this.setState({isOnline: false});
+        }
+      });
+  }
+
+  onSignUp() {
     const {email, password} = this.state;
     console.log(email);
     console.log(password);
@@ -111,7 +123,7 @@ class SignUpScreen extends Component {
         <Button
           title="Sign Up"
           onPress={() => {
-            this.onButtonPress();
+            this.onSignUp();
           }}
         />
       </View>

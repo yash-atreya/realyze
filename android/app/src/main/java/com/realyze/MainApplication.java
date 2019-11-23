@@ -10,8 +10,13 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+//NetInfo
+import com.reactnativecommunity.netinfo.NetInfoPackage;
+
+
 //Auth
 import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
+
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -29,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
           new ReactNativeFirebaseAuthPackage();
+          new NetInfoPackage();
           return packages;
         }
 
