@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "68887475033",
+    "firebase_url": "https://realyze-07.firebaseio.com",
+    "project_id": "realyze-07",
+    "storage_bucket": "realyze-07.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:68887475033:android:00b9c7a7abf349d83b9248",
+        "android_client_info": {
+          "package_name": "com.realyze"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "68887475033-t55cvbevemqa7iius9sa6ae3bjs68s82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtoQ6kGVFURtFYEbYb4qG9dX-_DOn09P4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "68887475033-t55cvbevemqa7iius9sa6ae3bjs68s82.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "68887475033-335g12ijc6tn612tvsv339ijrm7o3o3u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.realze"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
