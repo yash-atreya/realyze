@@ -3,6 +3,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 //SCREEN IMPORTS
 import LogInScreen from './app/screens/LogIn';
+import SignUpScreen from './app/screens/SignUp';
 
 // const AuthLoadingScreen = props => {
 //   function checkUser() {
@@ -24,9 +25,9 @@ const AuthStack = createStackNavigator(
     LogIn: {
       screen: LogInScreen,
     },
-    // SignUp: {
-    //   screen: SignUpScreen,
-    // },
+    SignUp: {
+      screen: SignUpScreen,
+    },
   },
   {
     initialRouteName: 'LogIn',
