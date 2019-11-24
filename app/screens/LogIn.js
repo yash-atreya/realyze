@@ -3,7 +3,6 @@ import {View, Text, Button, TextInput} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import NetInfo from '@react-native-community/netinfo';
 
-
 class LogInScreen extends Component {
   constructor(props) {
     super(props);
@@ -21,17 +20,15 @@ class LogInScreen extends Component {
 
   netInfo() {
     NetInfo.fetch().then(state => {
-      if(state.isInternetReachable) {
-          this.setState({isOnline: true});
-      }
-      else {
-          this.setState({isOnline: false});
+      if (state.isInternetReachable) {
+        this.setState({isOnline: true});
+      } else {
+        this.setState({isOnline: false});
       }
     });
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   onSignIn() {
     const {email, password} = this.state;
@@ -86,4 +83,3 @@ export default LogInScreen;
 /* NOTES 
 Setup Forgot paswword or email?
 */
-

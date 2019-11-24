@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, Button, TextInput} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import NetInfo from '@react-native-community/netinfo';
-// import firestore from '@react-native-firebase/firestore';
+import firestore from '@react-native-firebase/firestore';
 
 class SignUpScreen extends Component {
   constructor(props) {
@@ -21,13 +21,12 @@ class SignUpScreen extends Component {
 
   componentDidMount() {
     NetInfo.fetch().then(state => {
-        if(state.isInternetReachable) {
-            this.setState({isOnline: true});
-        }
-        else {
-            this.setState({isOnline: false});
-        }
-      });
+      if (state.isInternetReachable) {
+        this.setState({isOnline: true});
+      } else {
+        this.setState({isOnline: false});
+      }
+    });
   }
 
   onSignUp() {
@@ -43,8 +42,9 @@ class SignUpScreen extends Component {
       .then(() => {
         this.onEmailVerification();
         this.onCreateUser();
-        // this.setupMetrics();
+        this.setupMetrics();
       })
+      .then(() => this.props.navigation.navigate('Profile'))
       .catch(err => {
         console.log('ERROR SIGNING UP');
         console.log(err);
@@ -54,38 +54,38 @@ class SignUpScreen extends Component {
   onCreateUser() {
     const {email, username} = this.state;
     console.log('onCreateUser()');
-    //var uid = firebase.auth().currentUser.uid;
+    var uid = auth().currentUser.uid;
     auth()
       .currentUser.updateProfile({
         displayName: username,
       })
       .then('Display Name Updated')
       .catch(err => console.log('Display Name', err));
-    // firestore()
-    //   .collection('Users')
-    //   .doc(`${uid}`)
-    //   .set({
-    //     email: email,
-    //     username: username,
-    //   })
-    //   .then(console.log('Document Written in db'))
-    //   .catch(err => console.log('error writing document', err));
+    firestore()
+      .collection('Users')
+      .doc(`${uid}`)
+      .set({
+        email: email,
+        username: username,
+      })
+      .then(console.log('Document Written in db'))
+      .catch(err => console.log('error writing document', err));
   }
-//   setupMetrics() {
-//     const uid = firebase.auth().currentUser.uid;
-//     firestore()
-//       .collection('Metrics')
-//       .doc(`${uid}`)
-//       .set({
-//         totalTasks: null,
-//         totalCompleted: null,
-//         beforeDeadline: null,
-//         afterDeadline: null,
-//         notCompleted: null,
-//       })
-//       .then(() => console.log('Metrics are set'))
-//       .catch(err => console.log('err setting up metrics', err));
-//   }
+  setupMetrics() {
+    const uid = auth().currentUser.uid;
+    firestore()
+      .collection('Metrics')
+      .doc(`${uid}`)
+      .set({
+        totalTasks: null,
+        totalCompleted: null,
+        beforeDeadline: null,
+        afterDeadline: null,
+        notCompleted: null,
+      })
+      .then(() => console.log('Metrics are set'))
+      .catch(err => console.log('err setting up metrics', err));
+  }
   onEmailVerification() {
     auth()
       .currentUser.sendEmailVerification()
