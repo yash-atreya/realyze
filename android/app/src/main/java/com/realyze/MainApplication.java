@@ -21,6 +21,8 @@ import com.reactnativecommunity.netinfo.NetInfoPackage;
 import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
 //Firestore
 import io.invertase.firebase.firestore.ReactNativeFirebaseFirestorePackage;
+//Cloud Functions
+import io.invertase.firebase.functions.ReactNativeFirebaseFunctionsPackage;
 //RNDateTimePicker
 //import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
 
@@ -43,6 +45,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
           new ReactNativeFirebaseAuthPackage();
           new NetInfoPackage();
           new ReactNativeFirebaseFirestorePackage();
+          new ReactNativeFirebaseFunctionsPackage();
           //new RNDateTimePickerPackage();
           return packages;
         }

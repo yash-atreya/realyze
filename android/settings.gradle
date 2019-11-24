@@ -8,6 +8,11 @@ project(':@react-native-firebase_firestore').projectDir = new File(rootProject.p
 //RNDateTimePicker
 //include ':react-native-datetimepicker'
 //project(':react-native-datetimepicker').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/datetimepicker/android')
+
+//Cloud Functions
+include ':@react-native-firebase_functions'
+project(':@react-native-firebase_functions').projectDir = new File(rootProject.projectDir, './../node_modules/@react-native-firebase/functions/android')
+
 //Auth
 include ':@react-native-firebase_auth'
 project(':@react-native-firebase_auth').projectDir = new File(rootProject.projectDir, './../node_modules/@react-native-firebase/auth/android')
