@@ -10,15 +10,21 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+//Multidex
+import androidx.multidex.MultiDexApplication;
+
 //NetInfo
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 
 
 //Auth
 import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
+//Firestore
+import io.invertase.firebase.firestore.ReactNativeFirebaseFirestorePackage;
+//
 
 
-public class MainApplication extends Application implements ReactApplication {
+public class MainApplication extends MultiDexApplication implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
@@ -35,6 +41,7 @@ public class MainApplication extends Application implements ReactApplication {
           // packages.add(new MyReactNativePackage());
           new ReactNativeFirebaseAuthPackage();
           new NetInfoPackage();
+          new ReactNativeFirebaseFirestorePackage();
           return packages;
         }
 
