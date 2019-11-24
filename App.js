@@ -5,6 +5,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import LogInScreen from './app/screens/LogIn';
 import SignUpScreen from './app/screens/SignUp';
 import ProfileScreen from './app/screens/Profile';
+import ReAuthScreen from './app/screens/ReAuth';
 
 // const AuthLoadingScreen = props => {
 //   function checkUser() {
@@ -38,6 +39,9 @@ const AuthStack = createStackNavigator(
 const MainStack = createStackNavigator({
   Profile: {
     screen: ProfileScreen,
+  },
+  ReAuth: {
+    screen: ReAuthScreen,
   },
 });
 

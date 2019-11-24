@@ -30,25 +30,33 @@ class SignUpScreen extends Component {
   }
 
   onSignUp() {
-    const {email, password} = this.state;
-    console.log(email);
-    console.log(password);
-    auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        console.log('=======Signed UP========');
-        this.props.navigation.navigate('Profile');
-      })
-      .then(() => {
-        this.onEmailVerification();
-        this.onCreateUser();
-        this.setupMetrics();
-      })
-      .then(() => this.props.navigation.navigate('Profile'))
-      .catch(err => {
-        console.log('ERROR SIGNING UP');
-        console.log(err);
-      });
+    if (
+      this.state.email === '' ||
+      this.state.password === '' ||
+      this.state.username === ''
+    ) {
+      //SHOW ALERT @TANAY
+    } else {
+      const {email, password} = this.state;
+      console.log(email);
+      console.log(password);
+      auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          console.log('=======Signed UP========');
+          this.props.navigation.navigate('Profile');
+        })
+        .then(() => {
+          this.onEmailVerification();
+          this.onCreateUser();
+          this.setupMetrics();
+        })
+        .then(() => this.props.navigation.navigate('Profile'))
+        .catch(err => {
+          console.log('ERROR SIGNING UP');
+          console.log(err);
+        });
+    }
   }
 
   onCreateUser() {
