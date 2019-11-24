@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, Button} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-// import functions from '@react-native-firebase/functions';
+import functions from '@react-native-firebase/functions';
 
 //What needs to be displayed in the UserProfile ?? @DHARMI
 
@@ -118,20 +118,20 @@ class UserProfileScreen extends Component {
   //     });
   // }
 
-//   sendRequest() {
-//     const uid = auth().currentUser.uid;
-//     functions()
-//       .httpsCallable('sendRequest')({
-//         senderId: uid,
-//         targetId: this.profileId,
-//         status: 'sent',
-//       })
-//       .then(() => {
-//         console.log('Request Sent');
-//         this.setState({requestSent: true});
-//       })
-//       .catch(err => console.log('error sending request', err));
-//   }
+  sendRequest() {
+    const uid = auth().currentUser.uid;
+    functions()
+      .httpsCallable('sendRequest')({
+        senderId: uid,
+        targetId: this.profileId,
+        status: 'sent',
+      })
+      .then(() => {
+        console.log('Request Sent');
+        this.setState({requestSent: true});
+      })
+      .catch(err => console.log('error sending request', err));
+  }
 
   render() {
     return (
