@@ -15,6 +15,8 @@ import androidx.multidex.MultiDexApplication;
 
 //NetInfo
 import com.reactnativecommunity.netinfo.NetInfoPackage;
+//Firebase Messaging
+import io.invertase.firebase.messaging.ReactNativeFirebaseMessagingPackage;
 
 
 //Auth
@@ -46,6 +48,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
           new NetInfoPackage();
           new ReactNativeFirebaseFirestorePackage();
           new ReactNativeFirebaseFunctionsPackage();
+          new ReactNativeFirebaseMessagingPackage();
           //new RNDateTimePickerPackage();
           return packages;
         }

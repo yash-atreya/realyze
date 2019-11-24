@@ -16,6 +16,7 @@
     "@react-native-firebase/auth": "6.0.4",
     "@react-native-firebase/firestore": "6.0.4",
     "@react-native-firebase/functions": "^6.0.4",
+    "@react-native-firebase/messaging": "^6.0.4",
     "react": "16.9.0",
     "react-native": "0.61.4",
     "react-native-gesture-handler": "1.5.1",

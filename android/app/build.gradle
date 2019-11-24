@@ -198,6 +198,8 @@ dependencies {
     implementation project(path: ":@react-native-firebase_firestore")
     //Cloud Functions
     implementation project(path: ":@react-native-firebase_functions")
+    //Firebase Messaging
+    implementation project(path: ":@react-native-firebase_messaging")
     //RNDateTimePicker
     //implementation project(':react-native-datetimepicker')
 

@@ -13,6 +13,9 @@ project(':@react-native-firebase_firestore').projectDir = new File(rootProject.p
 include ':@react-native-firebase_functions'
 project(':@react-native-firebase_functions').projectDir = new File(rootProject.projectDir, './../node_modules/@react-native-firebase/functions/android')
 
+//Firebase Messaging
+include ':@react-native-firebase_messaging'
+project(':@react-native-firebase_messaging').projectDir = new File(rootProject.projectDir, './../node_modules/@react-native-firebase/messaging/android')
 //Auth
 include ':@react-native-firebase_auth'
 project(':@react-native-firebase_auth').projectDir = new File(rootProject.projectDir, './../node_modules/@react-native-firebase/auth/android')
