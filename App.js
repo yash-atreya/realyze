@@ -8,6 +8,7 @@ import ProfileScreen from './app/screens/Profile';
 import ReAuthScreen from './app/screens/ReAuth';
 import EditProfileScreen from './app/screens/EditProfile';
 import HomeScreen from './app/screens/Home';
+import CreateTaskScreen from './app/screens/CreateTask';
 
 // const AuthLoadingScreen = props => {
 //   function checkUser() {
@@ -51,6 +52,9 @@ const MainStack = createStackNavigator(
     },
     Home: {
       screen: HomeScreen,
+    },
+    CreateTask: {
+      screen: CreateTaskScreen,
     },
   },
   {
