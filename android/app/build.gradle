@@ -191,6 +191,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
     //Auth
     implementation project(path: ":@react-native-firebase_auth")
+    //Firestore
+    implementation project(path: ":@react-native-firebase_firestore")
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

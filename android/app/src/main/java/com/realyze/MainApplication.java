@@ -16,6 +16,9 @@ import com.reactnativecommunity.netinfo.NetInfoPackage;
 
 //Auth
 import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
+//Firestore
+import io.invertase.firebase.firestore.ReactNativeFirebaseFirestorePackage;
+//
 
 
 public class MainApplication extends Application implements ReactApplication {
@@ -35,6 +38,7 @@ public class MainApplication extends Application implements ReactApplication {
           // packages.add(new MyReactNativePackage());
           new ReactNativeFirebaseAuthPackage();
           new NetInfoPackage();
+          new ReactNativeFirebaseFirestorePackage();
           return packages;
         }
 

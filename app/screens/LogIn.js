@@ -7,7 +7,6 @@ import NetInfo from '@react-native-community/netinfo';
 class LogInScreen extends Component {
   constructor(props) {
     super(props);
-    console.log('LOGIN SCREEN');
     this.state = {
       email: '',
       password: '',
@@ -16,17 +15,22 @@ class LogInScreen extends Component {
       loading: Boolean,
       isOnline: Boolean,
     };
+
+    this.netInfo(); //Subscribe instead
+  }
+
+  netInfo() {
+    NetInfo.fetch().then(state => {
+      if(state.isInternetReachable) {
+          this.setState({isOnline: true});
+      }
+      else {
+          this.setState({isOnline: false});
+      }
+    });
   }
 
   componentDidMount() {
-    NetInfo.fetch().then(state => {
-        if(state.isInternetReachable) {
-            this.setState({isOnline: true});
-        }
-        else {
-            this.setState({isOnline: false});
-        }
-      });
   }
 
   onSignIn() {
