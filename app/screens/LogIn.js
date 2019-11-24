@@ -7,7 +7,6 @@ import NetInfo from '@react-native-community/netinfo';
 class LogInScreen extends Component {
   constructor(props) {
     super(props);
-    console.log('LOGIN SCREEN');
     this.state = {
       email: '',
       password: '',
