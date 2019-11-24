@@ -7,6 +7,7 @@ import SignUpScreen from './app/screens/SignUp';
 import ProfileScreen from './app/screens/Profile';
 import ReAuthScreen from './app/screens/ReAuth';
 import EditProfileScreen from './app/screens/EditProfile';
+import HomeScreen from './app/screens/Home';
 
 // const AuthLoadingScreen = props => {
 //   function checkUser() {
@@ -37,17 +38,25 @@ const AuthStack = createStackNavigator(
   },
 );
 
-const MainStack = createStackNavigator({
-  Profile: {
-    screen: ProfileScreen,
+const MainStack = createStackNavigator(
+  {
+    Profile: {
+      screen: ProfileScreen,
+    },
+    ReAuth: {
+      screen: ReAuthScreen,
+    },
+    EditProfile: {
+      screen: EditProfileScreen,
+    },
+    Home: {
+      screen: HomeScreen,
+    },
   },
-  ReAuth: {
-    screen: ReAuthScreen,
+  {
+    initialRouteName: 'Home',
   },
-  EditProfile: {
-    screen: EditProfileScreen,
-  },
-});
+);
 
 const AppContainer = createAppContainer(
   createSwitchNavigator(

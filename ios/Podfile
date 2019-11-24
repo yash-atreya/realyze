@@ -38,6 +38,7 @@ target 'realyze' do
   pod 'Firebase/Analytics'
 
   pod 'react-native-netinfo', :path => '../node_modules/@react-native-community/netinfo'
+  pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker/RNDateTimePicker.podspec'
 
   target 'realyzeTests' do
     inherit! :search_paths
