@@ -20,8 +20,8 @@
 		84740E226A6F808EAFF288C4 /* libPods-realyze-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E00460111229448173F8AD6A /* libPods-realyze-tvOSTests.a */; };
 		8986DE4F238B18F7001B8F5F /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8986DE4E238B18F7001B8F5F /* NotificationService.m */; };
 		8986DE53238B18F7001B8F5F /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8986DE4B238B18F7001B8F5F /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		89BD6BD12389DFD400D6B10B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89BD6BD02389DFD400D6B10B /* GoogleService-Info.plist */; };
-		89BD6BD22389DFD400D6B10B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89BD6BD02389DFD400D6B10B /* GoogleService-Info.plist */; };
+		8986DE5E238B31F9001B8F5F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8986DE5D238B31F9001B8F5F /* GoogleService-Info.plist */; };
+		8986DE5F238B31F9001B8F5F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8986DE5D238B31F9001B8F5F /* GoogleService-Info.plist */; };
 		90A51E66746239418A97B72E /* libPods-realyzeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A2A254049C51ABAB2D028B /* libPods-realyzeTests.a */; };
 		B21FFB7F98BB3490D7161E00 /* libPods-realyze-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE42D6DA1F6EC9F867E9338 /* libPods-realyze-OneSignalNotificationServiceExtension.a */; };
 		D92D750102930FF57FC38672 /* libPods-realyze.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB88DD8FD6E658003AF5DBB6 /* libPods-realyze.a */; };
@@ -92,7 +92,7 @@
 		8986DE4E238B18F7001B8F5F /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
 		8986DE50238B18F7001B8F5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8986DE57238B237D001B8F5F /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
-		89BD6BD02389DFD400D6B10B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8986DE5D238B31F9001B8F5F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9A177FBBE6D14F5AAA82DF39 /* Pods-realyze-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-realyze-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-realyze-OneSignalNotificationServiceExtension/Pods-realyze-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		A18FC9142A3B446CB92F8E04 /* Pods-realyze.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-realyze.release.xcconfig"; path = "Target Support Files/Pods-realyze/Pods-realyze.release.xcconfig"; sourceTree = "<group>"; };
 		AFC8F4BBF7E97E2BB1ECC92F /* Pods-realyze.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-realyze.debug.xcconfig"; path = "Target Support Files/Pods-realyze/Pods-realyze.debug.xcconfig"; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 				8986DE15238B1515001B8F5F /* realyze.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				89BD6BD02389DFD400D6B10B /* GoogleService-Info.plist */,
+				8986DE5D238B31F9001B8F5F /* GoogleService-Info.plist */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -424,7 +424,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89BD6BD22389DFD400D6B10B /* GoogleService-Info.plist in Resources */,
+				8986DE5F238B31F9001B8F5F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,7 +434,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				89BD6BD12389DFD400D6B10B /* GoogleService-Info.plist in Resources */,
+				8986DE5E238B31F9001B8F5F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

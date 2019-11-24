@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>68887475033-335g12ijc6tn612tvsv339ijrm7o3o3u.apps.googleusercontent.com</string>
+	<string>68887475033-f3f6561co3ob3tvaliok6og69jjmicpd.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.68887475033-335g12ijc6tn612tvsv339ijrm7o3o3u</string>
+	<string>com.googleusercontent.apps.68887475033-f3f6561co3ob3tvaliok6og69jjmicpd</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBOX84dljGNmq9CUweMjCjiJ7f84f2xUIg</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.realze</string>
+	<string>com.realyze</string>
 	<key>PROJECT_ID</key>
 	<string>realyze-07</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:68887475033:ios:ccd4a8f9a346fb9d3b9248</string>
+	<string>1:68887475033:ios:90b3a35b3fc0c5053b9248</string>
 	<key>DATABASE_URL</key>
 	<string>https://realyze-07.firebaseio.com</string>
 </dict>
