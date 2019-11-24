@@ -15,20 +15,6 @@ class ProfileScreen extends Component {
     this.props.navigation.navigate('ReAuth', {code: 3});
   }
 
-  editProfile() {
-    const uid = auth().currentUser.uid;
-    // auth().currentUser.updateProfile({
-    //changing user metadata here
-    // })
-    // firestore().collection('Users').doc(`${uid}`).update({
-    //   username: null,
-    //   email: null,
-    //   profilePic: null,
-    //   bio: null,
-    // });
-    // Edit profile pic using firebase storage.
-  }
-
   render() {
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>

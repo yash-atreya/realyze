@@ -6,6 +6,7 @@ import LogInScreen from './app/screens/LogIn';
 import SignUpScreen from './app/screens/SignUp';
 import ProfileScreen from './app/screens/Profile';
 import ReAuthScreen from './app/screens/ReAuth';
+import EditProfileScreen from './app/screens/EditProfile';
 
 // const AuthLoadingScreen = props => {
 //   function checkUser() {
@@ -42,6 +43,9 @@ const MainStack = createStackNavigator({
   },
   ReAuth: {
     screen: ReAuthScreen,
+  },
+  EditProfile: {
+    screen: EditProfileScreen,
   },
 });
 
