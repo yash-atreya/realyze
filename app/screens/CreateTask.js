@@ -4,6 +4,7 @@ import auth from '@react-native-firebase/auth';
 import {TextInput} from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import NetInfo from '@react-native-community/netinfo';
 // import ColorPalette from 'react-native-color-palette';
 
 class CreateTaskScreen extends Component {
@@ -14,15 +15,17 @@ class CreateTaskScreen extends Component {
       isDatePickerVisible: false,
       dueDate: '',
       dueTime: '',
-    //   selectedColor: '',
+      //   selectedColor: '',
       groups: [],
       title: '',
+      isOnline: Boolean, //Add NetInfo @Yash
     };
     this.uid = auth().currentUser.uid;
     this.displayName = auth().currentUser.displayName;
   }
 
   onCreateTask() {
+    //ADD RESTRICTION FOR FILLING ALL TextInputs @TANAY and show alert if not.
     //Possibly move to cloud functions as we might call this from this page and also select group page.
     const {title, desc, dueTime, dueDate} = this.state;
     console.log('Create Task Method ' + title + ' ' + desc);
@@ -49,7 +52,8 @@ class CreateTaskScreen extends Component {
               status: 'pending',
             });
           })
-          .then(() => console.log('task created'));
+          .then(() => console.log('task created'))
+          .then(() => this.props.navigation.navigate('AllTasks'));
       })
       .catch(err => console.log('error', err)); // IF NO GRP IS SELECTED ??
   }
