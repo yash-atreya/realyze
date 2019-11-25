@@ -6,6 +6,7 @@ import firestore from '@react-native-firebase/firestore';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import NetInfo from '@react-native-community/netinfo';
 // import ColorPalette from 'react-native-color-palette';
+import {Appearance} from 'react-native-appearance';
 
 class CreateTaskScreen extends Component {
   constructor(props) {
@@ -86,6 +87,8 @@ class CreateTaskScreen extends Component {
     this.hideDatePicker();
   };
   render() {
+    const colorScheme = Appearance.getColorScheme();
+    console.log(colorScheme);
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <Text>Create Task</Text>
@@ -112,12 +115,14 @@ class CreateTaskScreen extends Component {
           isVisible={this.state.isTimePickerVisible}
           onConfirm={this.handleTimePicked}
           onCancel={this.hideTimePicker}
+          isDarkModeEnabled={colorScheme === 'dark'}
         />
         <DateTimePicker
           mode="date"
           isVisible={this.state.isDatePickerVisible}
           onConfirm={this.handleDatePicked}
           onCancel={this.hideDatePicker}
+          isDarkModeEnabled={colorScheme === 'dark'}
         />
         {/* <ColorPalette
           onChange={color => (this.selectedColor = color)}
