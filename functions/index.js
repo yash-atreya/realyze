@@ -8,6 +8,27 @@ admin.initializeApp();
 //   response.send('Hello from Firebase!');
 // });
 
+//======================ACCEPT REQUEST==========================//
+exports.onAcceptRequest = functions.https.onCall((data, context) => {
+  const targetId = data.targetId;
+  const senderId = data.senderId;
+  return admin
+    .firestore()
+    .collection('Friendships')
+    .doc()
+    .set({
+      targetId: targetId,
+      senderId: senderId,
+      timeStamp: new Date(),
+    })
+    .then(() => {
+      console.log('Befriended');
+      return null;
+      //NOTIFICATION SENT TO uid2(senderId)
+    })
+    .catch(err => console.log('errrrrr', err));
+});
+
 //======================SEND REQUEST==========================//
 exports.sendRequest = functions.https.onCall((data, context) => {
   const senderId = data.senderId;

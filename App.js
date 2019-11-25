@@ -16,6 +16,7 @@ import AllTasksScreen from './app/screens/AllTasks';
 import AddFriendsScreen from './app/screens/AddFriends';
 import AllFriendsScreen from './app/screens/AllFriends';
 import UserProfileScreen from './app/screens/UserProfile';
+import FriendRequestsScreen from './app/screens/FriendRequests';
 
 const AuthLoadingScreen = props => {
   function checkUser() {
@@ -74,6 +75,9 @@ const MainStack = createStackNavigator(
     },
     UserProfile: {
       screen: UserProfileScreen,
+    },
+    FriendRequests: {
+      screen: FriendRequestsScreen,
     },
   },
   {
