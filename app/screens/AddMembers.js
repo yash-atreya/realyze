@@ -1,0 +1,227 @@
+import React, {Component} from 'react';
+import {View, Button, FlatList} from 'react-native';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+import AddMembersComp from '../components/AddMembersComp';
+import functions from '@react-native-firebase/functions';
+
+class AddMembersScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.uid = auth().currentUser.uid;
+    this.username = auth().currentUser.displayName;
+    this.email = auth().currentUser.email;
+    this.state = {
+      friends: [],
+      friendsData: [],
+      members: [
+        {
+          uid: `${this.uid}`,
+          username: `${this.username}`,
+        },
+      ],
+      docId: '',
+      addMembersToExisting: false,
+    };
+    this.tempFriends = [];
+    this.tempFriendsData = [];
+    console.log('Add Members Screen');
+    this.name = this.props.navigation.getParam('name');
+    // this.desc = this.props.navigation.getParam('desc');
+    this.code = this.props.navigation.getParam('code');
+    if (this.code) {
+      this.setState({addMembersToExisting: true});
+      this.groupId = this.props.navigation.getParam('groupId');
+    }
+  }
+
+  componentDidMount() {
+    this.fetchFriends()
+      .then(() =>
+        this.setState({
+          friends: this.tempFriends,
+        }),
+      )
+      .then(() => this.fetchEachFriend());
+  }
+
+  async fetchFriends() {
+    const uid = auth().currentUser.uid;
+    await firestore()
+      .collection('Friendships')
+      .where('targetId', '==', `${uid}`)
+      .get()
+      .then(doc => {
+        if (doc.empty) {
+          null;
+          console.log('DOC: ', doc.empty);
+        } else {
+          doc.forEach(snap => {
+            console.log(snap.data().senderId);
+            this.tempFriends.push(snap.data().senderId);
+            console.log(this.tempFriends);
+          });
+        }
+      })
+      .catch(err => console.log('Error DOC1 ', err));
+    await firestore()
+      .collection('Friendships')
+      .where('senderId', '==', `${uid}`)
+      .get()
+      .then(doc => {
+        if (doc.empty) {
+          null;
+          console.log('DOC2: ', doc.empty);
+        } else {
+          doc.forEach(snap => {
+            console.log(snap.data().targetId);
+            this.tempFriends.push(snap.data().targetId);
+            console.log(this.tempFriends);
+          });
+        }
+      })
+      .catch(err => console.log('Error DOC2 ', err));
+  }
+
+  fetchEachFriend() {
+    this.state.friends.forEach(uid => {
+      console.log('UID: ', uid);
+      firestore()
+        .collection('Users')
+        .doc(`${uid}`)
+        .get()
+        .then(doc => {
+          console.log('Friend Data ', doc.data());
+          this.tempFriendsData.push({
+            uid: doc.id,
+            data: doc.data(),
+          });
+        })
+        .then(() => this.setState({friendsData: this.tempFriendsData}))
+        .catch(err => {
+          console.log('Error fetchEachFriend(): ', err);
+        });
+    });
+  }
+
+  addMember = (uid, username) => {
+    if (this.code === 1) {
+      const members = [...{uid: uid, username: username}];
+      this.setState({members});
+    } else {
+      const members = [...this.state.members, {uid: uid, username: username}];
+      this.setState({
+        members,
+      });
+    }
+  };
+
+  onAddMembersToExisting() {
+    this.state.members.forEach(member => {
+      firestore()
+        .collection('Groups')
+        .doc(`${this.groupId}`)
+        .collection('Members')
+        .doc(`${member.uid}`)
+        .set({
+          uid: member.uid,
+          username: member.username,
+          role: 'participant',
+          joinedOn: new Date(),
+        })
+        .then(() => console.log('New Members Added'))
+        .then(() => this.notifyAddedMembers())
+        .catch(err => console.log('err adding members to existing group', err));
+    });
+  }
+
+  //CLOUD FUNCTION
+  notifyAddedMembers() {
+    functions()
+      .httpsCallable('notifyAddedMembers')({
+        members: this.state.members,
+      })
+      .then(() => console.log('Notified'))
+      .catch(err => console.log('error notifying added members', err));
+  }
+
+  createGroup() {
+    var docRef = firestore()
+      .collection('Groups')
+      .doc();
+    firestore() //Adding field data and Members Sub-collection to group doc
+      .runTransaction(transaction => {
+        return transaction.get(docRef).then(doc => {
+          this.setState({docId: doc.id}); // Saving the doc.id for querying later //Check do we really need this??
+          transaction.set(docRef, {
+            name: this.name,
+            desc: this.desc,
+            createdOn: new Date(),
+          });
+        });
+      }) //Making a doc for each member in group
+      .then(() => {
+        this.state.members.forEach(member => {
+          firestore()
+            .collection('Groups')
+            .doc(`${this.state.docId}`)
+            .collection('Members')
+            .doc(`${member.uid}`)
+            .set({
+              uid: member.uid,
+              username: member.username,
+              role: 'participant',
+              joinedOn: new Date(),
+            });
+        });
+      }) // Admin Updation
+      .then(() => {
+        firestore()
+          .collection('Groups')
+          .doc(`${this.state.docId}`)
+          .collection('Members')
+          .doc(`${this.uid}`)
+          .update({role: 'admin'});
+      })
+      .then(() => console.log('Group created'))
+      //Send notifications
+      .then(() => this.notifyAddedMembers())
+      .catch(err => console.log('err creating group', err));
+  }
+
+  _renderItem = ({item}) => (
+    <View>
+      <AddMembersComp
+        email={item.data.email}
+        username={item.data.username}
+        uid={item.uid}
+        name={this.name}
+        // desc={this.desc}
+        addMember={this.addMember}
+      />
+    </View>
+  );
+
+  render() {
+    console.log('MEMBERS SCREEN => Member array: ', this.state.members);
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <FlatList
+          data={this.state.friendsData}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={this._renderItem}
+        />
+        {this.state.addMembersToExisting ? (
+          <Button title="Add" onPress={() => this.onAddMembersToExisting()} />
+        ) : (
+          <Button title="Create Group" onPress={() => this.createGroup()} />
+        )}
+      </View>
+    );
+  }
+}
+
+export default AddMembersScreen;
+/* NOTES
+
+*/

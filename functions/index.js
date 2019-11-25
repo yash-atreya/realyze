@@ -50,3 +50,13 @@ exports.sendRequest = functions.https.onCall((data, context) => {
     })
     .catch(err => console.log('Error sending request - cloud function', err));
 });
+
+//======================NOTIFY ADDED MEMBERS==========================//
+
+exports.notifyAddedMembers = functions.https.onCall((data, context) => {
+  const members = data.members;
+  members.forEach(member => {
+    //send notifications to member.uid
+  });
+  return null;
+});
