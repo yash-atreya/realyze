@@ -14,12 +14,7 @@ class AddMembersScreen extends Component {
     this.state = {
       friends: [],
       friendsData: [],
-      members: [
-        {
-          uid: `${this.uid}`,
-          username: `${this.username}`,
-        },
-      ],
+      members: [],
       docId: '',
       addMembersToExisting: false,
     };
@@ -110,7 +105,12 @@ class AddMembersScreen extends Component {
       members.push({uid: uid, username: username});
       this.setState({members});
     } else {
-      var members = [this.state.members];
+      var members = [
+        {
+          uid: `${this.uid}`,
+          username: `${this.username}`,
+        },
+      ];
       members.push({uid: uid, username: username});
       this.setState({
         members,
@@ -184,7 +184,9 @@ class AddMembersScreen extends Component {
           .doc(`${this.state.docId}`)
           .collection('Members')
           .doc(`${this.uid}`)
-          .update({role: 'admin'});
+          .update({role: 'admin'})
+          .then(() => console.log('admin updated'))
+          .catch(err => console.log('err updating admin: ', err));
       })
       .then(() => console.log('Group created'))
       //Send notifications

@@ -171,3 +171,29 @@ function fcmUnmarkedTask() {
       .catch(err => console.log(err));
   });
 }
+
+//======================ADD NEW TASK TO GROUP==========================//
+exports.newTaskAdded = functions.https.onCall((data, context) => {
+  //Retrieve groups array
+  //Run forEach
+  //notify each user except one
+  const groups = data.groups;
+  groups.forEach(doc => {
+    return admin
+      .firestore()
+      .collection('Groups')
+      .doc(`${doc.groupId}`)
+      .collection('Members')
+      .get()
+      .then(doc => {
+        doc.forEach(snap => {
+          console.log(snap.id);
+          //Send NOTIFICATION to snap.id(userId)
+        });
+        return null;
+      })
+      .catch(err =>
+        console.log('cloud function error - newTaskAdded(): ', err),
+      );
+  });
+});
