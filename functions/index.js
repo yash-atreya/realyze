@@ -29,7 +29,7 @@ exports.onAcceptRequest = functions.https.onCall((data, context) => {
     .catch(err => console.log('errrrrr', err));
 });
 
-//======================SEND REQUEST==========================//
+//======================SEND REQUEST==========================// = 4.3s
 exports.sendRequest = functions.https.onCall((data, context) => {
   const senderId = data.senderId;
   const targetId = data.targetId;
@@ -59,4 +59,26 @@ exports.notifyAddedMembers = functions.https.onCall((data, context) => {
     //send notifications to member.uid
   });
   return null;
+});
+
+//======================NOTIFY MEMBERS OF LEAVING GROUP==========================// = 4s
+
+exports.notifyLeftGroup = functions.https.onCall((data, context) => {
+  const groupId = data.groupId;
+  const uid = data.uid;
+  return admin
+    .firestore()
+    .collection('Groups')
+    .doc(`${groupId}`)
+    .collection('Members')
+    .get()
+    .then(doc => {
+      doc.forEach(snap => {
+        console.log(snap.data().uid); //uid
+        console.log(snap.data().username); //Check if username exists in Members collection, if not, then add it.
+        //Send notification FCM
+      });
+      return null;
+    })
+    .catch(err => console.log(err));
 });

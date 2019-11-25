@@ -61,14 +61,16 @@ class AddMembersComp extends Component {
   render() {
     return (
       <View>
-        {/* <Text>{this.email}</Text>
-        <Text>{this.username}</Text> */}
+        <Text>{this.email}</Text>
+        <Text>{this.username}</Text>
         <Text>{this.uid}</Text>
         <Button
           title="Add"
-          onPress={() => this.props.addMember(this.uid, this.username)}
+          onPress={() => {
+            this.props.addMember(this.uid, this.username);
+            console.log('onPRess add');
+          }}
         />
-        {/* <Button title="Create Group" onPress={() => this.createGroup()} /> */}
       </View>
     );
   }

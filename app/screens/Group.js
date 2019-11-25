@@ -53,10 +53,12 @@ class GroupScreen extends Component {
           const taskId = snap.ref.parent.parent.id;
           firestore()
             .collection('Tasks')
-            .doc(`${taskId}`).get().then(doc => {
+            .doc(`${taskId}`)
+            .get()
+            .then(doc => {
               var title = doc.data().title;
               var desc = doc.data().desc;
-              // var deadline = 
+              // var deadline =
             });
         });
       });

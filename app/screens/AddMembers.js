@@ -29,13 +29,13 @@ class AddMembersScreen extends Component {
     this.name = this.props.navigation.getParam('name');
     // this.desc = this.props.navigation.getParam('desc');
     this.code = this.props.navigation.getParam('code');
+  }
+
+  componentDidMount() {
     if (this.code) {
       this.setState({addMembersToExisting: true});
       this.groupId = this.props.navigation.getParam('groupId');
     }
-  }
-
-  componentDidMount() {
     this.fetchFriends()
       .then(() =>
         this.setState({
@@ -106,10 +106,12 @@ class AddMembersScreen extends Component {
 
   addMember = (uid, username) => {
     if (this.code === 1) {
-      const members = [...{uid: uid, username: username}];
+      var members = [];
+      members.push({uid: uid, username: username});
       this.setState({members});
     } else {
-      const members = [...this.state.members, {uid: uid, username: username}];
+      var members = [this.state.members];
+      members.push({uid: uid, username: username});
       this.setState({
         members,
       });
@@ -117,6 +119,7 @@ class AddMembersScreen extends Component {
   };
 
   onAddMembersToExisting() {
+    console.log('onAddMembersToExisting()');
     this.state.members.forEach(member => {
       firestore()
         .collection('Groups')
