@@ -42,6 +42,8 @@ target 'realyze' do
 
   pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
 
+  pod 'react-native-appearance', :path => '../node_modules/react-native-appearance'
+
   target 'realyzeTests' do
     inherit! :search_paths
     # Pods for testing
