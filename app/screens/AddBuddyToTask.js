@@ -117,7 +117,7 @@ class AddBuddyToTaskScreen extends Component {
         buddyUsername: this.state.buddy.username,
       })
       .then(() => console.log('Buddy added'))
-      //   .then(() => this.notifyBuddyAdded())
+      .then(() => this.notifyBuddyAdded())
       .catch(err => console.log('err adding buddy', err));
   }
 
@@ -141,6 +141,7 @@ class AddBuddyToTaskScreen extends Component {
       .then(() => {
         console.log('buddy added');
         this.props.navigation.navigate('AllTasks');
+        this.notifyBuddyAdded();
       });
   }
   //ClOUD FUNCTION

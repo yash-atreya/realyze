@@ -197,3 +197,12 @@ exports.newTaskAdded = functions.https.onCall((data, context) => {
       );
   });
 });
+
+//======================NOTIFY BUDDY ADDED==========================//
+
+exports.notifyBuddyAdded = functions.https.onCall((data, context) => {
+  const buddyUid = data.buddyUid;
+  const buddyUsername = data.buddyUsername;
+  //Add taskTitle, taskAuthor for sending notification
+  //Send fcm
+});

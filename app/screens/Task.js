@@ -102,26 +102,6 @@ class TaskScreen extends Component {
     });
   }
 
-  deleteTask() {
-    firestore()
-      .collection('Tasks')
-      .doc(`${this.taskId}`)
-      .delete()
-      .then(() => {
-        firestore()
-          .collection('Logs')
-          .where('taskId', '==', `${this.taskId}`)
-          .get()
-          .then(doc => {
-            doc.forEach(snap => {
-              console.log(snap.data());
-            });
-          });
-      })
-      .then(() => this.deleteLogs())
-      .then(() => this.deleteReminders());
-  }
-
   deleteLogs() {
     firestore()
       .collection('Logs')
@@ -195,15 +175,7 @@ class TaskScreen extends Component {
               }}
             />
             <Button title="LogIt" onPress={() => this.createLog()} />
-            <Button title="Delete Task" onPress={() => this.deleteTask()} />
-            <Button
-              title="Add Buddy for this task"
-              onPress={() =>
-                this.props.navigation.navigate('AddBuddyToTask', {
-                  taskId: this.taskId,
-                })
-              }
-            />
+            <Button title="Edit Task" onPress={() => this.props.navigation.navigate('EditTask', {taskId: this.taskId})} />
           </View>
         ) : (
           <View>
