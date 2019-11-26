@@ -152,6 +152,20 @@ class CreateTaskScreen extends Component {
             })
           }
         />
+        <Button
+          title="Add Buddy"
+          onPress={() =>
+            this.props.navigation.navigate('AddBuddyToTask', {
+              uid: this.uid,
+              author: this.displayName,
+              title: this.state.title,
+              description: this.state.desc,
+              dueTime: this.state.dueTime,
+              dueDate: this.state.dueDate,
+              code: 1,
+            })
+          }
+        />
       </View>
     );
   }
