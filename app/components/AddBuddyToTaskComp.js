@@ -2,21 +2,19 @@ import React, {Component} from 'react';
 import {View, Text, Button} from 'react-native';
 import {withNavigation} from 'react-navigation';
 
-class AddMembersComp extends Component {
+class AddBuddyToTaskComp extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      addedMembers: [],
+      addedBuddy: [],
     };
 
     this.email = this.props.email;
     this.username = this.props.username;
     this.uid = this.props.uid;
-    this.name = this.props.name;
-    // this.desc = this.props.desc;
 
-    this.members = [];
+    this.buddy = [];
   }
 
   render() {
@@ -27,14 +25,11 @@ class AddMembersComp extends Component {
         <Text>{this.uid}</Text>
         <Button
           title="Add"
-          onPress={() => {
-            this.props.addMember(this.uid, this.username);
-            console.log('onPRess add');
-          }}
+          onPress={() => this.props.addBuddy(this.uid, this.username)}
         />
       </View>
     );
   }
 }
 
-export default withNavigation(AddMembersComp);
+export default withNavigation(AddBuddyToTaskComp);

@@ -196,6 +196,14 @@ class TaskScreen extends Component {
             />
             <Button title="LogIt" onPress={() => this.createLog()} />
             <Button title="Delete Task" onPress={() => this.deleteTask()} />
+            <Button
+              title="Add Buddy for this task"
+              onPress={() =>
+                this.props.navigation.navigate('AddBuddyToTask', {
+                  taskId: this.taskId,
+                })
+              }
+            />
           </View>
         ) : (
           <View>
