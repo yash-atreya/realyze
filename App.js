@@ -3,6 +3,7 @@ import {View, Text} from 'react-native';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import auth from '@react-native-firebase/auth';
+import messaging from '@react-native-firebase/messaging';
 
 //SCREEN IMPORTS
 import LogInScreen from './app/screens/LogIn';
@@ -27,6 +28,54 @@ import SelectGroupsScreen from './app/screens/SelectGroups';
 import AddBuddyToTaskScreen from './app/screens/AddBuddyToTask';
 import EditTaskScreen from './app/screens/EditTask';
 
+const registerNotif = async () => {
+  try {
+    if (messaging().isRegisteredForRemoteNotifications) {
+      await messaging()
+        .registerForRemoteNotifications()
+        .then(() => console.log('registered'));
+    }
+  } catch {
+    console.log('error registering for notifications');
+  }
+};
+
+registerNotif().then(() => {
+  requestPermission();
+});
+
+const requestPermission = async () => {
+  try {
+    const hasPermission = await messaging().hasPermission();
+    if (hasPermission) {
+      getFcmToken().then(fcmToken => console.log('FCM TOKEN: ', fcmToken));
+    } else {
+      try {
+        await messaging()
+          .requestPermission()
+          .then(() => {
+            console.log('permission granted');
+            getFcmToken().then(fcmToken =>
+              console.log('FCM TOKEN: ', fcmToken),
+            );
+          });
+      } catch {
+        console.log('err granting permission');
+      }
+    }
+  } catch {
+    console.log('user denied permission');
+  }
+};
+
+const getFcmToken = async () => {
+  try {
+    const fcmToken = await messaging().getToken();
+    return fcmToken;
+  } catch {
+    console.log('error getting token');
+  }
+};
 const AuthLoadingScreen = props => {
   function checkUser() {
     var user = auth().currentUser;
