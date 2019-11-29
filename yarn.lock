@@ -2195,6 +2195,11 @@ domexception@^1.0.1:
   dependencies:
     webidl-conversions "^4.0.2"
 
+dooboolab-welcome@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/dooboolab-welcome/-/dooboolab-welcome-1.1.1.tgz#ca2184f6e1f568865d707a6ce3bda7e003550f54"
+  integrity sha512-tQ/9NBCGnalHwKOBjDqTD4t4wQpDfSSbxQGctzkzaLHR3AhN0wCBkIs05JciVtvl/jfLZ+DgAndktAMk3Bu7Vw==
+
 ecc-jsbn@~0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.2.tgz#3a83a904e54353287874c564b7549386849a98c9"
@@ -5357,6 +5362,13 @@ react-native-appearance@0.2.2:
     fbemitter "^2.1.1"
     invariant "^2.2.4"
     use-subscription "^1.0.0"
+
+react-native-audio-recorder-player@^2.4.3:
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/react-native-audio-recorder-player/-/react-native-audio-recorder-player-2.4.3.tgz#430a84a751a245de4fd6b603b16479a5664e180e"
+  integrity sha512-JQsM92uSRjBXlY/6TAuk/aRwWTgZDaaZZmuSnv3wPrQJMQtSdg84EhJUAXawkT2H7URfymb9gELEqWxf0ChfWQ==
+  dependencies:
+    dooboolab-welcome "^1.1.1"
 
 react-native-gesture-handler@1.5.1:
   version "1.5.1"
