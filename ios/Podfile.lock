@@ -157,6 +157,12 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - OneSignal (2.11.2)
+  - Permission-Contacts (2.0.4):
+    - RNPermissions
+  - Permission-Microphone (2.0.4):
+    - RNPermissions
+  - Permission-Notifications (2.0.4):
+    - RNPermissions
   - Protobuf (3.10.0)
   - RCTRequired (0.61.4)
   - RCTTypeSafety (0.61.4):
@@ -390,6 +396,8 @@ PODS:
     - RNFBApp
   - RNGestureHandler (1.5.1):
     - React
+  - RNPermissions (2.0.4):
+    - React
   - RNReanimated (1.4.0):
     - React
   - RNScreens (1.0.0-alpha.23):
@@ -404,6 +412,9 @@ DEPENDENCIES:
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - OneSignal (< 3.0, >= 2.9.3)
+  - Permission-Contacts (from `../node_modules/react-native-permissions/ios/Contacts.podspec`)
+  - Permission-Microphone (from `../node_modules/react-native-permissions/ios/Microphone.podspec`)
+  - Permission-Notifications (from `../node_modules/react-native-permissions/ios/Notifications.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -437,6 +448,7 @@ DEPENDENCIES:
   - "RNFBFunctions (from `../node_modules/@react-native-firebase/functions`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -480,6 +492,12 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  Permission-Contacts:
+    :path: "../node_modules/react-native-permissions/ios/Contacts.podspec"
+  Permission-Microphone:
+    :path: "../node_modules/react-native-permissions/ios/Microphone.podspec"
+  Permission-Notifications:
+    :path: "../node_modules/react-native-permissions/ios/Notifications.podspec"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -540,6 +558,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/messaging"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -577,6 +597,9 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OneSignal: 4e3e68bb6c29975286a2fa910cb49132bc6e20bb
+  Permission-Contacts: a86054e67f06c4be1715f6b6d9ab4113c3430b53
+  Permission-Microphone: ed3bfe858d5d0fd0bf0f21d00ceb3a98a809eec6
+  Permission-Notifications: 7b7f44c506f0bb6edc747335f6fa9381142a0ec8
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
   RCTRequired: f3b3fb6f4723e8e52facb229d0c75fdc76773849
   RCTTypeSafety: 2ec60de6abb1db050b56ecc4b60188026078fd10
@@ -608,10 +631,11 @@ SPEC CHECKSUMS:
   RNFBFunctions: 86095c4dfef6b5c4eeef686a0d4e54a8c82965a7
   RNFBMessaging: 26f689e1b3e531c2cb5ae94469e77ec736fe0f05
   RNGestureHandler: 7add966bb5d90ee8cf38d4341f87814474357972
+  RNPermissions: 35959d09546f1cd60c129ee128146a120ea595c3
   RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
   RNScreens: f28b48b8345f2f5f39ed6195518291515032a788
   Yoga: ba3d99dbee6c15ea6bbe3783d1f0cb1ffb79af0f
 
-PODFILE CHECKSUM: c3ebb77d0f3723e3093d3629a3d1d6437c503505
+PODFILE CHECKSUM: f912b12ff7fe6860e1e927022f7f0ce5fd4bf12f
 
 COCOAPODS: 1.8.4
