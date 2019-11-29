@@ -53,7 +53,7 @@ class HomeScreen extends Component {
         />
         <Button
           title="Test"
-          onPress={() => this.props.navigation.navigate('NotifTest')}
+          onPress={() => this.props.navigation.navigate('Test')}
         />
         <Button title="Sign out" onPress={() => this.onSignOut()} />
       </View>
