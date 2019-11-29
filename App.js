@@ -4,6 +4,7 @@ import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import auth from '@react-native-firebase/auth';
 import messaging from '@react-native-firebase/messaging';
+import firestore from '@react-native-firebase/firestore';
 
 //SCREEN IMPORTS
 import LogInScreen from './app/screens/LogIn';
@@ -28,6 +29,47 @@ import SelectGroupsScreen from './app/screens/SelectGroups';
 import AddBuddyToTaskScreen from './app/screens/AddBuddyToTask';
 import EditTaskScreen from './app/screens/EditTask';
 
+// checkUser();
+const saveTokenToDb = token => {
+  const uid = auth().currentUser.uid;
+  console.log('saveTokenToDb');
+  firestore()
+    .collection('DeviceTokens')
+    .doc(`${uid}`)
+    .set({
+      tokens: [token],
+    })
+    .then(() => console.log('token saved to db'))
+    .catch(err => console.log('unable to save token : ', err));
+};
+const requestPermission = async () => {
+  try {
+    const hasPermission = await messaging().hasPermission();
+    if (hasPermission) {
+      console.log('hasPermission');
+      getFcmToken().then(fcmToken => {
+        console.log(' hasPermission FCM TOKEN: ', fcmToken);
+        saveTokenToDb(fcmToken);
+      });
+    } else {
+      try {
+        await messaging()
+          .requestPermission()
+          .then(() => {
+            console.log('permission granted');
+            getFcmToken().then(fcmToken => {
+              console.log('FCM TOKEN: ', fcmToken);
+              saveTokenToDb(fcmToken);
+            });
+          });
+      } catch {
+        console.log('err granting permission');
+      }
+    }
+  } catch {
+    console.log('user denied permission');
+  }
+};
 const registerNotif = async () => {
   try {
     if (messaging().isRegisteredForRemoteNotifications) {
@@ -39,35 +81,34 @@ const registerNotif = async () => {
     console.log('error registering for notifications');
   }
 };
-
-registerNotif().then(() => {
-  requestPermission();
-});
-
-const requestPermission = async () => {
-  try {
-    const hasPermission = await messaging().hasPermission();
-    if (hasPermission) {
-      getFcmToken().then(fcmToken => console.log('FCM TOKEN: ', fcmToken));
-    } else {
-      try {
-        await messaging()
-          .requestPermission()
-          .then(() => {
-            console.log('permission granted');
-            getFcmToken().then(fcmToken =>
-              console.log('FCM TOKEN: ', fcmToken),
-            );
-          });
-      } catch {
-        console.log('err granting permission');
-      }
-    }
-  } catch {
-    console.log('user denied permission');
-  }
+const pushToken = token => {
+  const uid = auth().currentUser.uid;
+  const docRef = firestore()
+    .collection('DeviceTokens')
+    .doc(`${uid}`);
+  var tempTokens = [];
+  firestore().runTransaction(async transaction => {
+    return await transaction
+      .get(docRef)
+      .then(doc => {
+        tempTokens.push(doc.data().tokens);
+      })
+      .then(() => {
+        tempTokens.push(token);
+        console.log('PUSHED NEW TOKEN');
+      })
+      .then(() => {
+        docRef
+          .update({
+            tokens: tempTokens,
+          })
+          .then(() => console.log('db updated'))
+          .catch(err => console.log('error updating db', err));
+      })
+      .catch(err => console.log('error pushing token to db: ', err));
+  });
 };
-
+firestore().runT;
 const getFcmToken = async () => {
   try {
     const fcmToken = await messaging().getToken();
@@ -76,6 +117,65 @@ const getFcmToken = async () => {
     console.log('error getting token');
   }
 };
+const checkToken = async tokens => {
+  var tokensArray = [];
+  tokensArray = tokens;
+  var tokenExists = false;
+  try {
+    await getFcmToken()
+      .then(token => {
+        for (var i = 0; i < tokensArray.length; i++) {
+          if (tokens[i] === token) {
+            console.log('token already exists');
+            tokenExists = true;
+            break;
+          }
+        }
+        return token;
+      })
+      .then(token => {
+        if (tokenExists === false) {
+          pushToken(token);
+        }
+      });
+  } catch {
+    console.log('error');
+  }
+};
+const checkIfToken = () => {
+  console.log('checkIfToken()');
+  const uid = auth().currentUser.uid;
+  firestore()
+    .collection('DeviceTokens')
+    .doc(`${uid}`)
+    .get()
+    .then(doc => {
+      if (doc.exists) {
+        console.log('existing tokens: ', doc.data().tokens);
+        checkToken(doc.data().tokens);
+      } else {
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+        registerNotif().then(() => {
+          requestPermission();
+        });
+      }
+    });
+};
+
+const checkUser = () => {
+  var userExists = Boolean;
+  if (auth().currentUser !== null) {
+    console.log('checkUser if()');
+    checkIfToken();
+  } else if (auth().currentUser === null || undefined) {
+    console.log('checkUser else');
+    return null;
+  }
+};
+checkUser();
+//Check whether token already exists
+
+//=================================================================================//
 const AuthLoadingScreen = props => {
   function checkUser() {
     var user = auth().currentUser;
