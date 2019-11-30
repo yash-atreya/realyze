@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Button, Platform} from 'react-native';
+import {View, Button, Platform, Text} from 'react-native';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 import RNPermissions, {RESULTS} from 'react-native-permissions';
 
@@ -13,6 +13,12 @@ class ReminderTestScreen extends Component {
       microphonePermANDROID: false,
       readStoragePermANDROID: false,
       writeStoragePermANDROID: false,
+      recordSecs: 0,
+      recordTime: 0,
+      currentPositionSec: 0,
+      currentDurationSec: 0,
+      playTime: 0,
+      duration: 0,
     };
   }
 
@@ -180,20 +186,55 @@ class ReminderTestScreen extends Component {
   async onStartRecord() {
     const result = await audioRecorderPlayer.startRecorder(this.path);
     console.log('startRecord: ', result);
+    audioRecorderPlayer.addRecordBackListener(e => {
+      this.setState({
+        recordSecs: e.current_position,
+        recordTime: audioRecorderPlayer.mmssss(Math.floor(e.current_position)),
+      });
+      return;
+    });
   }
 
   async onStopRecord() {
     const result = await audioRecorderPlayer.stopRecorder();
+    audioRecorderPlayer.removeRecordBackListener();
+    this.setState({
+      recordSecs: 0,
+    });
     console.log('stopRecorder', result);
   }
 
   async onPlay() {
-    const result = await audioRecorderPlayer.startPlayer(this.path);
-    console.log('startPlayer', result);
+    try {
+      const result = await audioRecorderPlayer.startPlayer(this.path);
+      console.log('startPlayer', result);
+      audioRecorderPlayer.addPlayBackListener(e => {
+        if (e.current_position === e.duration) {
+          console.log('finished');
+          this.onStop();
+        }
+        this.setState({
+          currentPositionSec: e.current_position,
+          currentDurationSec: e.duration,
+          playTime: audioRecorderPlayer.mmssss(Math.floor(e.current_position)),
+          duration: audioRecorderPlayer.mmssss(Math.floor(e.duration)),
+        });
+        return;
+      });
+    } catch {
+      console.log('ERR onPlay()');
+    }
   }
 
   async onStop() {
     const result = audioRecorderPlayer.stopPlayer();
+    audioRecorderPlayer.removePlayBackListener();
+    this.setState({
+      currentPositionSec: 0,
+      currentDurationSec: 0,
+      playTime: 0,
+      duration: 0,
+    });
     console.log('player stopped', result);
   }
 
@@ -201,8 +242,10 @@ class ReminderTestScreen extends Component {
     return (
       <View>
         <Button title="Record" onPress={() => this.onStartRecord()} />
+        <Text>{this.state.recordTime}</Text>
         <Button title="Stop Recording" onPress={() => this.onStopRecord()} />
         <Button title="Play" onPress={() => this.onPlay()} />
+        <Text>{this.state.playTime}</Text>
         <Button title="Stop Play" onPress={() => this.onStop()} />
       </View>
     );
