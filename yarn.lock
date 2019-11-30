@@ -1021,6 +1021,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-6.0.4.tgz#ad288d7b437a4a046ac42b9f569ba34de8f440ef"
   integrity sha512-t+i90y0HCo8Av/f1MCIKCxdIMZYUnrM4wYcjTZXfHj7ZukeJ1/iRqUipOfL2KwbkiCLDVTUjPMhiqKsO+ndyBQ==
 
+"@react-native-firebase/storage@6.0.4":
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/storage/-/storage-6.0.4.tgz#5b6044029b79b72ba77dd6e16aaaa5271a76c668"
+  integrity sha512-Peib8FA1wh63xyiRks+zU8UcZ7PkLo3z7N59wqQpQz0tr8ZkKIG+cgHLdycRIr36WMcOHi+yf9v+37D5A/ekJw==
+
 "@react-navigation/core@^3.5.1":
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-3.5.1.tgz#7a2339fca3496979305fb3a8ab88c2ca8d8c214d"
@@ -5363,7 +5368,7 @@ react-native-appearance@0.2.2:
     invariant "^2.2.4"
     use-subscription "^1.0.0"
 
-react-native-audio-recorder-player@^2.4.3:
+react-native-audio-recorder-player@2.4.3:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/react-native-audio-recorder-player/-/react-native-audio-recorder-player-2.4.3.tgz#430a84a751a245de4fd6b603b16479a5664e180e"
   integrity sha512-JQsM92uSRjBXlY/6TAuk/aRwWTgZDaaZZmuSnv3wPrQJMQtSdg84EhJUAXawkT2H7URfymb9gELEqWxf0ChfWQ==
@@ -5394,7 +5399,7 @@ react-native-onesignal@3.5.0:
   dependencies:
     invariant "^2.2.2"
 
-react-native-permissions@^2.0.4:
+react-native-permissions@2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-2.0.4.tgz#faef2b14da826b5537b1b7884fa6b4cc6e946b53"
   integrity sha512-QITF60wXwIXnsaOFbMys2+GRZI/5X22vmTjfX5iYk1vGCtmGO0WUy/upyEFFvglS0zDfYC3Axd7yqyd1TCBkvQ==

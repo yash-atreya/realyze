@@ -34,6 +34,9 @@ PODS:
   - Firebase/Messaging (6.8.1):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 4.1.4)
+  - Firebase/Storage (6.8.1):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 3.4.1)
   - FirebaseAnalytics (6.1.1):
     - FirebaseCore (~> 6.2)
     - FirebaseInstanceID (~> 4.2)
@@ -95,6 +98,10 @@ PODS:
     - GoogleUtilities/Reachability (~> 6.2)
     - GoogleUtilities/UserDefaults (~> 6.2)
     - Protobuf (>= 3.9.2, ~> 3.9)
+  - FirebaseStorage (3.4.2):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 6.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - Folly (2018.10.22.00):
     - boost-for-react-native
     - DoubleConversion
@@ -396,6 +403,11 @@ PODS:
     - Firebase/Messaging (~> 6.8.1)
     - React
     - RNFBApp
+  - RNFBStorage (6.0.4):
+    - Firebase/Core (~> 6.8.1)
+    - Firebase/Storage (~> 6.8.1)
+    - React
+    - RNFBApp
   - RNGestureHandler (1.5.1):
     - React
   - RNPermissions (2.0.4):
@@ -450,6 +462,7 @@ DEPENDENCIES:
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - "RNFBFunctions (from `../node_modules/@react-native-firebase/functions`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
+  - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -472,6 +485,7 @@ SPEC REPOS:
     - FirebaseFunctions
     - FirebaseInstanceID
     - FirebaseMessaging
+    - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
@@ -561,6 +575,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/functions"
   RNFBMessaging:
     :path: "../node_modules/@react-native-firebase/messaging"
+  RNFBStorage:
+    :path: "../node_modules/@react-native-firebase/storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNPermissions:
@@ -590,6 +606,7 @@ SPEC CHECKSUMS:
   FirebaseFunctions: 5af7c35d1c5e41608fecbb667eb6c4e672e318d0
   FirebaseInstanceID: ebd2ea79ee38db0cb5f5167b17a0d387e1cc7b6e
   FirebaseMessaging: e8d71368a5c579083da02203146c953f3386d503
+  FirebaseStorage: 046abe9ac4e2a1a0e47d72f536490ffa50896632
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   GoogleAppMeasurement: 86a82f0e1f20b8eedf8e20326530138fd71409de
@@ -636,6 +653,7 @@ SPEC CHECKSUMS:
   RNFBFirestore: 3aa9a1d4572b2bad1770173790dc2187deac36ea
   RNFBFunctions: 86095c4dfef6b5c4eeef686a0d4e54a8c82965a7
   RNFBMessaging: 26f689e1b3e531c2cb5ae94469e77ec736fe0f05
+  RNFBStorage: 0fba295bf17319285e40d6f118c70e86fa81b391
   RNGestureHandler: 7add966bb5d90ee8cf38d4341f87814474357972
   RNPermissions: 35959d09546f1cd60c129ee128146a120ea595c3
   RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
