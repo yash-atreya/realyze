@@ -31,57 +31,57 @@ import AddBuddyToTaskScreen from './app/screens/AddBuddyToTask';
 import EditTaskScreen from './app/screens/EditTask';
 
 // checkUser();
-const saveTokenToDb = token => {
-  const uid = auth().currentUser.uid;
-  console.log('saveTokenToDb');
-  firestore()
-    .collection('Users')
-    .doc(`${uid}`)
-    .set({
-      deviceToken: token,
-    })
-    .then(() => console.log('token saved to db'))
-    .catch(err => console.log('unable to save token : ', err));
-};
-const requestPermission = async () => {
-  try {
-    const hasPermission = await messaging().hasPermission();
-    if (hasPermission) {
-      console.log('hasPermission');
-      getFcmToken().then(fcmToken => {
-        console.log(' hasPermission FCM TOKEN: ', fcmToken);
-        saveTokenToDb(fcmToken);
-      });
-    } else {
-      try {
-        await messaging()
-          .requestPermission()
-          .then(() => {
-            console.log('permission granted');
-            getFcmToken().then(fcmToken => {
-              console.log('FCM TOKEN: ', fcmToken);
-              saveTokenToDb(fcmToken);
-            });
-          });
-      } catch {
-        console.log('err granting permission');
-      }
-    }
-  } catch {
-    console.log('user denied permission');
-  }
-};
-const registerNotif = async () => {
-  try {
-    if (messaging().isRegisteredForRemoteNotifications) {
-      await messaging()
-        .registerForRemoteNotifications()
-        .then(() => console.log('registered'));
-    }
-  } catch {
-    console.log('error registering for notifications');
-  }
-};
+// const saveTokenToDb = token => {
+//   const uid = auth().currentUser.uid;
+//   console.log('saveTokenToDb');
+//   firestore()
+//     .collection('Users')
+//     .doc(`${uid}`)
+//     .set({
+//       deviceToken: token,
+//     })
+//     .then(() => console.log('token saved to db'))
+//     .catch(err => console.log('unable to save token : ', err));
+// };
+// const requestPermission = async () => {
+//   try {
+//     const hasPermission = await messaging().hasPermission();
+//     if (hasPermission) {
+//       console.log('hasPermission');
+//       getFcmToken().then(fcmToken => {
+//         console.log(' hasPermission FCM TOKEN: ', fcmToken);
+//         saveTokenToDb(fcmToken);
+//       });
+//     } else {
+//       try {
+//         await messaging()
+//           .requestPermission()
+//           .then(() => {
+//             console.log('permission granted');
+//             getFcmToken().then(fcmToken => {
+//               console.log('FCM TOKEN: ', fcmToken);
+//               saveTokenToDb(fcmToken);
+//             });
+//           });
+//       } catch {
+//         console.log('err granting permission');
+//       }
+//     }
+//   } catch {
+//     console.log('user denied permission');
+//   }
+// };
+// const registerNotif = async () => {
+//   try {
+//     if (messaging().isRegisteredForRemoteNotifications) {
+//       await messaging()
+//         .registerForRemoteNotifications()
+//         .then(() => console.log('registered'));
+//     }
+//   } catch {
+//     console.log('error registering for notifications');
+//   }
+// };
 // const pushToken = token => {
 //   const uid = auth().currentUser.uid;
 //   const docRef = firestore()
@@ -173,21 +173,23 @@ const getFcmToken = async () => {
 //   }
 // };
 // checkUser();
-//Check whether token already exists
-if (auth().currentUser === null) {
-  console.log('nefjnvorfv');
-} else {
-  registerNotif().then(() => requestPermission()).then(() => notify())
-}
+// //Check whether token already exists
+// if (auth().currentUser === null) {
+//   console.log('nefjnvorfv');
+// } else {
+//   registerNotif()
+//     .then(() => requestPermission())
+//     .then(() => notify());
+// }
 
-const notify = functions()
-  .httpsCallable('notify')({
-    title: 'TESTSTSTTSTSTS',
-    uid: null || auth().currentUser.uid,
-    message: 'what are you doing?',
-  })
-  .then(console.log('notified'))
-  .catch(err => console.log('err'));
+// const notify = functions()
+//   .httpsCallable('notify')({
+//     title: 'TESTSTSTTSTSTS',
+//     uid: null || auth().currentUser.uid,
+//     message: 'what are you doing?',
+//   })
+//   .then(console.log('notified'))
+//   .catch(err => console.log('err'));
 
 //=================================================================================//
 const AuthLoadingScreen = props => {

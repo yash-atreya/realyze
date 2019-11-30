@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {View, Text, Button, TextInput} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import NetInfo from '@react-native-community/netinfo';
+import messaging from '@react-native-firebase/messaging';
+import firestore from '@react-native-firebase/firestore';
 
 class LogInScreen extends Component {
   constructor(props) {
@@ -28,7 +30,7 @@ class LogInScreen extends Component {
     });
   }
 
-  componentDidMount() {}
+  // componentDidMount() {}
 
   onSignIn() {
     const {email, password} = this.state;
@@ -36,6 +38,7 @@ class LogInScreen extends Component {
     console.log(password);
     auth()
       .signInWithEmailAndPassword(email, password)
+      .then(() => this.updateToken())
       .then(() => {
         console.log('=======Signed In========');
         this.props.navigation.navigate('Profile');
@@ -43,6 +46,31 @@ class LogInScreen extends Component {
       .catch(err => {
         console.log('ERROR SIGNING IN');
         console.log(err);
+      });
+  }
+
+  updateToken = async () => {
+    const uid = auth().currentUser.uid;
+    const token = await messaging().getToken();
+    console.log('UPDATE TOKEN');
+    firestore()
+      .collection('Users')
+      .doc(`${uid}`)
+      .get()
+      .then(doc => {
+        var currentTokens = doc.data().fcmTokens || {};
+        if (!currentTokens[token]) {
+          var tempTokens = currentTokens;
+          tempTokens = {
+            [token]: true,
+          };
+          firestore()
+            .collection('Users')
+            .doc(`${uid}`)
+            .update({fcmTokens: tempTokens});
+        } else {
+          console.log('Token already exists');
+        }
       });
   }
 
