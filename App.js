@@ -5,6 +5,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import auth from '@react-native-firebase/auth';
 import messaging from '@react-native-firebase/messaging';
 import firestore from '@react-native-firebase/firestore';
+import functions from '@react-native-firebase/functions';
 
 //SCREEN IMPORTS
 import LogInScreen from './app/screens/LogIn';
@@ -34,10 +35,10 @@ const saveTokenToDb = token => {
   const uid = auth().currentUser.uid;
   console.log('saveTokenToDb');
   firestore()
-    .collection('DeviceTokens')
+    .collection('Users')
     .doc(`${uid}`)
     .set({
-      tokens: [token],
+      deviceToken: token,
     })
     .then(() => console.log('token saved to db'))
     .catch(err => console.log('unable to save token : ', err));
@@ -81,34 +82,33 @@ const registerNotif = async () => {
     console.log('error registering for notifications');
   }
 };
-const pushToken = token => {
-  const uid = auth().currentUser.uid;
-  const docRef = firestore()
-    .collection('DeviceTokens')
-    .doc(`${uid}`);
-  var tempTokens = [];
-  firestore().runTransaction(async transaction => {
-    return await transaction
-      .get(docRef)
-      .then(doc => {
-        tempTokens.push(doc.data().tokens);
-      })
-      .then(() => {
-        tempTokens.push(token);
-        console.log('PUSHED NEW TOKEN');
-      })
-      .then(() => {
-        docRef
-          .update({
-            tokens: tempTokens,
-          })
-          .then(() => console.log('db updated'))
-          .catch(err => console.log('error updating db', err));
-      })
-      .catch(err => console.log('error pushing token to db: ', err));
-  });
-};
-firestore().runT;
+// const pushToken = token => {
+//   const uid = auth().currentUser.uid;
+//   const docRef = firestore()
+//     .collection('DeviceTokens')
+//     .doc(`${uid}`);
+//   var tempTokens = [];
+//   firestore().runTransaction(async transaction => {
+//     return await transaction
+//       .get(docRef)
+//       .then(doc => {
+//         tempTokens.push(doc.data().tokens);
+//       })
+//       .then(() => {
+//         tempTokens.push(token);
+//         console.log('PUSHED NEW TOKEN');
+//       })
+//       .then(() => {
+//         docRef
+//           .update({
+//             tokens: tempTokens,
+//           })
+//           .then(() => console.log('db updated'))
+//           .catch(err => console.log('error updating db', err));
+//       })
+//       .catch(err => console.log('error pushing token to db: ', err));
+//   });
+// };
 const getFcmToken = async () => {
   try {
     const fcmToken = await messaging().getToken();
@@ -117,63 +117,77 @@ const getFcmToken = async () => {
     console.log('error getting token');
   }
 };
-const checkToken = async tokens => {
-  var tokensArray = [];
-  tokensArray = tokens;
-  var tokenExists = false;
-  try {
-    await getFcmToken()
-      .then(token => {
-        for (var i = 0; i < tokensArray.length; i++) {
-          if (tokens[i] === token) {
-            console.log('token already exists');
-            tokenExists = true;
-            break;
-          }
-        }
-        return token;
-      })
-      .then(token => {
-        if (tokenExists === false) {
-          pushToken(token);
-        }
-      });
-  } catch {
-    console.log('error');
-  }
-};
-const checkIfToken = () => {
-  console.log('checkIfToken()');
-  const uid = auth().currentUser.uid;
-  firestore()
-    .collection('DeviceTokens')
-    .doc(`${uid}`)
-    .get()
-    .then(doc => {
-      if (doc.exists) {
-        console.log('existing tokens: ', doc.data().tokens);
-        checkToken(doc.data().tokens);
-      } else {
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-        registerNotif().then(() => {
-          requestPermission();
-        });
-      }
-    });
-};
+// const checkToken = async tokens => {
+//   var tokensArray = [];
+//   tokensArray = tokens;
+//   var tokenExists = false;
+//   try {
+//     await getFcmToken()
+//       .then(token => {
+//         for (var i = 0; i < tokensArray.length; i++) {
+//           if (tokens[i] === token) {
+//             console.log('token already exists');
+//             tokenExists = true;
+//             break;
+//           }
+//         }
+//         return token;
+//       })
+//       .then(token => {
+//         if (tokenExists === false) {
+//           pushToken(token);
+//         }
+//       });
+//   } catch {
+//     console.log('error');
+//   }
+// };
+// const checkIfToken = () => {
+//   console.log('checkIfToken()');
+//   const uid = auth().currentUser.uid;
+//   firestore()
+//     .collection('DeviceTokens')
+//     .doc(`${uid}`)
+//     .get()
+//     .then(doc => {
+//       if (doc.exists) {
+//         console.log('existing tokens: ', doc.data().tokens);
+//         checkToken(doc.data().tokens);
+//       } else {
+//         console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+//         registerNotif().then(() => {
+//           requestPermission();
+//         });
+//       }
+//     });
+// };
 
-const checkUser = () => {
-  var userExists = Boolean;
-  if (auth().currentUser !== null) {
-    console.log('checkUser if()');
-    checkIfToken();
-  } else if (auth().currentUser === null || undefined) {
-    console.log('checkUser else');
-    return null;
-  }
-};
-checkUser();
+// const checkUser = () => {
+//   var userExists = Boolean;
+//   if (auth().currentUser !== null) {
+//     console.log('checkUser if()');
+//     checkIfToken();
+//   } else if (auth().currentUser === null || undefined) {
+//     console.log('checkUser else');
+//     return null;
+//   }
+// };
+// checkUser();
 //Check whether token already exists
+if (auth().currentUser === null) {
+  console.log('nefjnvorfv');
+} else {
+  registerNotif().then(() => requestPermission()).then(() => notify())
+}
+
+const notify = functions()
+  .httpsCallable('notify')({
+    title: 'TESTSTSTTSTSTS',
+    uid: null || auth().currentUser.uid,
+    message: 'what are you doing?',
+  })
+  .then(console.log('notified'))
+  .catch(err => console.log('err'));
 
 //=================================================================================//
 const AuthLoadingScreen = props => {

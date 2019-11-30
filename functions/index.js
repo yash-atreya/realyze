@@ -206,3 +206,29 @@ exports.notifyBuddyAdded = functions.https.onCall((data, context) => {
   //Add taskTitle, taskAuthor for sending notification
   //Send fcm
 });
+
+//======================TEST FUNCTION=====================//
+exports.notify = functions.https.onCall((data, context) => {
+  const uid = data.uid;
+  const title = data.title;
+  const message = data.message;
+  var userTokens = [];
+  return admin
+    .firestore()
+    .collection('Users')
+    .doc(`${uid}`)
+    .get()
+    .then(doc => {
+      var token = doc.data().deviceToken;
+
+      var payload = {
+        notification: {
+          title: title,
+          body: message,
+          sound: 'default',
+        },
+      };
+
+      return admin.messaging().sendToDevice(token, payload);
+    });
+});
