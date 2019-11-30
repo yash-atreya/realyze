@@ -27,6 +27,7 @@ import SelectGroupsScreen from './app/screens/SelectGroups';
 import AddBuddyToTaskScreen from './app/screens/AddBuddyToTask';
 import EditTaskScreen from './app/screens/EditTask';
 import TestScreen from './app/screens/Test';
+import ReminderTestScreen from './app/screens/ReminderTest';
 
 const AuthLoadingScreen = props => {
   function checkUser() {
@@ -118,6 +119,9 @@ const MainStack = createStackNavigator(
     },
     Test: {
       screen: TestScreen,
+    },
+    ReminderTest: {
+      screen: ReminderTestScreen,
     },
   },
   {

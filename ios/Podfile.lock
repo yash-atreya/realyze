@@ -163,6 +163,8 @@ PODS:
     - RNPermissions
   - Permission-Notifications (2.0.4):
     - RNPermissions
+  - Permission-StoreKit (2.0.4):
+    - RNPermissions
   - Protobuf (3.10.0)
   - RCTRequired (0.61.4)
   - RCTTypeSafety (0.61.4):
@@ -415,6 +417,7 @@ DEPENDENCIES:
   - Permission-Contacts (from `../node_modules/react-native-permissions/ios/Contacts.podspec`)
   - Permission-Microphone (from `../node_modules/react-native-permissions/ios/Microphone.podspec`)
   - Permission-Notifications (from `../node_modules/react-native-permissions/ios/Notifications.podspec`)
+  - Permission-StoreKit (from `../node_modules/react-native-permissions/ios/StoreKit.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -498,6 +501,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-permissions/ios/Microphone.podspec"
   Permission-Notifications:
     :path: "../node_modules/react-native-permissions/ios/Notifications.podspec"
+  Permission-StoreKit:
+    :path: "../node_modules/react-native-permissions/ios/StoreKit.podspec"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -600,6 +605,7 @@ SPEC CHECKSUMS:
   Permission-Contacts: a86054e67f06c4be1715f6b6d9ab4113c3430b53
   Permission-Microphone: ed3bfe858d5d0fd0bf0f21d00ceb3a98a809eec6
   Permission-Notifications: 7b7f44c506f0bb6edc747335f6fa9381142a0ec8
+  Permission-StoreKit: 4b69ac72ec226f38d6efc2da0f05c2df2c6c2984
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
   RCTRequired: f3b3fb6f4723e8e52facb229d0c75fdc76773849
   RCTTypeSafety: 2ec60de6abb1db050b56ecc4b60188026078fd10
@@ -636,6 +642,6 @@ SPEC CHECKSUMS:
   RNScreens: f28b48b8345f2f5f39ed6195518291515032a788
   Yoga: ba3d99dbee6c15ea6bbe3783d1f0cb1ffb79af0f
 
-PODFILE CHECKSUM: f912b12ff7fe6860e1e927022f7f0ce5fd4bf12f
+PODFILE CHECKSUM: 5a7d759e262837c8d9b1614cdd4d402782cf1cff
 
 COCOAPODS: 1.8.4
