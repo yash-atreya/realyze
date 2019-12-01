@@ -30,6 +30,7 @@ class AddMembersScreen extends Component {
     if (this.code) {
       this.setState({addMembersToExisting: true});
       this.groupId = this.props.navigation.getParam('groupId');
+      this.name = this.props.navigation.getParam('name');
     }
     this.fetchFriends()
       .then(() =>

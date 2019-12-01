@@ -81,6 +81,7 @@ class GroupScreen extends Component {
             this.props.navigation.navigate('AddMembers', {
               code: 1,
               groupId: this.groupId,
+              name: this.name,
             })
           }
         />
