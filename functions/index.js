@@ -135,14 +135,93 @@ function notifyTargetId(targetId, senderUsername) {
 
 //======================NOTIFY ADDED MEMBERS==========================//
 
-exports.notifyAddedMembers = functions.https.onCall((data, context) => {
-  const members = data.members;
-  members.forEach(member => {
-    //send notifications to member.uid
-  });
+// exports.notifyAddedMembers = functions.https.onCall((data, context) => {
+//   const members = data.members;
+//   const groupName = data.groupName;
+//   var tokens = [];
+//   members.forEach(async member => {
+//     //send notifications to member.uid
+//     console.log('MEMBER.UID ', member.uid);
+//     await fetchTokenFromUid(member.uid)
+//       .then(token => {
+//         console.log('retrieved token: ', token);
+//         // tokens.push(token);
+//         const payload = {
+//           notification: {
+//             title: `You have been added to ${groupName}`,
+//             body: 'Share your tasks',
+//             sound: 'default',
+//           },
+//         };
+//         return admin.messaging().sendToDevice(token, payload);
+//       })
+//       .catch(err => console.log('err getting token', err));
+//   });
+//   // console.log('ALL TOKENS: ', tokens);
+//   console.log('GROUP NAME: ', groupName);
+// });
+
+// async function fetchTokenFromUid(uid) {
+//   //WONT WORK WHEN THERE ARE MULTIPLE FCM TOKENS OF THE SAME USER
+//   var token = '';
+//   return await admin
+//     .firestore()
+//     .collection('Users')
+//     .doc(`${uid}`)
+//     .get()
+//     .then(async doc => {
+//       console.log('uid token: ', Object.keys(doc.data().fcmTokens));
+//       var tokenArray = Object.keys(doc.data().fcmTokens); //ARRAY
+//       for (var i = 0; i < tokenArray.length; i++) {
+//         token = tokenArray[i]; //Coverts array to string
+//       }
+//       return token; //return token as string
+//     });
+// }
+
+exports.notifyAddedMembers = functions.https.onCall(async (data, context) => {
+  try {
+    const members = data.members;
+    const groupName = data.groupName;
+
+    const promises = [];
+    members.forEach(member => {
+      promises.push(
+        admin
+          .firestore()
+          .collection('Users')
+          .doc(`${member.uid}`)
+          .get(),
+      );
+    });
+
+    console.log('Promises array: ', promises);
+    const tokensSnapshotsArray = await Promise.all(promises);
+    console.log('tokensSnapshots: ', tokensSnapshotsArray.length);
+    const promises1 = [];
+    tokensSnapshotsArray.forEach(snap => {
+      console.log(snap.data());
+      const token = Object.keys(snap.data().fcmTokens); //Here you may adapt as it seems you have an array of tokens. I let you write the loop, etc.
+      console.log('TOKEN: ', token);
+      const payload = {
+        notification: {
+          title: `You have been added to ${groupName}`,
+          body: 'Share your tasks',
+          sound: 'default',
+        },
+      };
+      promises1.push(admin.messaging().sendToDevice(token, payload));
+    });
+
+    await Promise.all(promises1);
+
+    return {result: 'OK'};
+  } catch (error) {
+    console.log('error: ', error);
+    //See the doc: https://firebase.google.com/docs/functions/callable#handle_errors
+  }
   return null;
 });
-
 //======================NOTIFY MEMBERS OF LEAVING GROUP==========================// = 4s
 
 exports.notifyLeftGroup = functions.https.onCall((data, context) => {
@@ -287,30 +366,4 @@ exports.notifyBuddyAdded = functions.https.onCall((data, context) => {
   const buddyUsername = data.buddyUsername;
   //Add taskTitle, taskAuthor for sending notification
   //Send fcm
-});
-
-//======================TEST FUNCTION=====================//
-exports.notify = functions.https.onCall((data, context) => {
-  const uid = data.uid;
-  const title = data.title;
-  const message = data.message;
-  var userTokens = [];
-  return admin
-    .firestore()
-    .collection('Users')
-    .doc(`${uid}`)
-    .get()
-    .then(doc => {
-      var token = doc.data().deviceToken;
-
-      var payload = {
-        notification: {
-          title: title,
-          body: message,
-          sound: 'default',
-        },
-      };
-
-      return admin.messaging().sendToDevice(token, payload);
-    });
 });

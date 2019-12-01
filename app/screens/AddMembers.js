@@ -143,6 +143,7 @@ class AddMembersScreen extends Component {
     functions()
       .httpsCallable('notifyAddedMembers')({
         members: this.state.members,
+        groupName: this.name,
       })
       .then(() => console.log('Notified'))
       .catch(err => console.log('error notifying added members', err));
