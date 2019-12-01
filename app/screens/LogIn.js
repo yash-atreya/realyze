@@ -52,7 +52,7 @@ class LogInScreen extends Component {
   updateToken = async () => {
     const uid = auth().currentUser.uid;
     const token = await messaging().getToken();
-    console.log('UPDATE TOKEN');
+    console.log('UPDATETOKEN(_)');
     firestore()
       .collection('Users')
       .doc(`${uid}`)
@@ -67,12 +67,13 @@ class LogInScreen extends Component {
           firestore()
             .collection('Users')
             .doc(`${uid}`)
-            .update({fcmTokens: tempTokens});
+            .update({fcmTokens: tempTokens})
+            .then(() => console.log('new Token updated'));
         } else {
           console.log('Token already exists');
         }
       });
-  }
+  };
 
   render() {
     return (

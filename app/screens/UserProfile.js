@@ -101,22 +101,6 @@ class UserProfileScreen extends Component {
         }
       });
   }
-  // sendRequest() {
-  //   const uid = auth().currentUser.uid;
-  //   firestore()
-  //     .collection('Requests')
-  //     .doc()
-  //     .set({
-  //       targetId: this.profileId,
-  //       senderId: uid,
-  //       sentAt: new Date(),
-  //       status: 'sent',
-  //     })
-  //     .then(() => {
-  //       console.log('req sent');
-  //       this.setState({requestSent: true});
-  //     });
-  // }
 
   sendRequest() {
     const uid = auth().currentUser.uid;
@@ -124,7 +108,6 @@ class UserProfileScreen extends Component {
       .httpsCallable('sendRequest')({
         senderId: uid,
         targetId: this.profileId,
-        status: 'sent',
       })
       .then(() => {
         console.log('Request Sent');

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Button, View, Text} from 'react-native';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import messaging from '@react-native-firebase/messaging';
 
 class HomeScreen extends Component {
   constructor() {
@@ -11,10 +13,40 @@ class HomeScreen extends Component {
     title: 'Home',
   };
 
+  componentDidMount() {
+    this.updateToken();
+  }
+
   onSignOut() {
     auth().signOut();
     this.props.navigation.navigate('LogIn');
   }
+
+  updateToken = async () => {
+    const uid = auth().currentUser.uid;
+    const token = await messaging().getToken();
+    console.log('UPDATETOKEN(_)');
+    firestore()
+      .collection('Users')
+      .doc(`${uid}`)
+      .get()
+      .then(doc => {
+        var currentTokens = doc.data().fcmTokens || {};
+        if (!currentTokens[token]) {
+          var tempTokens = currentTokens;
+          tempTokens = {
+            [token]: true,
+          };
+          firestore()
+            .collection('Users')
+            .doc(`${uid}`)
+            .update({fcmTokens: tempTokens})
+            .then(() => console.log('new Token updated'));
+        } else {
+          console.log('Token already exists');
+        }
+      });
+  };
   render() {
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>

@@ -73,7 +73,7 @@ function notifySenderId(senderId, targetUsername) {
 exports.sendRequest = functions.https.onCall((data, context) => {
   const senderId = data.senderId;
   const targetId = data.targetId;
-  const status = data.status;
+  var senderUsername = '';
   return admin
     .firestore()
     .collection('Requests')
@@ -85,11 +85,53 @@ exports.sendRequest = functions.https.onCall((data, context) => {
     })
     .then(() => {
       console.log('Request Sent');
+      senderUsername = fetchSenderId(senderId);
+      return senderUsername;
+    })
+    .then(username => {
+      console.log('senderUsername : ', username);
+      notifyTargetId(targetId, username);
       return null;
-      //Send NOTIFICATION TO RECEIVER(targetId)
     })
     .catch(err => console.log('Error sending request - cloud function', err));
 });
+function fetchSenderId(senderId) {
+  return admin
+    .firestore()
+    .collection('Users')
+    .doc(`${senderId}`)
+    .get()
+    .then(doc => {
+      return doc.data().username;
+    })
+    .catch(err => console.log('err retreiving senders username', err));
+}
+function notifyTargetId(targetId, senderUsername) {
+  return admin
+    .firestore()
+    .collection('Users')
+    .doc(`${targetId}`)
+    .get()
+    .then(doc => {
+      console.log(doc.data());
+      var tokens = Object.keys(doc.data().fcmTokens);
+      console.log('targetId tokens : ', tokens);
+      return tokens;
+    })
+    .then(tokens => {
+      const payload = {
+        notification: {
+          title: `${senderUsername} has sent you a friend request`,
+          body: 'If you know them, accept it1',
+          sound: 'default',
+        },
+      };
+
+      return admin.messaging().sendToDevice(tokens, payload);
+    })
+    .then(() => console.log('notified target'))
+    .catch(err => console.log('err notifying target', err));
+}
 
 //======================NOTIFY ADDED MEMBERS==========================//
 
