@@ -12,6 +12,7 @@ admin.initializeApp();
 exports.onAcceptRequest = functions.https.onCall((data, context) => {
   const targetId = data.targetId;
   const senderId = data.senderId;
+  var targetUsername = '';
   return admin
     .firestore()
     .collection('Friendships')
@@ -23,12 +24,51 @@ exports.onAcceptRequest = functions.https.onCall((data, context) => {
     })
     .then(() => {
       console.log('Befriended');
+      targetUsername = fetchTargetId(targetId);
+      return targetUsername;
+    })
+    .then(username => {
+      notifySenderId(senderId, username);
       return null;
-      //NOTIFICATION SENT TO uid2(senderId)
     })
     .catch(err => console.log('errrrrr', err));
 });
-
+function fetchTargetId(targetId) {
+  return admin
+    .firestore()
+    .collection('Users')
+    .doc(`${targetId}`)
+    .get()
+    .then(doc => {
+      return doc.data().username;
+    })
+    .catch(err => console.log('err retreiving targets username', err));
+}
+function notifySenderId(senderId, targetUsername) {
+  return admin
+    .firestore()
+    .collection('Users')
+    .doc(`${senderId}`)
+    .get()
+    .then(doc => {
+      var tokens = Object.keys(doc.data().fcmTokens);
+      console.log('TOKENS: ', tokens);
+      return tokens;
+    })
+    .then(tokens => {
+      console.log('tokens: ', tokens);
+      const payload = {
+        notification: {
+          title: `${targetUsername} has accepted your friend request`,
+          body: 'You can now add them to group',
+          sound: 'default',
+        },
+      };
+      return admin.messaging().sendToDevice(tokens, payload);
+    })
+    .then(() => console.log('notified senderId of Acceptance'))
+    .catch(err => console.log('err notifying senderId', err));
+}
 //======================SEND REQUEST==========================// = 4.3s
 exports.sendRequest = functions.https.onCall((data, context) => {
   const senderId = data.senderId;

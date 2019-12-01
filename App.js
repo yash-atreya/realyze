@@ -30,85 +30,37 @@ import SelectGroupsScreen from './app/screens/SelectGroups';
 import AddBuddyToTaskScreen from './app/screens/AddBuddyToTask';
 import EditTaskScreen from './app/screens/EditTask';
 
-// checkUser();
-// const saveTokenToDb = token => {
-//   const uid = auth().currentUser.uid;
-//   console.log('saveTokenToDb');
-//   firestore()
-//     .collection('Users')
-//     .doc(`${uid}`)
-//     .set({
-//       deviceToken: token,
-//     })
-//     .then(() => console.log('token saved to db'))
-//     .catch(err => console.log('unable to save token : ', err));
-// };
-// const requestPermission = async () => {
-//   try {
-//     const hasPermission = await messaging().hasPermission();
-//     if (hasPermission) {
-//       console.log('hasPermission');
-//       getFcmToken().then(fcmToken => {
-//         console.log(' hasPermission FCM TOKEN: ', fcmToken);
-//         saveTokenToDb(fcmToken);
-//       });
-//     } else {
-//       try {
-//         await messaging()
-//           .requestPermission()
-//           .then(() => {
-//             console.log('permission granted');
-//             getFcmToken().then(fcmToken => {
-//               console.log('FCM TOKEN: ', fcmToken);
-//               saveTokenToDb(fcmToken);
-//             });
-//           });
-//       } catch {
-//         console.log('err granting permission');
-//       }
-//     }
-//   } catch {
-//     console.log('user denied permission');
-//   }
-// };
-// const registerNotif = async () => {
-//   try {
-//     if (messaging().isRegisteredForRemoteNotifications) {
-//       await messaging()
-//         .registerForRemoteNotifications()
-//         .then(() => console.log('registered'));
-//     }
-//   } catch {
-//     console.log('error registering for notifications');
-//   }
-// };
-// const pushToken = token => {
-//   const uid = auth().currentUser.uid;
-//   const docRef = firestore()
-//     .collection('DeviceTokens')
-//     .doc(`${uid}`);
-//   var tempTokens = [];
-//   firestore().runTransaction(async transaction => {
-//     return await transaction
-//       .get(docRef)
-//       .then(doc => {
-//         tempTokens.push(doc.data().tokens);
-//       })
-//       .then(() => {
-//         tempTokens.push(token);
-//         console.log('PUSHED NEW TOKEN');
-//       })
-//       .then(() => {
-//         docRef
-//           .update({
-//             tokens: tempTokens,
-//           })
-//           .then(() => console.log('db updated'))
-//           .catch(err => console.log('error updating db', err));
-//       })
-//       .catch(err => console.log('error pushing token to db: ', err));
-//   });
-// };
+const requestPermission = async () => {
+  try {
+    const hasPermission = await messaging().hasPermission();
+    if (hasPermission) {
+      console.log('hasPermission');
+    } else {
+      try {
+        await messaging()
+          .requestPermission()
+          .then(() => {
+            console.log('permission granted');
+          });
+      } catch {
+        console.log('err granting permission');
+      }
+    }
+  } catch {
+    console.log('user denied permission');
+  }
+};
+const registerNotif = async () => {
+  try {
+    if (messaging().isRegisteredForRemoteNotifications) {
+      await messaging()
+        .registerForRemoteNotifications()
+        .then(() => console.log('registered'));
+    }
+  } catch {
+    console.log('error registering for notifications');
+  }
+};
 const getFcmToken = async () => {
   try {
     const fcmToken = await messaging().getToken();
@@ -117,80 +69,30 @@ const getFcmToken = async () => {
     console.log('error getting token');
   }
 };
-// const checkToken = async tokens => {
-//   var tokensArray = [];
-//   tokensArray = tokens;
-//   var tokenExists = false;
-//   try {
-//     await getFcmToken()
-//       .then(token => {
-//         for (var i = 0; i < tokensArray.length; i++) {
-//           if (tokens[i] === token) {
-//             console.log('token already exists');
-//             tokenExists = true;
-//             break;
-//           }
-//         }
-//         return token;
-//       })
-//       .then(token => {
-//         if (tokenExists === false) {
-//           pushToken(token);
-//         }
-//       });
-//   } catch {
-//     console.log('error');
-//   }
-// };
-// const checkIfToken = () => {
-//   console.log('checkIfToken()');
-//   const uid = auth().currentUser.uid;
-//   firestore()
-//     .collection('DeviceTokens')
-//     .doc(`${uid}`)
-//     .get()
-//     .then(doc => {
-//       if (doc.exists) {
-//         console.log('existing tokens: ', doc.data().tokens);
-//         checkToken(doc.data().tokens);
-//       } else {
-//         console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-//         registerNotif().then(() => {
-//           requestPermission();
-//         });
-//       }
-//     });
-// };
 
-// const checkUser = () => {
-//   var userExists = Boolean;
-//   if (auth().currentUser !== null) {
-//     console.log('checkUser if()');
-//     checkIfToken();
-//   } else if (auth().currentUser === null || undefined) {
-//     console.log('checkUser else');
-//     return null;
-//   }
-// };
-// checkUser();
-// //Check whether token already exists
-// if (auth().currentUser === null) {
-//   console.log('nefjnvorfv');
-// } else {
-//   registerNotif()
-//     .then(() => requestPermission())
-//     .then(() => notify());
-// }
+registerNotif().then(() => requestPermission());
 
-// const notify = functions()
-//   .httpsCallable('notify')({
-//     title: 'TESTSTSTTSTSTS',
-//     uid: null || auth().currentUser.uid,
-//     message: 'what are you doing?',
-//   })
-//   .then(console.log('notified'))
-//   .catch(err => console.log('err'));
+const listenForTokenRefresh = () => {
+  console.log('listening for token refresh');
+  messaging().onTokenRefresh(async newToken => {
+    console.log('newToken: ', newToken);
+    const uid = auth().currentUser.uid || null;
+    if (uid != null) {
+      await firestore()
+        .collection('Users')
+        .doc(`${uid}`)
+        .update({
+          fcmTokens: {
+            [newToken]: true,
+          },
+        })
+        .then(() => console.log('token refreshed and updated'))
+        .catch(err => console.log('err updating to db ', err));
+    }
+  });
+};
 
+listenForTokenRefresh();
 //=================================================================================//
 const AuthLoadingScreen = props => {
   function checkUser() {
