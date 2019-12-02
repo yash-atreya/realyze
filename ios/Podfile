@@ -34,6 +34,7 @@ target 'realyze' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+<<<<<<< HEAD
   #Firebase
   pod 'Firebase/Analytics'
 
@@ -70,14 +71,27 @@ target 'realyze' do
        end
     end
   end
+=======
+  target 'RealyzeTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+>>>>>>> Initial React-native Template
 
   use_native_modules!
 end
 
+<<<<<<< HEAD
 target 'realyze-tvOS' do
   # Pods for realyze-tvOS
 
   target 'realyze-tvOSTests' do
+=======
+target 'Realyze-tvOS' do
+  # Pods for Realyze-tvOS
+
+  target 'Realyze-tvOSTests' do
+>>>>>>> Initial React-native Template
     inherit! :search_paths
     # Pods for testing
   end

@@ -2,6 +2,7 @@ apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
 
+<<<<<<< HEAD
 // /*OneSignal */
 // buildscript {
 //     repositories {
@@ -14,6 +15,8 @@ import com.android.build.OutputFile
 
 // apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 
+=======
+>>>>>>> Initial React-native Template
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -143,10 +146,15 @@ android {
         applicationId "com.realyze"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+<<<<<<< HEAD
         vectorDrawables.useSupportLibrary = true
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+=======
+        versionCode 1
+        versionName "1.0"
+>>>>>>> Initial React-native Template
     }
     splits {
         abi {
@@ -193,6 +201,7 @@ android {
 }
 
 dependencies {
+<<<<<<< HEAD
     implementation project(':react-native-sound')
     implementation project(':react-native-appearance')
     implementation project(':@react-native-community_netinfo')
@@ -221,6 +230,10 @@ dependencies {
     implementation project(path: ":@react-native-firebase_dynamic-links")
     //RNDateTimePicker
     //implementation project(':react-native-datetimepicker')
+=======
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "com.facebook.react:react-native:+"  // From node_modules
+>>>>>>> Initial React-native Template
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
@@ -239,5 +252,8 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+<<<<<<< HEAD
 //Firebase
 apply plugin: 'com.google.gms.google-services'
+=======
+>>>>>>> Initial React-native Template
