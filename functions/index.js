@@ -2,13 +2,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
-// Create and Deploy Your First Cloud Functions
-// https://firebase.google.com/docs/functions/write-firebase-functions
-
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//   response.send('Hello from Firebase!');
-// });
-
 //======================ACCEPT REQUEST==========================//
 exports.onAcceptRequest = functions.https.onCall((data, context) => {
   const targetId = data.targetId;
@@ -181,24 +174,68 @@ exports.notifyAddedMembers = functions.https.onCall(async (data, context) => {
 });
 //======================NOTIFY MEMBERS OF LEAVING GROUP==========================// = 4s
 
-exports.notifyLeftGroup = functions.https.onCall((data, context) => {
+exports.notifyLeftGroup = functions.https.onCall(async (data, context) => {
   const groupId = data.groupId;
-  const uid = data.uid;
-  return admin
-    .firestore()
-    .collection('Groups')
-    .doc(`${groupId}`)
-    .collection('Members')
-    .get()
-    .then(doc => {
+  const username = data.username;
+  const groupName = data.groupName;
+  try {
+    const promise = [];
+    promise.push(
+      admin
+        .firestore()
+        .collection('Groups')
+        .doc(`${groupId}`)
+        .collection('Members')
+        .get(),
+    );
+
+    console.log('promises: ', promise);
+
+    const memberSnapshots = await Promise.all(promise);
+
+    console.log('memberSnaps: ', memberSnapshots);
+
+    const uids = [];
+    memberSnapshots.forEach(doc => {
       doc.forEach(snap => {
-        console.log(snap.data().uid); //uid
-        console.log(snap.data().username); //Check if username exists in Members collection, if not, then add it.
-        //Send notification FCM
+        console.log(snap.id);
+        uids.push(snap.id);
       });
-      return null;
-    })
-    .catch(err => console.log(err));
+    });
+
+    const tokenPromises = [];
+    uids.forEach(uid => {
+      tokenPromises.push(
+        admin
+          .firestore()
+          .collection('Users')
+          .doc(`${uid}`)
+          .get(),
+      );
+    });
+
+    console.log('tokenPromises: ', tokenPromises);
+    const tokenSnapshots = await Promise.all(tokenPromises);
+
+    const notifPromises = [];
+    tokenSnapshots.forEach(snap => {
+      console.log('userData: ', snap.data());
+      const token = Object.keys(snap.data().fcmTokens);
+      const payload = {
+        notification: {
+          title: `${username}`,
+          body: `has left the group ${groupName}`,
+          sound: 'default',
+        },
+      };
+      notifPromises.push(admin.messaging().sendToDevice(token, payload));
+    });
+
+    await Promise.all(notifPromises);
+  } catch (err) {
+    console.log(err);
+  }
+  return {result: 'ok'};
 });
 
 //======================NOTIFY MEMBERS OF TASK COMPLETION==========================//
@@ -435,13 +472,8 @@ exports.newTaskAdded = functions.https.onCall(async (data, context) => {
 
 exports.notifyBuddyAdded = functions.https.onCall(async (data, context) => {
   const buddyUid = data.buddyUid;
-  const buddyUsername = data.buddyUsername;
-  const uid = data.uid;
   const author = data.author;
-  const taskId = data.taskId;
   const taskTitle = data.taskTitle;
-  //Add taskTitle, taskAuthor for sending notification
-  //Send fcm
   try {
     const promises = [];
     promises.push(
@@ -460,8 +492,8 @@ exports.notifyBuddyAdded = functions.https.onCall(async (data, context) => {
       const token = Object.keys(snap.data().fcmTokens);
       const payload = {
         notification: {
-          title: `${author} has added you on their task as a buddy, ${taskTitle}`,
-          body: 'Go help them complete it',
+          title: `${author} has added you on their task as a buddy`,
+          body: `Go help them complete ${taskTitle}`,
           sound: 'default',
         },
       };

@@ -13,6 +13,8 @@ class EditGroupScreen extends Component {
     };
     this.groupId = this.props.navigation.getParam('groupId');
     this.membersData = [];
+    this.groupName = '';
+    this.username = auth().currentUser.displayName;
   }
 
   componentDidMount() {
@@ -22,6 +24,7 @@ class EditGroupScreen extends Component {
       .get()
       .then(doc => {
         console.log(doc.data());
+        this.groupName = doc.data().name;
       });
     firestore()
       .collection('Groups')
@@ -59,11 +62,11 @@ class EditGroupScreen extends Component {
   }
 
   notifyLeftGroup() {
-    const uid = auth().currentUser.uid;
     functions()
       .httpsCallable('notifyLeftGroup')({
         groupId: this.groupId,
-        uid: uid,
+        groupName: this.groupName,
+        username: this.username,
       })
       .then('notfied about leaving grp')
       .catch(err => console.log('unable to notify : ', err));
