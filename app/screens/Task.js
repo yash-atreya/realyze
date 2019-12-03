@@ -73,14 +73,14 @@ class TaskScreen extends Component {
     //Add setTimeout for a possible scenario of checking the task by mistake. And add if else.
     const uid = auth().currentUser.uid;
     functions()
-      .httpsCallable('notifyTaskCompletion')({
+      .httpsCallable('notifyTaskCompleted')({
         taskId: this.taskId,
+        taskTitle: this.state.title,
         uid: uid,
-        //taskTitle: ??
-        //Can we retrive the groupId??
+        author: this.state.taskAuthor,
       })
       .then(() => console.log('notifiedTaskCompletion'))
-      .catch(err => console.log(err));
+      .catch(err => console.log('notifying error: ', err));
   }
 
   unmarkCompletion() {
@@ -188,6 +188,7 @@ class TaskScreen extends Component {
                 })
               }
             />
+            <Button title="Complete" onPress={() => this.onMarkCompleted()} />
           </View>
         ) : (
           <View>

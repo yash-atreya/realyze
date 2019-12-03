@@ -240,11 +240,57 @@ exports.notifyLeftGroup = functions.https.onCall(async (data, context) => {
 
 //======================NOTIFY MEMBERS OF TASK COMPLETION==========================//
 
-exports.notifyTaskCompleted = functions.https.onCall((data, context) => {
+exports.notifyTaskCompleted = functions.https.onCall(async (data, context) => {
   const taskId = data.taskId;
   const uid = data.uid;
+  const author = data.author;
+  const taskTitle = data.taskTitle;
+  try {
+    const groups = await retrieveTaskGroups(taskId);
+    for (const group of groups) {
+      const members = await retrieveMembers(group.groupId);
+
+      const memberPromises = [];
+      members.forEach(member => {
+        console.log('member: ', member);
+        memberPromises.push(
+          admin
+            .firestore()
+            .collection('Users')
+            .doc(`${member}`)
+            .get(),
+        );
+      });
+
+      console.log('memberPromises: ', memberPromises);
+
+      const memberSnapshots = await Promise.all(memberPromises);
+
+      const notifPromises = [];
+      memberSnapshots.forEach(snap => {
+        console.log(snap.data());
+        const token = Object.keys(snap.data().fcmTokens);
+        const payload = {
+          notification: {
+            title: `${author} has completed: `,
+            body: `Task: ${taskTitle}`,
+            sound: 'default',
+          },
+        };
+
+        notifPromises.push(admin.messaging().sendToDevice(token, payload));
+      });
+      await Promise.all(notifPromises);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+  return null;
+});
+
+async function retrieveTaskGroups(taskId) {
   const groups = [];
-  return admin
+  return await admin
     .firestore()
     .collection('Tasks')
     .doc(`${taskId}`)
@@ -252,37 +298,14 @@ exports.notifyTaskCompleted = functions.https.onCall((data, context) => {
     .get()
     .then(doc => {
       doc.forEach(snap => {
-        console.log(snap.id);
-        groups.push(snap.id);
-      });
-      return null;
-    })
-    .then(() => fcmTaskCompletion(groups))
-    .catch(err => console.log(err));
-});
-
-function fcmTaskCompletion(groups) {
-  //Check scope of groups array from parent function
-  groups.forEach(group => {
-    return admin
-      .firestore()
-      .collection('Groups')
-      .doc(`${group}`)
-      .collection('Members')
-      .get()
-      .then(doc => {
-        doc.forEach(snap => {
-          console.log(snap.data().uid); //uid
-          console.log(snap.data().username); //Check if username exists in Members collection, if not, then add it.
-          //Send notification FCM
+        groups.push({
+          groupId: snap.data().groupId,
+          groupName: snap.data().groupName,
         });
-        return null;
-      })
-      .catch(err => console.log(err));
-  });
+      });
+      return groups;
+    });
 }
-// Prevent sending doubly nofications to if a user exists in two groups and the task also exists in the same group.
-
 //======================NOTIFY MEMBERS OF UNMARKING TASK==========================//
 
 exports.notifyUnmarkedTask = functions.https.onCall((data, context) => {
