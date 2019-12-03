@@ -1,6 +1,7 @@
 package com.realyze;
 
 import com.facebook.react.ReactActivity;
+<<<<<<< HEAD
 //For react-native-gesture-handler
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
@@ -8,6 +9,11 @@ import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 //react-native-appearance
 import android.content.Intent; // <--- import
 import android.content.res.Configuration; // <--- import
+=======
+import com.facebook.react.ReactActivityDelegate;
+import com.facebook.react.ReactRootView;
+import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+>>>>>>> Installed React Navigation
 
 public class MainActivity extends ReactActivity {
 
