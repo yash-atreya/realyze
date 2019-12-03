@@ -329,144 +329,72 @@ function fcmUnmarkedTask() {
 
 //======================ADD NEW TASK TO GROUP==========================//
 
-async function asyncForEach(array, callback) {
-  for (let i = 0; i < array.length; i++) {
-    // eslint-disable-next-line no-await-in-loop
-    // eslint-disable-next-line callback-return
-    await callback(array[i], i, array);
-  }
-}
 exports.newTaskAdded = functions.https.onCall(async (data, context) => {
   const groups = data.groups;
   const uid = data.uid;
   const author = data.author;
   const taskId = data.taskId;
   const taskTitle = data.taskTitle;
-  // try {
-  //   const groupIdPromises = [];
-  //   groups.forEach(group => {
-  //     groupIdPromises.push(
-  //       admin
-  //         .firestore()
-  //         .collection('Groups')
-  //         .doc(`${group.groupId}`)
-  //         .collection('Members')
-  //         .get(),
-  //     );
-  //   });
 
-  //   console.log('groupIdPromises: ', groupIdPromises);
-
-  //   const memberSnapshots = await Promise.all(groupIdPromises);
-  //   console.log('memberSnapshots: ', memberSnapshots);
-
-  //   const uids = [];
-  //   groupIdPromises.forEach(snap => {
-  //     console.log(snap.data().uid);
-  //     uids.push(snap.data().uid);
-  //   });
-
-  //   console.log('UIDS: ', uids);
-
-  //   const uidPromises = [];
-  //   uids.forEach(uid => {
-  //     uidPromises.push(
-  //       admin
-  //         .firestore()
-  //         .collection('Users')
-  //         .doc(`${uid}`)
-  //         .get(),
-  //     );
-  //   });
-
-  //   console.log('uidPromises: ', uidPromises);
-  //   const uidSnapshots = await Promise.all(uidPromises);
-  //   console.log('UID SNAPSHOTS:  ', uidSnapshots);
-  //   const notifPromises = [];
-  //   uidSnapshots.forEach(snap => {
-  //     console.log('UID DATA: ', snap.data());
-  //     const token = Object.keys(snap.data().fcmTokens);
-  //     const payload = {
-  //       notification: {
-  //         title: `${author} has added a new task`,
-  //         body: `go check it out`,
-  //         sound: 'default',
-  //       },
-  //     };
-
-  //     notifPromises.push(admin.messaging().sendToDevice(token, payload));
-  //   });
-
-  //   await Promise.all(notifPromises);
-  // } catch (err) {
-  //   console.log(err);
-  // }
   try {
-    asyncForEach(groups, async group => {
-      const groupName = group.groupName;
-      console.log('groupName: ', groupName);
-      const groupId = groups.groupId;
+    for (const group of groups) {
+      const members = await retrieveMembers(group.groupId);
 
-      const membersPromises = [];
-      membersPromises.push(
-        admin
-          .firestore()
-          .collection('Groups')
-          .doc(`${groupId}`)
-          .collection('Members')
-          .get(),
-      );
-
-      console.log('memberPromises: ', membersPromises);
-
-      const membersSnapshot = await Promise.all(membersPromises);
-      console.log('membersSnapshots', membersSnapshot);
-      const uids = [];
-      membersSnapshot.forEach(doc => {
-        doc.forEach(snap => {
-          console.log(snap.id);
-          uids.push(snap.id);
-        });
-      });
-      console.log(uids);
-
-      const uidPromises = [];
-      uids.forEach(uid => {
-        uidPromises.push(
+      const memberPromises = [];
+      members.forEach(member => {
+        console.log('member: ', member);
+        memberPromises.push(
           admin
             .firestore()
             .collection('Users')
-            .doc(`${uid}`)
+            .doc(`${member}`)
             .get(),
         );
       });
 
-      console.log('uidPromises: ', uidPromises);
-      const tokensSnapshots = await Promise.all(uidPromises);
+      console.log('memberPromises: ', memberPromises);
+
+      const memberSnapshots = await Promise.all(memberPromises);
 
       const notifPromises = [];
-      tokensSnapshots.forEach(snap => {
+      memberSnapshots.forEach(snap => {
         console.log(snap.data());
         const token = Object.keys(snap.data().fcmTokens);
         const payload = {
           notification: {
-            title: `${author} has added a new task to ${groupName}`,
-            body: `Task Added: ${taskTitle}`,
+            title: `${author} added a new task to ${group.groupName}`,
+            body: `Task: ${taskTitle}`,
             sound: 'default',
           },
         };
 
         notifPromises.push(admin.messaging().sendToDevice(token, payload));
       });
-
       await Promise.all(notifPromises);
-    });
+    }
   } catch (err) {
-    console.log(err);
+    consoe.log(err);
   }
   console.log('DONE');
   return {result: 'OK'};
 });
+
+async function retrieveMembers(groupId) {
+  var members = [];
+  return await admin
+    .firestore()
+    .collection('Groups')
+    .doc(`${groupId}`)
+    .collection('Members')
+    .get()
+    .then(doc => {
+      doc.forEach(snap => {
+        console.log(snap.id);
+        members.push(snap.id);
+      });
+      return members;
+    });
+}
 
 //======================NOTIFY BUDDY ADDED==========================//
 
