@@ -124,21 +124,6 @@ class CreateTaskScreen extends Component {
           onCancel={this.hideDatePicker}
           isDarkModeEnabled={colorScheme === 'dark'}
         />
-        {/* <ColorPalette
-          onChange={color => (this.selectedColor = color)}
-          value={this.selectedColor}
-          colors={[
-            '#C0392B',
-            '#E74C3C',
-            '#9B59B6',
-            '#8E44AD',
-            '#2980B9',
-            '#350AD7',
-          ]}
-          title={'Controlled Color Palette:'}
-          icon={<Text>✔</Text>}
-          scaleToWindow={true}
-        /> */}
         <Button
           title="Add to groups"
           onPress={() =>

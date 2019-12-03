@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
@@ -135,50 +136,6 @@ function notifyTargetId(targetId, senderUsername) {
 
 //======================NOTIFY ADDED MEMBERS==========================//
 
-// exports.notifyAddedMembers = functions.https.onCall((data, context) => {
-//   const members = data.members;
-//   const groupName = data.groupName;
-//   var tokens = [];
-//   members.forEach(async member => {
-//     //send notifications to member.uid
-//     console.log('MEMBER.UID ', member.uid);
-//     await fetchTokenFromUid(member.uid)
-//       .then(token => {
-//         console.log('retrieved token: ', token);
-//         // tokens.push(token);
-//         const payload = {
-//           notification: {
-//             title: `You have been added to ${groupName}`,
-//             body: 'Share your tasks',
-//             sound: 'default',
-//           },
-//         };
-//         return admin.messaging().sendToDevice(token, payload);
-//       })
-//       .catch(err => console.log('err getting token', err));
-//   });
-//   // console.log('ALL TOKENS: ', tokens);
-//   console.log('GROUP NAME: ', groupName);
-// });
-
-// async function fetchTokenFromUid(uid) {
-//   //WONT WORK WHEN THERE ARE MULTIPLE FCM TOKENS OF THE SAME USER
-//   var token = '';
-//   return await admin
-//     .firestore()
-//     .collection('Users')
-//     .doc(`${uid}`)
-//     .get()
-//     .then(async doc => {
-//       console.log('uid token: ', Object.keys(doc.data().fcmTokens));
-//       var tokenArray = Object.keys(doc.data().fcmTokens); //ARRAY
-//       for (var i = 0; i < tokenArray.length; i++) {
-//         token = tokenArray[i]; //Coverts array to string
-//       }
-//       return token; //return token as string
-//     });
-// }
-
 exports.notifyAddedMembers = functions.https.onCall(async (data, context) => {
   try {
     const members = data.members;
@@ -197,7 +154,7 @@ exports.notifyAddedMembers = functions.https.onCall(async (data, context) => {
 
     console.log('Promises array: ', promises);
     const tokensSnapshotsArray = await Promise.all(promises);
-    console.log('tokensSnapshots: ', tokensSnapshotsArray.length);
+    console.log('tokensSnapshots: ', tokensSnapshotsArray);
     const promises1 = [];
     tokensSnapshotsArray.forEach(snap => {
       console.log(snap.data());
@@ -334,36 +291,187 @@ function fcmUnmarkedTask() {
 }
 
 //======================ADD NEW TASK TO GROUP==========================//
-exports.newTaskAdded = functions.https.onCall((data, context) => {
-  //Retrieve groups array
-  //Run forEach
-  //notify each user except one
+
+async function asyncForEach(array, callback) {
+  for (let i = 0; i < array.length; i++) {
+    // eslint-disable-next-line no-await-in-loop
+    // eslint-disable-next-line callback-return
+    await callback(array[i], i, array);
+  }
+}
+exports.newTaskAdded = functions.https.onCall(async (data, context) => {
   const groups = data.groups;
-  groups.forEach(doc => {
-    return admin
-      .firestore()
-      .collection('Groups')
-      .doc(`${doc.groupId}`)
-      .collection('Members')
-      .get()
-      .then(doc => {
+  const uid = data.uid;
+  const author = data.author;
+  const taskId = data.taskId;
+  const taskTitle = data.taskTitle;
+  // try {
+  //   const groupIdPromises = [];
+  //   groups.forEach(group => {
+  //     groupIdPromises.push(
+  //       admin
+  //         .firestore()
+  //         .collection('Groups')
+  //         .doc(`${group.groupId}`)
+  //         .collection('Members')
+  //         .get(),
+  //     );
+  //   });
+
+  //   console.log('groupIdPromises: ', groupIdPromises);
+
+  //   const memberSnapshots = await Promise.all(groupIdPromises);
+  //   console.log('memberSnapshots: ', memberSnapshots);
+
+  //   const uids = [];
+  //   groupIdPromises.forEach(snap => {
+  //     console.log(snap.data().uid);
+  //     uids.push(snap.data().uid);
+  //   });
+
+  //   console.log('UIDS: ', uids);
+
+  //   const uidPromises = [];
+  //   uids.forEach(uid => {
+  //     uidPromises.push(
+  //       admin
+  //         .firestore()
+  //         .collection('Users')
+  //         .doc(`${uid}`)
+  //         .get(),
+  //     );
+  //   });
+
+  //   console.log('uidPromises: ', uidPromises);
+  //   const uidSnapshots = await Promise.all(uidPromises);
+  //   console.log('UID SNAPSHOTS:  ', uidSnapshots);
+  //   const notifPromises = [];
+  //   uidSnapshots.forEach(snap => {
+  //     console.log('UID DATA: ', snap.data());
+  //     const token = Object.keys(snap.data().fcmTokens);
+  //     const payload = {
+  //       notification: {
+  //         title: `${author} has added a new task`,
+  //         body: `go check it out`,
+  //         sound: 'default',
+  //       },
+  //     };
+
+  //     notifPromises.push(admin.messaging().sendToDevice(token, payload));
+  //   });
+
+  //   await Promise.all(notifPromises);
+  // } catch (err) {
+  //   console.log(err);
+  // }
+  try {
+    asyncForEach(groups, async group => {
+      const groupName = group.groupName;
+      console.log('groupName: ', groupName);
+      const groupId = groups.groupId;
+
+      const membersPromises = [];
+      membersPromises.push(
+        admin
+          .firestore()
+          .collection('Groups')
+          .doc(`${groupId}`)
+          .collection('Members')
+          .get(),
+      );
+
+      console.log('memberPromises: ', membersPromises);
+
+      const membersSnapshot = await Promise.all(membersPromises);
+      console.log('membersSnapshots', membersSnapshot);
+      const uids = [];
+      membersSnapshot.forEach(doc => {
         doc.forEach(snap => {
           console.log(snap.id);
-          //Send NOTIFICATION to snap.id(userId)
+          uids.push(snap.id);
         });
-        return null;
-      })
-      .catch(err =>
-        console.log('cloud function error - newTaskAdded(): ', err),
-      );
-  });
+      });
+      console.log(uids);
+
+      const uidPromises = [];
+      uids.forEach(uid => {
+        uidPromises.push(
+          admin
+            .firestore()
+            .collection('Users')
+            .doc(`${uid}`)
+            .get(),
+        );
+      });
+
+      console.log('uidPromises: ', uidPromises);
+      const tokensSnapshots = await Promise.all(uidPromises);
+
+      const notifPromises = [];
+      tokensSnapshots.forEach(snap => {
+        console.log(snap.data());
+        const token = Object.keys(snap.data().fcmTokens);
+        const payload = {
+          notification: {
+            title: `${author} has added a new task to ${groupName}`,
+            body: `Task Added: ${taskTitle}`,
+            sound: 'default',
+          },
+        };
+
+        notifPromises.push(admin.messaging().sendToDevice(token, payload));
+      });
+
+      await Promise.all(notifPromises);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+  console.log('DONE');
+  return {result: 'OK'};
 });
 
 //======================NOTIFY BUDDY ADDED==========================//
 
-exports.notifyBuddyAdded = functions.https.onCall((data, context) => {
+exports.notifyBuddyAdded = functions.https.onCall(async (data, context) => {
   const buddyUid = data.buddyUid;
   const buddyUsername = data.buddyUsername;
+  const uid = data.uid;
+  const author = data.author;
+  const taskId = data.taskId;
+  const taskTitle = data.taskTitle;
   //Add taskTitle, taskAuthor for sending notification
   //Send fcm
+  try {
+    const promises = [];
+    promises.push(
+      admin
+        .firestore()
+        .collection('Users')
+        .doc(`${buddyUid}`)
+        .get(),
+    );
+    console.log('promises: ', promises);
+    const buddySnapshot = await Promise.all(promises);
+    console.log('buddySnapshot: ', buddySnapshot);
+    const notifPromises = [];
+    buddySnapshot.forEach(snap => {
+      console.log('buddy Data: ', snap.data());
+      const token = Object.keys(snap.data().fcmTokens);
+      const payload = {
+        notification: {
+          title: `${author} has added you on their task as a buddy, ${taskTitle}`,
+          body: 'Go help them complete it',
+          sound: 'default',
+        },
+      };
+
+      notifPromises.push(admin.messaging().sendToDevice(token, payload));
+    });
+
+    await Promise.all(notifPromises);
+  } catch (err) {
+    console.log('err', err);
+  }
+  return {result: 'ok'};
 });

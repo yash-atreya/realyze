@@ -6,17 +6,17 @@ class SelectGroupsComp extends Component {
   constructor(props) {
     super(props);
 
-    this.name = this.props.name;
+    this.groupName = this.props.groupName;
     this.groupId = this.props.groupId;
   }
 
   render() {
     return (
       <View>
-        <Text>{this.name}</Text>
+        <Text>{this.groupName}</Text>
         <Button
           title="Add"
-          onPress={() => this.props.addGroup(this.groupId, this.name)}
+          onPress={() => this.props.addGroup(this.groupId, this.groupName)}
         />
       </View>
     );

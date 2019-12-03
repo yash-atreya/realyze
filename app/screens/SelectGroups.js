@@ -34,7 +34,7 @@ class SelectGroupsScreen extends Component {
               console.log(doc.data());
               this.groupData.push({
                 groupId: groupId,
-                name: doc.data().name,
+                groupName: doc.data().name,
               });
             })
             .then(() => this.setState({groupData: this.groupData}))
@@ -43,8 +43,8 @@ class SelectGroupsScreen extends Component {
       });
   }
 
-  addGroup = (groupId, name) => {
-    this.groups.push({groupId: groupId, name: name});
+  addGroup = (groupId, groupName) => {
+    this.groups.push({groupId: groupId, groupName: groupName});
     console.log(
       'Added to groups array: ',
       JSON.stringify(this.groups, null, 2),
@@ -94,8 +94,8 @@ class SelectGroupsScreen extends Component {
             .doc(`${group.groupId}`)
             .set({
               groupId: group.groupId,
-              name: group.name,
-              //   authorUid: uid,
+              groupName: group.groupName,
+              timestamp: new Date(),
             });
         });
       })
@@ -106,9 +106,16 @@ class SelectGroupsScreen extends Component {
 
   //CLOUD FUNCTION
   newTaskAdded() {
+    const title = this.props.navigation.getParam('title');
+    const uid = auth().currentUser.uid;
+    const displayName = auth().currentUser.displayName;
     functions()
       .httpsCallable('newTaskAdded')({
         groups: this.state.groups,
+        taskTitle: title,
+        taskId: this.state.docId,
+        uid: uid,
+        author: displayName,
       })
       .then(() => console.log('Notifications sent'))
       .catch(err => console.log('error sending notifications ', err));
@@ -119,7 +126,7 @@ class SelectGroupsScreen extends Component {
     console.log('rendeItem');
     return (
       <SelectGroupsComp
-        name={item.name}
+        groupName={item.groupName}
         groupId={item.groupId}
         addGroup={this.addGroup}
       />

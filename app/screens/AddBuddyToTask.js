@@ -150,6 +150,10 @@ class AddBuddyToTaskScreen extends Component {
       .httpsCallable('notifyBuddyAdded')({
         buddyUid: this.state.buddy.uid,
         buddyUsername: this.state.buddy.username,
+        uid: this.uid,
+        author: this.author,
+        taskId: this.taskId,
+        taskTitle: this.title,
       })
       .then(() => console.log('Notified'))
       .catch(err => console.log('err notifying buddy ', err));

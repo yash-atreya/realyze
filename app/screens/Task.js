@@ -15,6 +15,7 @@ class TaskScreen extends Component {
       title: '',
       logText: '',
       authorUid: '',
+      taskAuthor: '',
     };
   }
 
@@ -25,8 +26,11 @@ class TaskScreen extends Component {
       .get()
       .then(doc => {
         console.log(doc.data());
-        this.setState({title: doc.data().title});
-        this.setState({authorUid: doc.data().uid});
+        this.setState({
+          title: doc.data().title,
+          authorUid: doc.data().uid,
+          taskAuthor: doc.data().author,
+        });
       })
       .catch(err => console.log('Error, unable to load task data', err));
   }
@@ -175,7 +179,15 @@ class TaskScreen extends Component {
               }}
             />
             <Button title="LogIt" onPress={() => this.createLog()} />
-            <Button title="Edit Task" onPress={() => this.props.navigation.navigate('EditTask', {taskId: this.taskId})} />
+            <Button
+              title="Edit Task"
+              onPress={() =>
+                this.props.navigation.navigate('EditTask', {
+                  taskId: this.taskId,
+                  author: this.state.taskAuthor,
+                })
+              }
+            />
           </View>
         ) : (
           <View>

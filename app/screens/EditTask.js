@@ -8,6 +8,7 @@ class EditTaskScreen extends Component {
 
     this.title = this.props.navigation.getParam('title');
     this.taskId = this.props.navigation.getParam('taskId');
+    this.author = this.props.navigation.getParam('author');
     this.tempTaskData = [];
     this.state = {
       taskData: {}, //TRy to convert this to an object
@@ -97,6 +98,7 @@ class EditTaskScreen extends Component {
             onPress={() =>
               this.props.navigation.navigate('AddBuddyToTask', {
                 taskId: this.taskId,
+                author: this.author,
               })
             }
           />
