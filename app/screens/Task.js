@@ -76,7 +76,6 @@ class TaskScreen extends Component {
       .httpsCallable('notifyTaskCompleted')({
         taskId: this.taskId,
         taskTitle: this.state.title,
-        uid: uid,
         author: this.state.taskAuthor,
       })
       .then(() => console.log('notifiedTaskCompletion'))
@@ -97,12 +96,10 @@ class TaskScreen extends Component {
 
   //CLOUD FUNCTION
   notifyUnmarkedTask() {
-    const uid = auth().currentUser.uid;
     functions().httpsCallable('notifyUnmarkedTask')({
       taskId: this.taskId,
-      uid: uid,
-      //taskTitle: ??
-      //Can we retrive the groupId??
+      taskTitle: this.state.title,
+      author: this.state.taskAuthor,
     });
   }
 
@@ -189,6 +186,7 @@ class TaskScreen extends Component {
               }
             />
             <Button title="Complete" onPress={() => this.onMarkCompleted()} />
+            <Button title="Incomplete" onPress={() => this.unmarkCompletion()} />
           </View>
         ) : (
           <View>

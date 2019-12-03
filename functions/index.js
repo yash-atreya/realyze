@@ -242,7 +242,6 @@ exports.notifyLeftGroup = functions.https.onCall(async (data, context) => {
 
 exports.notifyTaskCompleted = functions.https.onCall(async (data, context) => {
   const taskId = data.taskId;
-  const uid = data.uid;
   const author = data.author;
   const taskTitle = data.taskTitle;
   try {
@@ -308,25 +307,51 @@ async function retrieveTaskGroups(taskId) {
 }
 //======================NOTIFY MEMBERS OF UNMARKING TASK==========================//
 
-exports.notifyUnmarkedTask = functions.https.onCall((data, context) => {
+exports.notifyUnmarkedTask = functions.https.onCall(async (data, context) => {
   const taskId = data.taskId;
-  const uid = data.uid;
-  // const title =
-  const groups = [];
-  return admin
-    .firestore()
-    .collection('Tasks')
-    .doc(`${taskId}`)
-    .collection('TaskGroups')
-    .get()
-    .then(doc => {
-      doc.forEach(snap => {
-        console.log(snap.id);
-        groups.push(snap.id);
+  const taskTitle = data.taskTitle;
+  const author = data.author;
+  try {
+    const groups = await retrieveTaskGroups(taskId);
+    for (const group of groups) {
+      const members = await retrieveMembers(group.groupId);
+
+      const memberPromises = [];
+      members.forEach(member => {
+        console.log('member: ', member);
+        memberPromises.push(
+          admin
+            .firestore()
+            .collection('Users')
+            .doc(`${member}`)
+            .get(),
+        );
       });
-      return null;
-    })
-    .then(() => fcmUnmarkedTask());
+
+      console.log('memberPromises: ', memberPromises);
+
+      const memberSnapshots = await Promise.all(memberPromises);
+
+      const notifPromises = [];
+      memberSnapshots.forEach(snap => {
+        console.log(snap.data());
+        const token = Object.keys(snap.data().fcmTokens);
+        const payload = {
+          notification: {
+            title: `${taskTitle} incompleted: `,
+            body: `Author: ${author}`,
+            sound: 'default',
+          },
+        };
+
+        notifPromises.push(admin.messaging().sendToDevice(token, payload));
+      });
+      await Promise.all(notifPromises);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+  return {result: 'ok'};
 });
 
 function fcmUnmarkedTask() {
