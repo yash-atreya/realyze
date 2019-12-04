@@ -5,6 +5,8 @@ import firestore from '@react-native-firebase/firestore';
 import AllTasksComp from '../components/AllTasksComp';
 import functions from '@react-native-firebase/functions';
 import RNPermissions, {RESULTS} from 'react-native-permissions';
+import AudioRecorderPlayer from 'react-native-audio-recorder-player';
+const audioRecorderPlayer = new AudioRecorderPlayer();
 
 class TaskScreen extends Component {
   constructor(props) {
@@ -202,6 +204,73 @@ class TaskScreen extends Component {
     }
   }
 
+  //================================RN-AUDIO-RECORDER-PLAYER====================================
+
+  path = Platform.select({
+    ios: 'hello.m4a',
+    android: 'sdcard/hello.mp3', // should give extra dir name in android. Won't grant permission to the first level of dir.
+  });
+  async onStartRecord() {
+    const result = await audioRecorderPlayer.startRecorder(this.path);
+    console.log('startRecord: ', result);
+    audioRecorderPlayer.addRecordBackListener(e => {
+      this.setState({
+        recordSecs: e.current_position,
+        recordTime: audioRecorderPlayer.mmssss(Math.floor(e.current_position)),
+      });
+    });
+    this.setState({
+      file: result,
+    });
+    console.log('STATE FILE: ', this.state.file);
+    return;
+  }
+
+  async onStopRecord() {
+    const result = await audioRecorderPlayer.stopRecorder();
+    audioRecorderPlayer.removeRecordBackListener();
+    this.setState({
+      recordSecs: 0,
+    });
+    console.log('stopRecorder', result);
+  }
+
+  async onPlay() {
+    try {
+      const result = await audioRecorderPlayer.startPlayer(this.path);
+      console.log('startPlayer', result);
+      audioRecorderPlayer.addPlayBackListener(e => {
+        if (e.current_position === e.duration) {
+          console.log('finished');
+          this.onStop();
+        }
+        this.setState({
+          currentPositionSec: e.current_position,
+          currentDurationSec: e.duration,
+          playTime: audioRecorderPlayer.mmssss(Math.floor(e.current_position)),
+          duration: audioRecorderPlayer.mmssss(Math.floor(e.duration)),
+        });
+        return;
+      });
+    } catch {
+      console.log('ERR onPlay()');
+    }
+  }
+
+  async onStop() {
+    const result = audioRecorderPlayer.stopPlayer();
+    audioRecorderPlayer.removePlayBackListener();
+    this.setState({
+      currentPositionSec: 0,
+      currentDurationSec: 0,
+      playTime: 0,
+      duration: 0,
+    });
+    console.log('player stopped', result);
+  }
+
+  //======================================TASK METHODS==========================================
+
   createLog() {
     const {logText} = this.state;
     const username = auth().currentUser.displayName;
@@ -362,11 +431,11 @@ class TaskScreen extends Component {
           <View>
             <AllTasksComp title={this.state.title} />
             <Button title="Nudge" onPress={() => this.onNudge()} />
-            <Button title="Record" />
-            <Text>Record time</Text>
-            <Button title="Stop Record" />
-            <Button title="Play" />
-            <Text>Play time</Text>
+            <Button title="Record" onPress={() => this.onStartRecord()} />
+            <Text>{this.state.recordTime}</Text>
+            <Button title="Stop Record" onPress={() => this.onStopRecord()} />
+            <Button title="Play" onPress={() => this.onPlay()} />
+            <Text>{this.state.playTime}</Text>
             <Button title="Send" />
           </View>
         )}
