@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Button, View, TextInput, Text} from 'react-native';
+import {Button, View, TextInput, Text, Platform} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import AllTasksComp from '../components/AllTasksComp';
 import functions from '@react-native-firebase/functions';
+import RNPermissions, {RESULTS} from 'react-native-permissions';
 
 class TaskScreen extends Component {
   constructor(props) {
@@ -16,6 +17,16 @@ class TaskScreen extends Component {
       logText: '',
       authorUid: '',
       taskAuthor: '',
+      microphonePermIOS: false,
+      microphonePermANDROID: false,
+      readStoragePermANDROID: false,
+      writeStoragePermANDROID: false,
+      recordSecs: 0,
+      recordTime: 0,
+      currentPositionSec: 0,
+      currentDurationSec: 0,
+      playTime: 0,
+      duration: 0,
     };
   }
 
@@ -32,7 +43,163 @@ class TaskScreen extends Component {
           taskAuthor: doc.data().author,
         });
       })
+      .then(() => {
+        const uid = auth().currentUser.uid;
+        if (this.state.authorUid !== uid) {
+          this.checkPerms().then(() => {
+            this.requestPerm();
+          });
+        }
+      })
       .catch(err => console.log('Error, unable to load task data', err));
+  }
+  // ===================================CHECK PERMISSIONS=====================================================================
+
+  async checkPerms() {
+    if (Platform.OS === 'ios') {
+      try {
+        await RNPermissions.check(RNPermissions.PERMISSIONS.IOS.MICROPHONE)
+          .then(result => {
+            switch (result) {
+              case RESULTS.UNAVAILABLE:
+                console.log(
+                  'This feature is not available (on this device / in this context)',
+                );
+                break;
+              case RESULTS.DENIED:
+                console.log(
+                  'The microphone permission has not been requested / is denied but requestable',
+                );
+                break;
+              case RESULTS.GRANTED:
+                console.log('The permission is granted');
+                this.setState({microphonePermIOS: true});
+                break;
+              case RESULTS.BLOCKED:
+                console.log(
+                  'The permission is denied and not requestable anymore',
+                );
+                break;
+            }
+          })
+          .then(() => this.setState({microphonePermIOS: true}))
+          .catch(() => console.log('err'));
+      } catch {
+        console.log('ios error');
+      }
+    } else if (Platform.OS === 'android') {
+      try {
+        await RNPermissions.check(
+          RNPermissions.PERMISSIONS.ANDROID.RECORD_AUDIO,
+        )
+          .then(result => {
+            switch (result) {
+              case RESULTS.UNAVAILABLE:
+                console.log(
+                  'This feature is not available (on this device / in this context)',
+                );
+                break;
+              case RESULTS.DENIED:
+                console.log(
+                  'The permission has not been requested / is denied but requestable',
+                );
+                break;
+              case RESULTS.GRANTED:
+                console.log('The permission is granted');
+                this.setState({microphonePermANDROID: true});
+                break;
+              case RESULTS.BLOCKED:
+                console.log(
+                  'The permission is denied and not requestable anymore',
+                );
+                break;
+            }
+          })
+          .catch(() => console.log('err'));
+        await RNPermissions.check(
+          RNPermissions.PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+        ).then(result => {
+          switch (result) {
+            case RESULTS.UNAVAILABLE:
+              console.log(
+                'This feature is not available (on this device / in this context)',
+              );
+              break;
+            case RESULTS.DENIED:
+              console.log(
+                'The permission has not been requested / is denied but requestable',
+              );
+              break;
+            case RESULTS.GRANTED:
+              console.log('The permission is granted');
+              this.setState({writeStoragePermANDROID: true});
+              break;
+            case RESULTS.BLOCKED:
+              console.log(
+                'The permission is denied and not requestable anymore',
+              );
+              break;
+          }
+        });
+        await RNPermissions.check(
+          RNPermissions.PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+        ).then(result => {
+          switch (result) {
+            case RESULTS.UNAVAILABLE:
+              console.log(
+                'This feature is not available (on this device / in this context)',
+              );
+              break;
+            case RESULTS.DENIED:
+              console.log(
+                'The permission has not been requested / is denied but requestable',
+              );
+              break;
+            case RESULTS.GRANTED:
+              console.log('The permission is granted');
+              this.setState({readStoragePermANDROID: true});
+              break;
+            case RESULTS.BLOCKED:
+              console.log(
+                'The permission is denied and not requestable anymore',
+              );
+              break;
+          }
+        });
+      } catch {
+        console.log('android error');
+      }
+    }
+  }
+  //===================================REQUEST PERMISSIONS==========================================
+  async requestPerm() {
+    if (Platform.OS === 'ios') {
+      try {
+        // if (this.state.microphonePermIOS === false) {
+        await RNPermissions.request(RNPermissions.PERMISSIONS.IOS.MICROPHONE);
+        // }
+      } catch {
+        console.log('err requesting ios perms');
+      }
+    } else if (Platform.OS === 'android') {
+      if (this.state.microphonePermANDROID === false) {
+        await RNPermissions.request(
+          RNPermissions.PERMISSIONS.ANDROID.RECORD_AUDIO,
+        );
+      }
+
+      if (this.state.readStoragePermANDROID === false) {
+        await RNPermissions.request(
+          RNPermissions.PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+        );
+      }
+
+      if (this.state.writeStoragePermANDROID === false) {
+        await RNPermissions.request(
+          RNPermissions.PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+        );
+      }
+    }
   }
 
   createLog() {
