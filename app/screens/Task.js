@@ -32,6 +32,7 @@ class TaskScreen extends Component {
       playTime: 0,
       duration: 0,
       file: '',
+      downloadLocation: '',
     };
   }
 
@@ -290,7 +291,8 @@ class TaskScreen extends Component {
   onDownload() {
     var downloadTo = `file:///private${
       firebase.utils.FilePath.DOCUMENT_DIRECTORY
-    }/Realyze/${new Date()}.m4a`;
+    }/Realyze/helloDownloaded.m4a`;
+    this.setState({downloadLocation: downloadTo});
     const task = this.helloAudioMessagesRef.writeToFile(downloadTo).then(() => {
       console.log('Downloaded!');
     });
@@ -298,6 +300,31 @@ class TaskScreen extends Component {
       .getDownloadURL()
       .then(url => console.log('DOWNLOAD URL', url));
     console.log('DOWNLOAD TO: ', downloadTo);
+  }
+
+  async playDownloaded() {
+    try {
+      console.log('DOWNLOAD LOCATION: ', this.state.downloadLocation);
+      const result = await audioRecorderPlayer.startPlayer(
+        this.state.downloadLocation,
+      );
+      console.log('playDownloaded: ', result);
+      audioRecorderPlayer.addPlayBackListener(e => {
+        if (e.current_position === e.duration) {
+          console.log('finished');
+          this.onStop();
+        }
+        this.setState({
+          currentPositionSec: e.current_position,
+          currentDurationSec: e.duration,
+          playTime: audioRecorderPlayer.mmssss(Math.floor(e.current_position)),
+          duration: audioRecorderPlayer.mmssss(Math.floor(e.duration)),
+        });
+        return;
+      });
+    } catch {
+      console.log('ERR onPlay()');
+    }
   }
   //======================================TASK METHODS==========================================
 
@@ -468,6 +495,10 @@ class TaskScreen extends Component {
             <Text>{this.state.playTime}</Text>
             <Button title="Upload" onPress={() => this.onUpload()} />
             <Button title="Download" onPress={() => this.onDownload()} />
+            <Button
+              title="Play Downloaded File"
+              onPress={() => this.playDownloaded()}
+            />
           </View>
         )}
       </View>
