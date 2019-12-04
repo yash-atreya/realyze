@@ -31,7 +31,7 @@ import AddBuddyToTaskScreen from './app/screens/AddBuddyToTask';
 import EditTaskScreen from './app/screens/EditTask';
 import TestScreen from './app/screens/Test';
 import ReminderTestScreen from './app/screens/ReminderTest';
-
+import UserTasksScreen from './app/screens/UserTasks';
 const requestPermission = async () => {
   try {
     const hasPermission = await messaging().hasPermission();
@@ -189,6 +189,9 @@ const MainStack = createStackNavigator(
     },
     ReminderTest: {
       screen: ReminderTestScreen,
+    },
+    UserTasks: {
+      screen: UserTasksScreen,
     },
   },
   {

@@ -93,6 +93,7 @@ class SelectGroupsScreen extends Component {
             .collection('TaskGroups')
             .doc(`${group.groupId}`)
             .set({
+              authorUid: uid,
               groupId: group.groupId,
               groupName: group.groupName,
               timestamp: new Date(),

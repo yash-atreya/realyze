@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, View, TextInput} from 'react-native';
+import {Button, View, TextInput, Text} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import AllTasksComp from '../components/AllTasksComp';
@@ -186,12 +186,21 @@ class TaskScreen extends Component {
               }
             />
             <Button title="Complete" onPress={() => this.onMarkCompleted()} />
-            <Button title="Incomplete" onPress={() => this.unmarkCompletion()} />
+            <Button
+              title="Incomplete"
+              onPress={() => this.unmarkCompletion()}
+            />
           </View>
         ) : (
           <View>
             <AllTasksComp title={this.state.title} />
             <Button title="Nudge" onPress={() => this.onNudge()} />
+            <Button title="Record" />
+            <Text>Record time</Text>
+            <Button title="Stop Record" />
+            <Button title="Play" />
+            <Text>Play time</Text>
+            <Button title="Send" />
           </View>
         )}
       </View>

@@ -172,7 +172,7 @@ PODS:
     - RNPermissions
   - Permission-StoreKit (2.0.4):
     - RNPermissions
-  - Protobuf (3.10.0)
+  - Protobuf (3.11.1)
   - RCTRequired (0.61.4)
   - RCTTypeSafety (0.61.4):
     - FBLazyVector (= 0.61.4)
@@ -623,7 +623,7 @@ SPEC CHECKSUMS:
   Permission-Microphone: ed3bfe858d5d0fd0bf0f21d00ceb3a98a809eec6
   Permission-Notifications: 7b7f44c506f0bb6edc747335f6fa9381142a0ec8
   Permission-StoreKit: 4b69ac72ec226f38d6efc2da0f05c2df2c6c2984
-  Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
+  Protobuf: 20d79da7f20b5928b80043b05080b816e802659e
   RCTRequired: f3b3fb6f4723e8e52facb229d0c75fdc76773849
   RCTTypeSafety: 2ec60de6abb1db050b56ecc4b60188026078fd10
   React: 10e0130b57e55a7cd8c3dee37c1261102ce295f4

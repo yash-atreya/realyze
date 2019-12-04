@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, View, Text} from 'react-native';
+import {Button, View, Text, FlatList, TouchableOpacity} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 
 class GroupScreen extends Component {
@@ -8,6 +8,7 @@ class GroupScreen extends Component {
 
     this.state = {
       userData: [],
+      loading: true,
     };
 
     this.name = this.props.navigation.getParam('name');
@@ -16,6 +17,9 @@ class GroupScreen extends Component {
   }
 
   componentDidMount() {
+    this.fetchUsers();
+  }
+  async fetchUsers() {
     firestore()
       .collection('Groups')
       .doc(`${this.groupId}`)
@@ -29,18 +33,18 @@ class GroupScreen extends Component {
             .doc(`${uid}`)
             .get()
             .then(doc => {
-              console.log(doc.data());
               this.tempUserData.push({
-                uid: doc.data().uid,
+                uid: doc.id,
                 username: doc.data().username,
-                // profilePic: doc.data().profilePic,
               });
-            });
+            })
+            .then(() =>
+              this.setState({userData: this.tempUserData, loading: false}),
+            );
         });
       })
-      .then(() => this.setState({userData: this.tempUserData}));
+      .catch(err => console.log(err));
   }
-
   userTasks(uid) {
     firestore()
       .collectionGroup('TaskGroups')
@@ -64,11 +68,42 @@ class GroupScreen extends Component {
       });
   }
 
+  _renderItem = ({item}) => {
+    return (
+      <TouchableOpacity
+        onPress={() =>
+          this.props.navigation.navigate('UserTasks', {
+            uid: item.uid,
+            username: item.username,
+            groupId: this.groupId,
+          })
+        }>
+        <Text>{item.uid}</Text>
+        <Text>{item.username}</Text>
+      </TouchableOpacity>
+    );
+  };
   render() {
+    console.log('USerDAta: ', JSON.stringify(this.state.userData, null, 2));
     return (
       <View>
-        <Text>{this.name}</Text>
-        <Text>{this.groupId}</Text>
+        {this.state.loading ? (
+          <View>
+            <Text>{this.name}</Text>
+            <Text>{this.groupId}</Text>
+            <Text>Loading users ...</Text>
+          </View>
+        ) : (
+          <View>
+            <Text>{this.name}</Text>
+            <Text>{this.groupId}</Text>
+            <FlatList
+              data={this.state.userData}
+              renderItem={this._renderItem}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </View>
+        )}
         <Button
           title="Edit Group"
           onPress={() =>
