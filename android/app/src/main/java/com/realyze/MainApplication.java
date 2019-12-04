@@ -20,6 +20,8 @@ import com.reactnativecommunity.netinfo.NetInfoPackage;
 //Firebase Messaging
 import io.invertase.firebase.messaging.ReactNativeFirebaseMessagingPackage;
 
+//Firebase Storage
+import io.invertase.firebase.storage.ReactNativeFirebaseStoragePackage;
 
 //Auth
 import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
@@ -51,6 +53,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
           new ReactNativeFirebaseFirestorePackage();
           new ReactNativeFirebaseFunctionsPackage();
           new ReactNativeFirebaseMessagingPackage();
+          new ReactNativeFirebaseStoragePackage();
           //new RNDateTimePickerPackage();
           return packages;
         }

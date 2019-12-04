@@ -13,6 +13,9 @@ project(':@react-native-firebase_firestore').projectDir = new File(rootProject.p
 //include ':react-native-datetimepicker'
 //project(':react-native-datetimepicker').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/datetimepicker/android')
 
+// Firebase Storage
+include ':@react-native-firebase_storage'
+project(':@react-native-firebase_storage').projectDir = new File(rootProject.projectDir, './../node_modules/@react-native-firebase/storage/android')
 //Cloud Functions
 include ':@react-native-firebase_functions'
 project(':@react-native-firebase_functions').projectDir = new File(rootProject.projectDir, './../node_modules/@react-native-firebase/functions/android')

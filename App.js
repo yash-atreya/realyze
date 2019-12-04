@@ -29,6 +29,8 @@ import TaskScreen from './app/screens/Task';
 import SelectGroupsScreen from './app/screens/SelectGroups';
 import AddBuddyToTaskScreen from './app/screens/AddBuddyToTask';
 import EditTaskScreen from './app/screens/EditTask';
+import TestScreen from './app/screens/Test';
+import ReminderTestScreen from './app/screens/ReminderTest';
 
 const requestPermission = async () => {
   try {
@@ -181,6 +183,12 @@ const MainStack = createStackNavigator(
     },
     EditTask: {
       screen: EditTaskScreen,
+    },
+    Test: {
+      screen: TestScreen,
+    },
+    ReminderTest: {
+      screen: ReminderTestScreen,
     },
   },
   {

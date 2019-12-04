@@ -34,6 +34,9 @@ PODS:
   - Firebase/Messaging (6.8.1):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 4.1.4)
+  - Firebase/Storage (6.8.1):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 3.4.1)
   - FirebaseAnalytics (6.1.1):
     - FirebaseCore (~> 6.2)
     - FirebaseInstanceID (~> 4.2)
@@ -95,6 +98,10 @@ PODS:
     - GoogleUtilities/Reachability (~> 6.2)
     - GoogleUtilities/UserDefaults (~> 6.2)
     - Protobuf (>= 3.9.2, ~> 3.9)
+  - FirebaseStorage (3.4.2):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 6.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - Folly (2018.10.22.00):
     - boost-for-react-native
     - DoubleConversion
@@ -157,6 +164,14 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - OneSignal (2.11.2)
+  - Permission-Contacts (2.0.4):
+    - RNPermissions
+  - Permission-Microphone (2.0.4):
+    - RNPermissions
+  - Permission-Notifications (2.0.4):
+    - RNPermissions
+  - Permission-StoreKit (2.0.4):
+    - RNPermissions
   - Protobuf (3.10.0)
   - RCTRequired (0.61.4)
   - RCTTypeSafety (0.61.4):
@@ -363,6 +378,8 @@ PODS:
     - React-cxxreact (= 0.61.4)
     - React-jsi (= 0.61.4)
     - ReactCommon/jscallinvoker (= 0.61.4)
+  - RNAudioRecorderPlayer (2.4.3):
+    - React
   - RNDateTimePicker (2.1.0):
     - React
   - RNFBApp (6.0.4):
@@ -386,7 +403,14 @@ PODS:
     - Firebase/Messaging (~> 6.8.1)
     - React
     - RNFBApp
+  - RNFBStorage (6.0.4):
+    - Firebase/Core (~> 6.8.1)
+    - Firebase/Storage (~> 6.8.1)
+    - React
+    - RNFBApp
   - RNGestureHandler (1.5.1):
+    - React
+  - RNPermissions (2.0.4):
     - React
   - RNReanimated (1.4.0):
     - React
@@ -402,6 +426,10 @@ DEPENDENCIES:
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - OneSignal (< 3.0, >= 2.9.3)
+  - Permission-Contacts (from `../node_modules/react-native-permissions/ios/Contacts.podspec`)
+  - Permission-Microphone (from `../node_modules/react-native-permissions/ios/Microphone.podspec`)
+  - Permission-Notifications (from `../node_modules/react-native-permissions/ios/Notifications.podspec`)
+  - Permission-StoreKit (from `../node_modules/react-native-permissions/ios/StoreKit.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -427,13 +455,16 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNAudioRecorderPlayer (from `../node_modules/react-native-audio-recorder-player`)
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker/RNDateTimePicker.podspec`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - "RNFBFunctions (from `../node_modules/@react-native-firebase/functions`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
+  - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -454,6 +485,7 @@ SPEC REPOS:
     - FirebaseFunctions
     - FirebaseInstanceID
     - FirebaseMessaging
+    - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
@@ -477,6 +509,14 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  Permission-Contacts:
+    :path: "../node_modules/react-native-permissions/ios/Contacts.podspec"
+  Permission-Microphone:
+    :path: "../node_modules/react-native-permissions/ios/Microphone.podspec"
+  Permission-Notifications:
+    :path: "../node_modules/react-native-permissions/ios/Notifications.podspec"
+  Permission-StoreKit:
+    :path: "../node_modules/react-native-permissions/ios/StoreKit.podspec"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -521,6 +561,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNAudioRecorderPlayer:
+    :path: "../node_modules/react-native-audio-recorder-player"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker/RNDateTimePicker.podspec"
   RNFBApp:
@@ -533,8 +575,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/functions"
   RNFBMessaging:
     :path: "../node_modules/@react-native-firebase/messaging"
+  RNFBStorage:
+    :path: "../node_modules/@react-native-firebase/storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -560,6 +606,7 @@ SPEC CHECKSUMS:
   FirebaseFunctions: 5af7c35d1c5e41608fecbb667eb6c4e672e318d0
   FirebaseInstanceID: ebd2ea79ee38db0cb5f5167b17a0d387e1cc7b6e
   FirebaseMessaging: e8d71368a5c579083da02203146c953f3386d503
+  FirebaseStorage: 046abe9ac4e2a1a0e47d72f536490ffa50896632
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   GoogleAppMeasurement: 86a82f0e1f20b8eedf8e20326530138fd71409de
@@ -572,6 +619,10 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OneSignal: 4e3e68bb6c29975286a2fa910cb49132bc6e20bb
+  Permission-Contacts: a86054e67f06c4be1715f6b6d9ab4113c3430b53
+  Permission-Microphone: ed3bfe858d5d0fd0bf0f21d00ceb3a98a809eec6
+  Permission-Notifications: 7b7f44c506f0bb6edc747335f6fa9381142a0ec8
+  Permission-StoreKit: 4b69ac72ec226f38d6efc2da0f05c2df2c6c2984
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
   RCTRequired: f3b3fb6f4723e8e52facb229d0c75fdc76773849
   RCTTypeSafety: 2ec60de6abb1db050b56ecc4b60188026078fd10
@@ -595,17 +646,20 @@ SPEC CHECKSUMS:
   React-RCTText: 21934e0a51d522abcd0a275407e80af45d6fd9ec
   React-RCTVibration: 0f76400ee3cec6edb9c125da49fed279340d145a
   ReactCommon: a6a294e7028ed67b926d29551aa9394fd989c24c
+  RNAudioRecorderPlayer: b25470e95141f11f1439604b56847f4d8ce7968d
   RNDateTimePicker: 9db00606d689f5653f08aa601c81b9d3266a0a19
   RNFBApp: cce40af7fd9a8bc12858ce5ec21e20ac7987e0ca
   RNFBAuth: 3b4847dd59141f4c7ad59eee50a37347f3db8eb7
   RNFBFirestore: 3aa9a1d4572b2bad1770173790dc2187deac36ea
   RNFBFunctions: 86095c4dfef6b5c4eeef686a0d4e54a8c82965a7
   RNFBMessaging: 26f689e1b3e531c2cb5ae94469e77ec736fe0f05
+  RNFBStorage: 0fba295bf17319285e40d6f118c70e86fa81b391
   RNGestureHandler: 7add966bb5d90ee8cf38d4341f87814474357972
+  RNPermissions: 35959d09546f1cd60c129ee128146a120ea595c3
   RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
   RNScreens: f28b48b8345f2f5f39ed6195518291515032a788
   Yoga: ba3d99dbee6c15ea6bbe3783d1f0cb1ffb79af0f
 
-PODFILE CHECKSUM: c3ebb77d0f3723e3093d3629a3d1d6437c503505
+PODFILE CHECKSUM: 5a7d759e262837c8d9b1614cdd4d402782cf1cff
 
 COCOAPODS: 1.8.4
