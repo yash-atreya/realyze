@@ -6,6 +6,8 @@ import AllTasksComp from '../components/AllTasksComp';
 import functions from '@react-native-firebase/functions';
 import RNPermissions, {RESULTS} from 'react-native-permissions';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
+import storage from '@react-native-firebase/storage';
+import firebase from '@react-native-firebase/app';
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
 class TaskScreen extends Component {
@@ -29,6 +31,7 @@ class TaskScreen extends Component {
       currentDurationSec: 0,
       playTime: 0,
       duration: 0,
+      file: '',
     };
   }
 
@@ -269,6 +272,33 @@ class TaskScreen extends Component {
     console.log('player stopped', result);
   }
 
+  //======================================FIREBASE STORAGE=====================================================
+
+  storageRef = storage().ref();
+  helloAudioMessagesRef = this.storageRef.child('AudioMessages/hello.m4a');
+  //UPLOAD
+  onUpload = async () => {
+    var uploadFile = this.state.file;
+    console.log('uploadFile', uploadFile);
+    this.helloAudioMessagesRef.putFile(uploadFile).then(function(snapshot) {
+      console.log('Uploaded a file!');
+    });
+
+    return;
+  };
+  //DOWNLOAD
+  onDownload() {
+    var downloadTo = `file:///private${
+      firebase.utils.FilePath.DOCUMENT_DIRECTORY
+    }/Realyze/${new Date()}.m4a`;
+    const task = this.helloAudioMessagesRef.writeToFile(downloadTo).then(() => {
+      console.log('Downloaded!');
+    });
+    var url = this.helloAudioMessagesRef
+      .getDownloadURL()
+      .then(url => console.log('DOWNLOAD URL', url));
+    console.log('DOWNLOAD TO: ', downloadTo);
+  }
   //======================================TASK METHODS==========================================
 
   createLog() {
@@ -436,7 +466,8 @@ class TaskScreen extends Component {
             <Button title="Stop Record" onPress={() => this.onStopRecord()} />
             <Button title="Play" onPress={() => this.onPlay()} />
             <Text>{this.state.playTime}</Text>
-            <Button title="Send" />
+            <Button title="Upload" onPress={() => this.onUpload()} />
+            <Button title="Download" onPress={() => this.onDownload()} />
           </View>
         )}
       </View>
