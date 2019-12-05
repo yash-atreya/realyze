@@ -61,6 +61,15 @@ class EditGroupScreen extends Component {
       .catch(err => console.log('unable to leave grp', err));
   }
 
+  removeFromGroup(uid) {
+    firestore()
+      .collection('Groups')
+      .doc(`${this.groupId}`)
+      .collection('Members')
+      .doc(`${uid}`)
+      .delete();
+  }
+
   notifyLeftGroup() {
     functions()
       .httpsCallable('notifyLeftGroup')({

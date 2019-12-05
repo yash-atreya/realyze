@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, View, TextInput, Text, Platform} from 'react-native';
+import {Button, View, TextInput, Text, Platform, FlatList} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import AllTasksComp from '../components/AllTasksComp';
@@ -35,6 +35,8 @@ class TaskScreen extends Component {
       file: '',
       downloadLocation: '',
     };
+
+    this.tempLogs = [];
   }
 
   componentDidMount() {
@@ -49,6 +51,9 @@ class TaskScreen extends Component {
           authorUid: doc.data().uid,
           taskAuthor: doc.data().author,
         });
+      })
+      .then(() => {
+        this.fetchLogs();
       })
       .then(() => {
         const uid = auth().currentUser.uid;
@@ -374,6 +379,26 @@ class TaskScreen extends Component {
   }
   //======================================TASK METHODS==========================================
 
+  fetchLogs() {
+    firestore()
+      .collection('Logs')
+      .where('taskId', '==', `${this.taskId}`)
+      .get()
+      .then(doc => {
+        doc.forEach(snap => {
+          console.log(snap.data());
+          this.tempLogs.push({
+            logText: snap.data().logText,
+            timestamp: snap.data().timestamp,
+            author: snap.data().author,
+          });
+        });
+      })
+      .then(() => {
+        console.log('tempLogs: ', JSON.stringify(this.tempLogs, null, 2));
+        this.setState({logs: this.tempLogs});
+      });
+  }
   createLog() {
     const {logText} = this.state;
     const username = auth().currentUser.displayName;
@@ -381,13 +406,19 @@ class TaskScreen extends Component {
       console.log('Type something to log it');
       // Add UX to indicate user that nothing has been typed
     } else {
+      this.tempLogs.push({
+        logText: logText,
+        timestamp: new Date(),
+        author: username,
+      });
+      this.setState({logs: this.tempLogs, logText: ''});
       firestore()
         .collection('Logs')
         .doc()
         .set({
           taskId: this.taskId,
-          text: logText,
-          date: new Date(),
+          logText: logText,
+          timestamp: new Date(),
           author: username,
         })
         .then(console.log('LOGGED'))
@@ -495,6 +526,15 @@ class TaskScreen extends Component {
       });
   }
 
+  _renderItem = ({item}) => {
+    return (
+      <View>
+        <Text>{item.logText}</Text>
+        {/* <Text>{item.timestamp}</Text> */}
+      </View>
+    );
+  };
+
   render() {
     const uid = auth().currentUser.uid;
     return (
@@ -502,6 +542,11 @@ class TaskScreen extends Component {
         {uid === this.state.authorUid ? (
           <View>
             <AllTasksComp title={this.state.title} />
+            <FlatList
+              data={this.state.logs}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={this._renderItem}
+            />
             <TextInput
               placeholder="log"
               onChangeText={logText => {
