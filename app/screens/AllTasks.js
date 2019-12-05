@@ -4,6 +4,7 @@ import {View, FlatList} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import AllTasksComp from '../components/AllTasksComp';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 class AllTasksScreen extends Component {
   constructor(props) {
@@ -60,8 +61,19 @@ class AllTasksScreen extends Component {
           keyExtractor={(item, index) => index.toString()}
           renderItem={this._renderItem}
         />
+  }
+
+  render() {
+    return (
+      <View>
+        <Text style={{fontFamily: 'Raleway-Bold'}}>All Tasks</Text>
+        <FontAwesome5 name="list-ul" color={'#000000'} size={24} />
       </View>
     );
   }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> Added MainStack Navigation
 export default AllTasksScreen;

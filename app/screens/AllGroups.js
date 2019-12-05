@@ -13,6 +13,7 @@ import Modal, {
   ModalFooter,
   ModalButton,
 } from 'react-native-modals';
+import Icons from 'react-native-vector-icons/Ionicons';
 
 class AllGroupsScreen extends Component {
   constructor(props) {
@@ -312,6 +313,13 @@ class AllGroupsScreen extends Component {
             />
           </ModalContent>
         </BottomModal>
+  }
+
+  render() {
+    return (
+      <View>
+        <Text style={{fontFamily: 'Raleway-Bold'}}>All Groups</Text>
+        <Icons name="ios-people" color={'#000000'} size={24} />
       </View>
     );
   }
