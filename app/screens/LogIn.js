@@ -102,6 +102,12 @@ class LogInScreen extends Component {
             this.props.navigation.navigate('SignUp');
           }}
         />
+  }
+
+  render() {
+    return (
+      <View>
+        <Text>Login Page</Text>
       </View>
     );
   }
