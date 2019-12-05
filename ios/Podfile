@@ -35,6 +35,7 @@ target 'realyze' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   #Firebase
   pod 'Firebase/Analytics'
 
@@ -72,6 +73,10 @@ target 'realyze' do
     end
   end
 =======
+=======
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+>>>>>>> Added VectorIcons and Custom Fonts
   target 'RealyzeTests' do
     inherit! :search_paths
     # Pods for testing

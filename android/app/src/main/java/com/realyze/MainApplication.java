@@ -4,8 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+<<<<<<< HEAD
 import com.zmxv.RNSound.RNSoundPackage;
 import com.reactlibrary.RNCAppearancePackage;
+=======
+import com.oblador.vectoricons.VectorIconsPackage;
+>>>>>>> Added VectorIcons and Custom Fonts
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;

@@ -194,6 +194,7 @@ android {
 
 dependencies {
 <<<<<<< HEAD
+<<<<<<< HEAD
     implementation project(':react-native-sound')
     implementation project(':react-native-appearance')
     implementation project(':@react-native-community_netinfo')
@@ -223,6 +224,9 @@ dependencies {
     //RNDateTimePicker
     //implementation project(':react-native-datetimepicker')
 =======
+=======
+    implementation project(':react-native-vector-icons')
+>>>>>>> Added VectorIcons and Custom Fonts
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
 <<<<<<< HEAD
