@@ -52,6 +52,8 @@ target 'realyze' do
   pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications.podspec"
   pod 'Permission-StoreKit', :path => "#{permissions_path}/StoreKit.podspec"
   
+  pod 'RNSound', :path => '../node_modules/react-native-sound'
+
   target 'realyzeTests' do
     inherit! :search_paths
     # Pods for testing

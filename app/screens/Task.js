@@ -8,6 +8,7 @@ import RNPermissions, {RESULTS} from 'react-native-permissions';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 import storage from '@react-native-firebase/storage';
 import firebase from '@react-native-firebase/app';
+var Sound = require('react-native-sound');
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
 class TaskScreen extends Component {
@@ -289,42 +290,87 @@ class TaskScreen extends Component {
   };
   //DOWNLOAD
   onDownload() {
-    var downloadTo = `file:///private${
-      firebase.utils.FilePath.DOCUMENT_DIRECTORY
-    }/Realyze/helloDownloaded.m4a`;
-    this.setState({downloadLocation: downloadTo});
-    const task = this.helloAudioMessagesRef.writeToFile(downloadTo).then(() => {
-      console.log('Downloaded!');
-    });
-    var url = this.helloAudioMessagesRef
-      .getDownloadURL()
-      .then(url => console.log('DOWNLOAD URL', url));
-    console.log('DOWNLOAD TO: ', downloadTo);
+    if (Platform.OS === 'android') {
+      var downloadTo = `${
+        firebase.utils.FilePath.DOCUMENT_DIRECTORY
+      }/Realyze/AudioMessages_sent/hello.mp3`;
+
+      this.setState({downloadLocation: downloadTo});
+      const task = this.helloAudioMessagesRef
+        .writeToFile(downloadTo)
+        .then(() => {
+          console.log('Downloaded!');
+        });
+      var url = this.helloAudioMessagesRef
+        .getDownloadURL()
+        .then(url => console.log('DOWNLOAD URL', url));
+      console.log('DOWNLOAD TO: ', downloadTo);
+    } else if (Platform.OS === 'ios') {
+      var downloadTo = `file:///private${
+        firebase.utils.FilePath.DOCUMENT_DIRECTORY
+      }/Realyze/helloDownloaded.m4a`;
+      this.setState({downloadLocation: downloadTo});
+      const task = this.helloAudioMessagesRef
+        .writeToFile(downloadTo)
+        .then(() => {
+          console.log('Downloaded!');
+        });
+      var url = this.helloAudioMessagesRef
+        .getDownloadURL()
+        .then(url => console.log('DOWNLOAD URL', url));
+      console.log('DOWNLOAD TO: ', downloadTo);
+    }
   }
 
   async playDownloaded() {
-    try {
+    // try {
+    //   console.log('DOWNLOAD LOCATION: ', this.state.downloadLocation);
+    //   const result = await audioRecorderPlayer.startPlayer(
+    //     this.state.downloadLocation,
+    //   );
+    //   console.log('playDownloaded: ', result);
+    //   audioRecorderPlayer.addPlayBackListener(e => {
+    //     if (e.current_position === e.duration) {
+    //       console.log('finished');
+    //       this.onStop();
+    //     }
+    //     this.setState({
+    //       currentPositionSec: e.current_position,
+    //       currentDurationSec: e.duration,
+    //       playTime: audioRecorderPlayer.mmssss(Math.floor(e.current_position)),
+    //       duration: audioRecorderPlayer.mmssss(Math.floor(e.duration)),
+    //     });
+    //     return;
+    //   });
+    // } catch {
+    //   console.log('ERR onPlay()');
+    // }
+
+    Sound.setCategory('Playback');
+
+    var hello = new Sound(this.state.downloadLocation, undefined, error => {
       console.log('DOWNLOAD LOCATION: ', this.state.downloadLocation);
-      const result = await audioRecorderPlayer.startPlayer(
-        this.state.downloadLocation,
-      );
-      console.log('playDownloaded: ', result);
-      audioRecorderPlayer.addPlayBackListener(e => {
-        if (e.current_position === e.duration) {
-          console.log('finished');
-          this.onStop();
-        }
-        this.setState({
-          currentPositionSec: e.current_position,
-          currentDurationSec: e.duration,
-          playTime: audioRecorderPlayer.mmssss(Math.floor(e.current_position)),
-          duration: audioRecorderPlayer.mmssss(Math.floor(e.duration)),
-        });
+      if (error) {
+        console.log('failed to load the sound', error);
         return;
+      }
+      // loaded successfully
+      console.log(
+        'duration in seconds: ' +
+          hello.getDuration() +
+          'number of channels: ' +
+          hello.getNumberOfChannels(),
+      );
+
+      // Play the sound with an onEnd callback
+      hello.play(success => {
+        if (success) {
+          console.log('successfully finished playing');
+        } else {
+          console.log('playback failed due to audio decoding errors');
+        }
       });
-    } catch {
-      console.log('ERR onPlay()');
-    }
+    });
   }
   //======================================TASK METHODS==========================================
 
