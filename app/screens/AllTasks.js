@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity, Platform, SafeAreaView} from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 class AllTasksScreen extends Component {
@@ -10,6 +15,20 @@ class AllTasksScreen extends Component {
   render() {
     return (
       <View>
+        <View
+          style={{
+            position: 'absolute',
+            marginLeft: wp('81.3%'),
+            marginTop: Platform.OS === 'ios' ? hp('79') : hp('80'),
+            marginBottom: hp('9.85%'),
+            zIndex: 10,
+            shadowcolor: '#00000029',
+            shadowRadius: 6,
+          }}>
+          <TouchableOpacity onPress={this.toggleModal}>
+            <Icon name="ios-add-circle" color={'#333647'} size={64} />
+          </TouchableOpacity>
+        </View>
         <Text style={{fontFamily: 'Raleway-Bold'}}>All Tasks</Text>
         <FontAwesome5 name="list-ul" color={'#000000'} size={24} />
       </View>
