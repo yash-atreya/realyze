@@ -258,13 +258,21 @@ export default AppContainer;
  * @flow
  */
 //Importing Libraries
-import React from 'react';
-import {StyleSheet, ScrollView, View, Text, StatusBar} from 'react-native';
+import React, {Component} from 'react';
+import {View, Text, StatusBar, Platform, SafeAreaView} from 'react-native';
+
+//React-Navigation Libraries
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
+
+//React-Native Libraries for Designing
 import Icon from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 //Importing Screens
 import SplashScreen from './app/screens/SplashScreen';
@@ -276,6 +284,19 @@ import AllNotificationsScreen from './app/screens/AllNotifications';
 // const App: () => React$Node = () => {
 //   return <View />;
 // };
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <SafeAreaView style={{flex: 1}}>
+        <AppContainer />
+      </SafeAreaView>
+    );
+  }
+}
 const SplashStack = createStackNavigator({
   Splash: {
     screen: SplashScreen,
@@ -341,8 +362,8 @@ const MainStack = createMaterialTopTabNavigator(
       },
       style: {
         backgroundColor: '#FFFFFF',
-        // shadowColor: '#00A1ED',
-        //paddingBottom: 20,
+        shadowColor: '#00A1ED',
+        //paddingBottom: Platform.OS === 'ios' ? hp('1.3') : hp('0'),
       },
       indicatorStyle: {
         height: 0,
@@ -365,4 +386,4 @@ const AppContainer = createAppContainer(
 );
 // const styles = StyleSheet.create({});
 
-export default AppContainer;
+export default App;
