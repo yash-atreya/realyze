@@ -83,6 +83,8 @@ class SignUpScreen extends Component {
         fcmTokens: {
           [token]: true,
         },
+        friendRequests: false,
+        reminders: false,
       })
       .then(console.log('Document Written in db'))
       .catch(err => console.log('error writing document', err));
