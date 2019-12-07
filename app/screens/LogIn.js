@@ -16,19 +16,19 @@ class LogInScreen extends Component {
       loading: Boolean,
       isOnline: Boolean,
     };
-
-    this.netInfo(); //Subscribe instead
   }
 
-  netInfo() {
-    NetInfo.fetch().then(state => {
-      if (state.isInternetReachable) {
-        this.setState({isOnline: true});
-      } else {
-        this.setState({isOnline: false});
-      }
-    });
-  }
+  subscribeNetInfo = NetInfo.addEventListener(state => {
+    console.log('Connection type', state.type);
+    console.log('Is connected?', state.isConnected);
+    if (state.isConnected === false) {
+      this.setState({isOnline: false});
+      console.log('isOnline: false');
+    } else {
+      this.setState({isOnline: true});
+      console.log('isOnline: true');
+    }
+  });
 
   // componentDidMount() {}
 

@@ -8,28 +8,33 @@ import messaging from '@react-native-firebase/messaging';
 class SignUpScreen extends Component {
   constructor(props) {
     super(props);
-    console.log('REGISTER SCREEN');
+    console.log('SIGN UP SCREEN');
 
     this.state = {
       email: '',
       password: '',
       error: '',
       username: '',
-      loading: Boolean,
+      loading: false,
       isOnline: Boolean,
     };
   }
 
   componentDidMount() {
-    NetInfo.fetch().then(state => {
-      if (state.isInternetReachable) {
-        this.setState({isOnline: true});
-      } else {
-        this.setState({isOnline: false});
-      }
-    });
     this.registerNotif().then(() => this.requestPermission());
   }
+
+  subscribeNetInfo = NetInfo.addEventListener(state => {
+    console.log('Connection type', state.type);
+    console.log('Is connected?', state.isConnected);
+    if (state.isConnected === false) {
+      this.setState({isOnline: false});
+      console.log('isOnline: false');
+    } else {
+      this.setState({isOnline: true});
+      console.log('isOnline: true');
+    }
+  });
 
   onSignUp() {
     if (
