@@ -77,7 +77,7 @@ const textInput = StyleSheet.create({
   generalTextInput: {
     // width: wp('84.26'),
     // height: Platform.OS === 'ios' ? hp('4.92') : hp('6'),
-    width: 316,
+    width: 328,
     height: 40,
     borderColor: '#00A1EDC4',
     borderWidth: 1,
@@ -93,7 +93,7 @@ const buttonStyles = StyleSheet.create({
   buttonBody: {
     // width: wp('84.26'),
     // height: hp('5.9%'),
-    width: 316,
+    width: 328,
     height: 48,
     borderRadius: Platform.OS === 'ios' ? 11 : 3,
     shadowColor: '#102FC6',
