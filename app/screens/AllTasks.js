@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, TouchableOpacity, Platform, SafeAreaView} from 'react-native';
+
+//3rd Party Libraries
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
+
+//3rd Party Libraries
 import Icon from 'react-native-vector-icons/Ionicons';
 
 class AllNotificationsScreen extends Component {
