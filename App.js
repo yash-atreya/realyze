@@ -261,6 +261,7 @@ export default AppContainer;
 import React, {Component} from 'react';
 import {View, Text, StatusBar, Platform, SafeAreaView} from 'react-native';
 
+//3rd Party Libraries--------------------------------------
 //React-Navigation Libraries
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
@@ -273,6 +274,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+//------------------------------------------------------------
 
 //Importing Screens
 import SplashScreen from './app/screens/SplashScreen';
