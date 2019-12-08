@@ -1,6 +1,13 @@
 import React, {Component} from 'react';
 import {View, Text, Button} from 'react-native';
 
+//3rd Party Libraries
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import Logo from '../components/Svg Components/Logo';
+
 class SplashScreen extends Component {
   constructor(props) {
     super(props);
@@ -14,12 +21,14 @@ class SplashScreen extends Component {
       // Right here we're telling it to navigate to the route
       // with the name 'App'.
       this.props.navigation.navigate('LogIn');
-    }, 2000);
+    }, 10000);
   }
 
   render() {
     return (
       <View>
+        {/* //width={wp('33.86')} height={hp('26.6')}  */}
+        <Logo scale={0.2} />
         <Text>Splash Screen</Text>
         <Button
           title="Go to Login"
