@@ -32,6 +32,8 @@ import EditTaskScreen from './app/screens/EditTask';
 import TestScreen from './app/screens/Test';
 import ReminderTestScreen from './app/screens/ReminderTest';
 import UserTasksScreen from './app/screens/UserTasks';
+
+firestore.CACHE_SIZE_UNLIMITED;
 const requestPermission = async () => {
   try {
     const hasPermission = await messaging().hasPermission();
