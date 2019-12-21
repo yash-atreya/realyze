@@ -9,11 +9,13 @@ class GroupScreen extends Component {
     this.state = {
       userData: [],
       loading: true,
+      uid: '',
       dummyUserData: [
         {username: 'Yash', uid: '1'},
         {username: 'Djarmi', uid: '2'},
         {username: 'tanay', uid: '3'},
       ],
+      dummyTaskData: [],
     };
 
     this.name = this.props.navigation.getParam('name');
@@ -73,19 +75,58 @@ class GroupScreen extends Component {
       });
   }
 
+  setTasks(uid) {
+    this.setState({uid: uid});
+    if (uid === '1') {
+      this.setState({
+        dummyTaskData: [
+          {title: 'Y Task', id: '1'},
+          {title: 'Y Task', id: '2'},
+          {title: 'Y Task', id: '3'},
+        ],
+      });
+    } else if (uid === '2') {
+      this.setState({
+        dummyTaskData: [
+          {title: 'D Task', id: '1'},
+          {title: 'D Task', id: '2'},
+          {title: 'D Task', id: '3'},
+        ],
+      });
+    } else {
+      this.setState({
+        dummyTaskData: [
+          {title: 'T Task', id: '1'},
+          {title: 'T Task', id: '2'},
+          {title: 'T Task', id: '3'},
+        ],
+      });
+    }
+  }
+
   _renderItem = ({item}) => {
     return (
       <TouchableOpacity
         onPress={() =>
-          this.props.navigation.navigate('UserTasks', {
-            uid: item.uid,
-            username: item.username,
-            groupId: this.groupId,
-          })
+          // this.props.navigation.navigate('UserTasks', {
+          //   uid: item.uid,
+          //   username: item.username,
+          //   groupId: this.groupId,
+          // })
+          this.setTasks(item.uid)
         }>
         <Text>{item.uid}</Text>
         <Text>{item.username}</Text>
       </TouchableOpacity>
+    );
+  };
+
+  _renderTasks = ({item}) => {
+    return (
+      <View>
+        <Text>{item.title}</Text>
+        <Text>{item.id}</Text>
+      </View>
     );
   };
 
@@ -110,6 +151,11 @@ class GroupScreen extends Component {
                 keyExtractor={(item, index) => index.toString()}
                 horizontal={true}
                 showsHorizontalScrollIndicator={true}
+              />
+              <FlatList
+                keyExtractor={(item, index) => index.toString()}
+                data={this.state.dummyTaskData}
+                renderItem={this._renderTasks}
               />
             </View>
           </View>
