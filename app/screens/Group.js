@@ -9,6 +9,11 @@ class GroupScreen extends Component {
     this.state = {
       userData: [],
       loading: true,
+      dummyUserData: [
+        {username: 'Yash', uid: '1'},
+        {username: 'Djarmi', uid: '2'},
+        {username: 'tanay', uid: '3'},
+      ],
     };
 
     this.name = this.props.navigation.getParam('name');
@@ -83,6 +88,7 @@ class GroupScreen extends Component {
       </TouchableOpacity>
     );
   };
+
   render() {
     console.log('USerDAta: ', JSON.stringify(this.state.userData, null, 2));
     return (
@@ -97,11 +103,15 @@ class GroupScreen extends Component {
           <View>
             <Text>{this.name}</Text>
             <Text>{this.groupId}</Text>
-            <FlatList
-              data={this.state.userData}
-              renderItem={this._renderItem}
-              keyExtractor={(item, index) => index.toString()}
-            />
+            <View>
+              <FlatList
+                data={this.state.dummyUserData}
+                renderItem={this._renderItem}
+                keyExtractor={(item, index) => index.toString()}
+                horizontal={true}
+                showsHorizontalScrollIndicator={true}
+              />
+            </View>
           </View>
         )}
         <Button
