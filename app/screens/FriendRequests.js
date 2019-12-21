@@ -8,6 +8,7 @@ import FriendRequestComp from '../components/FriendRequestComp';
 class FriendRequestsScreen extends Component {
   constructor() {
     super();
+    //=========STATE=========
     this.state = {
       reqs: [
         {name: 'yash', uid: '1'},
@@ -18,6 +19,7 @@ class FriendRequestsScreen extends Component {
       error: null,
       value: '',
     };
+    //==========================
     this.arrayholder = [
       {name: 'yash', uid: '1'},
       {name: 'tanay', uid: '2'},
