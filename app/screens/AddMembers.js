@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {View, Button, FlatList} from 'react-native';
+import {View, Button, FlatList, Text} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import AddMembersComp from '../components/AddMembersComp';
 import functions from '@react-native-firebase/functions';
+import {ListItem, SearchBar} from 'react-native-elements';
 
 class AddMembersScreen extends Component {
   constructor(props) {
@@ -11,13 +12,26 @@ class AddMembersScreen extends Component {
     this.uid = auth().currentUser.uid;
     this.username = auth().currentUser.displayName;
     this.email = auth().currentUser.email;
+    //==========STATE===========
     this.state = {
       friends: [],
       friendsData: [],
       members: [],
       docId: '',
       addMembersToExisting: false,
+      dummyData: [
+        {name: 'yash', uid: '1'},
+        {name: 'tanay', uid: '2'},
+        {name: 'dharmi', uid: '3'},
+      ],
     };
+    //========================
+
+    this.arrayholder = [
+      {name: 'yash', uid: '1'},
+      {name: 'tanay', uid: '2'},
+      {name: 'dharmi', uid: '3'},
+    ];
     this.tempFriends = [];
     this.tempFriendsData = [];
     console.log('Add Members Screen');
@@ -196,27 +210,86 @@ class AddMembersScreen extends Component {
       .catch(err => console.log('err creating group', err));
   }
 
-  _renderItem = ({item}) => (
-    <View>
-      <AddMembersComp
-        email={item.data.email}
-        username={item.data.username}
-        uid={item.uid}
-        name={this.name}
-        // desc={this.desc}
-        addMember={this.addMember}
+  //=====================================SEARCH FUNCTIONALITY=====================
+
+  searchFilterFunction = text => {
+    this.setState({
+      value: text,
+    });
+
+    const newData = this.arrayholder.filter(item => {
+      const itemData = `${item.name.toUpperCase()}`;
+      const textData = text.toUpperCase();
+
+      return itemData.indexOf(textData) > -1;
+    });
+    this.setState({
+      dummyData: newData,
+    });
+  };
+
+  renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: '86%',
+          backgroundColor: '#CED0CE',
+          marginLeft: '14%',
+        }}
       />
-    </View>
-  );
+    );
+  };
+
+  renderHeader = () => {
+    return (
+      <SearchBar
+        placeholder="Type Here..."
+        lightTheme
+        round
+        onChangeText={text => this.searchFilterFunction(text)}
+        autoCorrect={false}
+        value={this.state.value}
+      />
+    );
+  };
+
+  //===================================================
+
+  // _renderItem = ({item}) => (
+  //   <View>
+  //     <AddMembersComp
+  //       email={item.data.email}
+  //       username={item.data.username}
+  //       uid={item.uid}
+  //       name={this.name}
+  //       // desc={this.desc}
+  //       addMember={this.addMember}
+  //     />
+  //   </View>
+  // );
+
+  //========DUMMY RENDER FOR TESTING SEARCH========
+  _renderItem = ({item}) => {
+    return (
+      <View>
+        <Text>{item.name}</Text>
+        <Text>{item.uid}</Text>
+      </View>
+    );
+  };
 
   render() {
     console.log('MEMBERS SCREEN => Member array: ', this.state.members);
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <View style={{flex: 1, justifyContent: 'center'}}>
         <FlatList
-          data={this.state.friendsData}
+          // data={this.state.friendsData}
+          data={this.state.dummyData}
           keyExtractor={(item, index) => index.toString()}
           renderItem={this._renderItem}
+          ItemSeparatorComponent={this.renderSeparator}
+          ListHeaderComponent={this.renderHeader}
         />
         {this.state.addMembersToExisting ? (
           <Button title="Add" onPress={() => this.onAddMembersToExisting()} />
