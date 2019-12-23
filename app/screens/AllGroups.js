@@ -1,17 +1,27 @@
 import React, {Component} from 'react';
-import {View, FlatList} from 'react-native';
+import {View, FlatList, Button, Text, TextInput} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import AllGroupsComp from '../components/AllGroupsComp';
+import Modal, {
+  BottomModal,
+  ModalContent,
+  SlideAnimation,
+  ModalFooter,
+  ModalButton,
+} from 'react-native-modals';
 
 class AllGroupsScreen extends Component {
   constructor(props) {
     super(props);
-
+    //===============STATE================
     this.state = {
       groupData: [],
+      createGroupModal: false,
+      addMembersModal: false,
+      groupName: '',
     };
-
+    //======================================
     this.groupData = [];
   }
 
@@ -43,6 +53,8 @@ class AllGroupsScreen extends Component {
       });
   }
 
+  //===========================ADD MEMBERS==========================
+
   _renderItem = ({item}) => {
     console.log('rendeItem');
     return <AllGroupsComp name={item.name} groupId={item.groupId} />;
@@ -56,6 +68,63 @@ class AllGroupsScreen extends Component {
           keyExtractor={(item, index) => index.toString()}
           renderItem={this._renderItem}
         />
+        <Button
+          title="Create Group"
+          onPress={() => this.setState({createGroupModal: true})}
+        />
+        <BottomModal
+          visible={this.state.createGroupModal}
+          footer={
+            <ModalFooter>
+              <ModalButton
+                text="Add Members"
+                onPress={() =>
+                  this.setState({
+                    createGroupModal: false,
+                    addMembersModal: true,
+                  })
+                }
+              />
+            </ModalFooter>
+          }
+          modalAnimation={
+            new SlideAnimation({
+              slideFrom: 'bottom',
+            })
+          }>
+          <ModalContent>
+            <Text>Create Group Modal</Text>
+            <TextInput
+              onChangeText={name => this.setState({groupName: name})}
+              placeholder="name"
+              style={{
+                height: 40,
+                width: 100,
+                borderColor: 'gray',
+                borderWidth: 1,
+              }} //Add a group icon input
+            />
+          </ModalContent>
+        </BottomModal>
+        <BottomModal
+          visible={this.state.addMembersModal}
+          footer={
+            <ModalFooter>
+              <ModalButton
+                text="Disappear"
+                onPress={() => this.setState({addMembersModal: false})}
+              />
+            </ModalFooter>
+          }
+          modalAnimation={
+            new SlideAnimation({
+              slideFrom: 'bottom',
+            })
+          }>
+          <ModalContent>
+            <Text>Add Members</Text>
+          </ModalContent>
+        </BottomModal>
       </View>
     );
   }
