@@ -221,7 +221,7 @@ class AllGroupsScreen extends Component {
         <Button
           title="Add"
           onPress={() => {
-            this.addMember(this.uid, this.username);
+            this.addMember(item.uid, item.username);
             console.log('onPRess add');
           }}
         />
