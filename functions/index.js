@@ -483,3 +483,47 @@ exports.notifyBuddyAdded = functions.https.onCall(async (data, context) => {
   }
   return {result: 'ok'};
 });
+
+//=================================================================================
+//                                 METRICS
+//=================================================================================
+
+//======================ON TASK CREATE===============================
+exports.onTaskCreate = functions.firestore
+  .document('Tasks/{taskId}')
+  .onCreate((snap, context) => {
+    const newTask = snap.data();
+    const uid = newTask.uid;
+    let totalTasksCreated = null;
+    const metricRef = admin
+      .firestore()
+      .collection('Metrics')
+      .doc(`${uid}`);
+
+    return admin.firestore().runTransaction(async transaction => {
+      const metricsDoc = await transaction.get(metricRef);
+
+      let newCount = metricsDoc.data().totalTasksCreated + 1;
+
+      return await transaction.update(metricRef, {totalTasksCreated: newCount});
+    });
+  });
+
+//=========================ON DELETION===========================
+exports.onTaskDelete = functions.firestore
+  .document('Tasks/{taskId}')
+  .onDelete((snap, context) => {
+    console.log('CONTEXT: ', context);
+    const uid = snap.data().uid;
+    const metricRef = admin
+      .firestore()
+      .collection('Metrics')
+      .doc(`${uid}`);
+    return admin.firestore().runTransaction(async transaction => {
+      const metricsDoc = await transaction.get(metricRef);
+
+      let newCount = metricsDoc.data().totalTasksDeleted + 1;
+
+      return await transaction.update(metricRef, {totalTasksDeleted: newCount});
+    });
+  });

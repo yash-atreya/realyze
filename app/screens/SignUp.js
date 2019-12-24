@@ -100,11 +100,12 @@ class SignUpScreen extends Component {
       .collection('Metrics')
       .doc(`${uid}`)
       .set({
-        totalTasks: null,
-        totalCompleted: null,
-        beforeDeadline: null,
-        afterDeadline: null,
-        notCompleted: null,
+        totalTasksCreated: 0,
+        totalTasksCompleted: 0,
+        completedBeforeDeadline: 0,
+        conpletedAfterDeadline: 0,
+        notCompleted: 0,
+        totalTasksDeleted: 0,
       })
       .then(() => console.log('Metrics are set'))
       .catch(err => console.log('err setting up metrics', err));

@@ -379,6 +379,13 @@ class TaskScreen extends Component {
   }
   //======================================TASK METHODS==========================================
 
+  deleteTask() {
+    firestore()
+      .collection('Tasks')
+      .doc(`${this.taskId}`)
+      .delete()
+      .then(() => console.log('task deleted'));
+  }
   fetchLogs() {
     firestore()
       .collection('Logs')
@@ -542,11 +549,11 @@ class TaskScreen extends Component {
         {uid === this.state.authorUid ? (
           <View>
             <AllTasksComp title={this.state.title} />
-            <FlatList
+            {/* <FlatList
               data={this.state.logs}
               keyExtractor={(item, index) => index.toString()}
               renderItem={this._renderItem}
-            />
+            /> */}
             <TextInput
               placeholder="log"
               onChangeText={logText => {
@@ -574,6 +581,7 @@ class TaskScreen extends Component {
               title="Incomplete"
               onPress={() => this.unmarkCompletion()}
             />
+            <Button title="Delete" onPress={() => this.deleteTask()} />
           </View>
         ) : (
           <View>
