@@ -3,7 +3,7 @@ import {View, FlatList, Text} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import UserSummary from '../components/UserSummary';
-import {ListItem, SearchBar} from 'react-native-elements';
+// import {ListItem, SearchBar} from 'react-native-elements';
 
 class AddFriendsScreen extends Component {
   constructor(props) {
@@ -60,78 +60,77 @@ class AddFriendsScreen extends Component {
 
   //=============================SEARCH FUNCTIONALITY==============================
 
-  searchFilterFunction = text => {
-    this.setState({
-      value: text,
-    });
+  // searchFilterFunction = text => {
+  //   this.setState({
+  //     value: text,
+  //   });
 
-    const newData = this.arrayholder.filter(item => {
-      const itemData = `${item.name.toUpperCase()}`;
-      const textData = text.toUpperCase();
+  //   const newData = this.arrayholder.filter(item => {
+  //     const itemData = `${item.name.toUpperCase()}`;
+  //     const textData = text.toUpperCase();
 
-      return itemData.indexOf(textData) > -1;
-    });
-    this.setState({
-      dummyData: newData,
-    });
-  };
+  //     return itemData.indexOf(textData) > -1;
+  //   });
+  //   this.setState({
+  //     dummyData: newData,
+  //   });
+  // };
 
-  renderSeparator = () => {
-    return (
-      <View
-        style={{
-          height: 1,
-          width: '86%',
-          backgroundColor: '#CED0CE',
-          marginLeft: '14%',
-        }}
-      />
-    );
-  };
-
-  renderHeader = () => {
-    return (
-      <SearchBar
-        placeholder="Type Here..."
-        lightTheme
-        round
-        onChangeText={text => this.searchFilterFunction(text)}
-        autoCorrect={false}
-        value={this.state.value}
-      />
-    );
-  };
-
-  //================================================================================
-  // _renderItem = ({item}) => (
-  //   <View>
-  //     <UserSummary
-  //       email={item.data.email}
-  //       username={item.data.username}
-  //       uid={item.uid}
-  //       //navigation={this.props.navigation} //Passing the navigation props to <UserSummary> Component //USED withNavigator() instead
+  // renderSeparator = () => {
+  //   return (
+  //     <View
+  //       style={{
+  //         height: 1,
+  //         width: '86%',
+  //         backgroundColor: '#CED0CE',
+  //         marginLeft: '14%',
+  //       }}
   //     />
-  //   </View>
-  // );
+  //   );
+  // };
+
+  // renderHeader = () => {
+  //   return (
+  //     <SearchBar
+  //       placeholder="Type Here..."
+  //       lightTheme
+  //       round
+  //       onChangeText={text => this.searchFilterFunction(text)}
+  //       autoCorrect={false}
+  //       value={this.state.value}
+  //     />
+  //   );
+  // };
+
+  // ================================================================================
+  _renderItem = ({item}) => (
+    <View>
+      <UserSummary
+        email={item.data.email}
+        username={item.data.username}
+        uid={item.uid}
+      />
+    </View>
+  );
 
   //========DUMMY RENDER FOR TESTING SEARCH========
-  _renderItem = ({item}) => {
-    return (
-      <View>
-        <Text>{item.name}</Text>
-        <Text>{item.uid}</Text>
-      </View>
-    );
-  };
+  // _renderItem = ({item}) => {
+  //   return (
+  //     <View>
+  //       <Text>{item.name}</Text>
+  //       <Text>{item.uid}</Text>
+  //     </View>
+  //   );
+  // };
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center'}}>
         <FlatList
-          data={this.state.dummyData}
+          data={this.state.users}
           keyExtractor={(item, index) => index.toString()}
           renderItem={this._renderItem}
-          ItemSeparatorComponent={this.renderSeparator}
-          ListHeaderComponent={this.renderHeader}
+          // ItemSeparatorComponent={this.renderSeparator}
+          // ListHeaderComponent={this.renderHeader}
         />
       </View>
     );
