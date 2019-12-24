@@ -509,7 +509,7 @@ exports.onTaskCreate = functions.firestore
     });
   });
 
-//=========================ON DELETION===========================
+//=========================ON TASK DELETE===========================
 exports.onTaskDelete = functions.firestore
   .document('Tasks/{taskId}')
   .onDelete((snap, context) => {
@@ -526,4 +526,29 @@ exports.onTaskDelete = functions.firestore
 
       return await transaction.update(metricRef, {totalTasksDeleted: newCount});
     });
+  });
+
+//=========================ON TASK COMPLETE=========================
+exports.onTaskComplete = functions.firestore
+  .document('Tasks/{taskId}')
+  .onUpdate((change, context) => {
+    if (change.after.data().status === 'completed') {
+      console.log('task completed');
+      const uid = change.after.data().uid;
+      const metricRef = admin
+        .firestore()
+        .collection('Metrics')
+        .doc(`${uid}`);
+
+      return admin.firestore().runTransaction(async transaction => {
+        const metricsDoc = await transaction.get(metricRef);
+
+        let newCount = metricsDoc.data().totalTasksCompleted + 1;
+
+        return await transaction.update(metricRef, {
+          totalTasksCompleted: newCount,
+        });
+      });
+    }
+    return null;
   });
