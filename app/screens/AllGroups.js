@@ -215,8 +215,8 @@ class AllGroupsScreen extends Component {
   _renderFriends = ({item}) => {
     return (
       <View>
-        <Text>{item.email}</Text>
-        <Text>{item.username}</Text>
+        <Text>{item.data.email}</Text>
+        <Text>{item.data.username}</Text>
         <Text>{item.uid}</Text>
         <Button
           title="Add"
@@ -230,6 +230,7 @@ class AllGroupsScreen extends Component {
   };
 
   render() {
+    console.log('Friends Data: ', JSON.stringify(this.state.friendsData));
     return (
       <View>
         <FlatList
