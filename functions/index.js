@@ -528,27 +528,52 @@ exports.onTaskDelete = functions.firestore
     });
   });
 
-//=========================ON TASK COMPLETE=========================
+//=========================ON TASK COMPLETE/PENDING=========================
 exports.onTaskComplete = functions.firestore
   .document('Tasks/{taskId}')
   .onUpdate((change, context) => {
-    if (change.after.data().status === 'completed') {
-      console.log('task completed');
-      const uid = change.after.data().uid;
-      const metricRef = admin
-        .firestore()
-        .collection('Metrics')
-        .doc(`${uid}`);
+    if (change.before.data().status === 'completed') {
+      if (change.after.data().status === 'pending') {
+        console.log('task pending');
+        const uid = change.after.data().uid;
+        const metricRef = admin
+          .firestore()
+          .collection('Metrics')
+          .doc(`${uid}`);
 
-      return admin.firestore().runTransaction(async transaction => {
-        const metricsDoc = await transaction.get(metricRef);
+        return admin.firestore().runTransaction(async transaction => {
+          const metricsDoc = await transaction.get(metricRef);
 
-        let newCount = metricsDoc.data().totalTasksCompleted + 1;
+          let newCount = metricsDoc.data().totalTasksCompleted - 1;
 
-        return await transaction.update(metricRef, {
-          totalTasksCompleted: newCount,
+          return await transaction.update(metricRef, {
+            totalTasksCompleted: newCount,
+          });
         });
-      });
+      } else {
+        console.log('Task already pending');
+      }
+    } else if (change.before.data().status === 'pending') {
+      if (change.after.data().status === 'completed') {
+        console.log('task completed');
+        const uid = change.after.data().uid;
+        const metricRef = admin
+          .firestore()
+          .collection('Metrics')
+          .doc(`${uid}`);
+
+        return admin.firestore().runTransaction(async transaction => {
+          const metricsDoc = await transaction.get(metricRef);
+
+          let newCount = metricsDoc.data().totalTasksCompleted + 1;
+
+          return await transaction.update(metricRef, {
+            totalTasksCompleted: newCount,
+          });
+        });
+      } else {
+        console.log('Task already completed');
+      }
     }
     return null;
   });
