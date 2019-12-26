@@ -16,7 +16,7 @@ class CreateTaskScreen extends Component {
       isDatePickerVisible: false,
       dueDate: '',
       dueTime: '',
-      //   selectedColor: '',
+      deadline: '',
       groups: [],
       title: '',
       isOnline: Boolean, //Add NetInfo @Yash
@@ -25,10 +25,17 @@ class CreateTaskScreen extends Component {
     this.displayName = auth().currentUser.displayName;
   }
 
+  async toDeadline(date, time) {
+    const deadline = date + ' ' + time;
+    await this.setState({deadline: deadline});
+    console.log('Deadline: ', deadline);
+    console.log(typeof deadline);
+  }
+
   onCreateTask() {
     //ADD RESTRICTION FOR FILLING ALL TextInputs @TANAY and show alert if not.
     //Possibly move to cloud functions as we might call this from this page and also select group page.
-    const {title, desc, dueTime, dueDate} = this.state;
+    const {title, desc, dueTime, dueDate, deadline} = this.state;
     console.log('Create Task Method ' + title + ' ' + desc);
     console.log('Due Time: ' + dueTime);
     var uid = auth().currentUser.uid;
@@ -47,8 +54,9 @@ class CreateTaskScreen extends Component {
               author: displayName,
               title: title,
               description: desc,
-              dueTime: dueTime,
-              dueDate: dueDate,
+              // dueTime: dueTime,
+              // dueDate: dueDate,
+              deadline: deadline,
               createdOn: new Date(),
               status: 'pending',
             });
@@ -108,7 +116,14 @@ class CreateTaskScreen extends Component {
         <Button title="Show Date Picker" onPress={this.showDatePicker} />
         <Text>Due Date: {this.state.dueDate}</Text>
 
-        <Button title="Create Task" onPress={() => this.onCreateTask()} />
+        <Button
+          title="Create Task"
+          onPress={() => {
+            this.toDeadline(this.state.dueDate, this.state.dueTime).then(() => {
+              this.onCreateTask();
+            });
+          }}
+        />
 
         <DateTimePicker
           mode="time"
