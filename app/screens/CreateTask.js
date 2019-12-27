@@ -26,18 +26,30 @@ class CreateTaskScreen extends Component {
   }
 
   async toDeadline(date, time) {
-    const deadline = date + ' ' + time;
-    await this.setState({deadline: deadline});
-    console.log('Deadline: ', deadline);
-    console.log(typeof deadline);
+    // const deadline = date + ' ' + time;
+    const newDate = Date.parse(date);
+    const toParse = time.getTime();
+    const parsedTime = Date.parse(toParse);
+    var datetime = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      time.getHours(),
+      time.getMinutes(),
+      time.getSeconds(),
+    );
+    // var datetime = new Date();
+    this.setState({deadline: datetime});
+    console.log('Deadline: ', datetime);
+    console.log('newDate ', newDate);
+    console.log('newtime: ', toParse);
   }
 
   onCreateTask() {
     //ADD RESTRICTION FOR FILLING ALL TextInputs @TANAY and show alert if not.
     //Possibly move to cloud functions as we might call this from this page and also select group page.
-    const {title, desc, dueTime, dueDate, deadline} = this.state;
+    const {title, desc, deadline} = this.state;
     console.log('Create Task Method ' + title + ' ' + desc);
-    console.log('Due Time: ' + dueTime);
     var uid = auth().currentUser.uid;
     var displayName = auth().currentUser.displayName;
 
@@ -76,7 +88,7 @@ class CreateTaskScreen extends Component {
   };
 
   handleTimePicked = time => {
-    this.setState({dueTime: time.toLocaleTimeString()});
+    this.setState({dueTime: time});
     console.log('A time has been picked: ', time.toLocaleTimeString());
     this.hideTimePicker();
   };
@@ -90,7 +102,7 @@ class CreateTaskScreen extends Component {
   };
 
   handleDatePicked = date => {
-    this.setState({dueDate: date.toDateString()});
+    this.setState({dueDate: date});
     console.log('A date has been picked: ', date.toDateString());
     this.hideDatePicker();
   };
@@ -112,16 +124,16 @@ class CreateTaskScreen extends Component {
         />
 
         <Button title="Show Time Picker" onPress={this.showTimePicker} />
-        <Text>Completion time: {this.state.dueTime}</Text>
+        <Text>Completion time: {this.state.dueTime.toLocaleTimeString()}</Text>
         <Button title="Show Date Picker" onPress={this.showDatePicker} />
-        <Text>Due Date: {this.state.dueDate}</Text>
+        <Text>Due Date: {this.state.dueDate.toDateString()}</Text>
 
         <Button
           title="Create Task"
           onPress={() => {
-            this.toDeadline(this.state.dueDate, this.state.dueTime).then(() => {
-              this.onCreateTask();
-            });
+            this.toDeadline(this.state.dueDate, this.state.dueTime).then(() =>
+              this.onCreateTask(),
+            );
           }}
         />
 
@@ -139,7 +151,7 @@ class CreateTaskScreen extends Component {
           onCancel={this.hideDatePicker}
           isDarkModeEnabled={colorScheme === 'dark'}
         />
-        <Button
+        {/* <Button
           title="Add to groups"
           onPress={() =>
             this.props.navigation.navigate('SelectGroups', {
@@ -165,7 +177,7 @@ class CreateTaskScreen extends Component {
               code: 1,
             })
           }
-        />
+        /> */}
       </View>
     );
   }
