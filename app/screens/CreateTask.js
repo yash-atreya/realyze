@@ -124,9 +124,9 @@ class CreateTaskScreen extends Component {
         />
 
         <Button title="Show Time Picker" onPress={this.showTimePicker} />
-        <Text>Completion time: {this.state.dueTime.toLocaleTimeString()}</Text>
+        <Text>Completion time: {this.state.dueTime.toString()}</Text>
         <Button title="Show Date Picker" onPress={this.showDatePicker} />
-        <Text>Due Date: {this.state.dueDate.toDateString()}</Text>
+        <Text>Due Date: {this.state.dueDate.toString()}</Text>
 
         <Button
           title="Create Task"
