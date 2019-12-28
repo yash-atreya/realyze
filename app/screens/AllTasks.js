@@ -22,7 +22,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {SlideAnimation, BottomModal} from 'react-native-modals';
+import {SlideAnimation, BottomModal, ModalContent} from 'react-native-modals';
 
 class AllTasksScreen extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class AllTasksScreen extends Component {
 
   passData() {
     const text = this.state.text;
-    this.data.push({name: text}); 
+    this.data.push({name: text});
     this.setState({visible: false});
   }
 
@@ -84,6 +84,11 @@ class AllTasksScreen extends Component {
           onTouchOutside={() => {
             this.setState({visible: false});
           }}
+          swipeDirection={['up', 'down']} // can be string or an array
+          swipeThreshold={200} // default 100
+          onSwipeOut={event => {
+            this.setState({visible: false});
+          }}
           modalAnimation={
             new SlideAnimation({
               slideFrom: 'bottom',
@@ -99,6 +104,7 @@ class AllTasksScreen extends Component {
           }}
           hasBackdrop={true}
           hideModalContentWhileAnimating={true}>
+          {/* <ModalContent> */}
           <View>
             <Text>Hello</Text>
           </View>
@@ -125,6 +131,7 @@ class AllTasksScreen extends Component {
               </Text>
             </LinearGradient>
           </TouchableOpacity>
+          {/* </ModalContent> */}
         </BottomModal>
       </View>
     );
