@@ -282,6 +282,11 @@ import LogInScreen from './app/screens/LogIn';
 import AllGroupsScreen from './app/screens/AllGroups';
 import AllTasksScreen from './app/screens/AllTasks';
 import AllNotificationsScreen from './app/screens/AllNotifications';
+import ProfileScreen from './app/screens/Profile';
+import ViewInsightsScreen from './app/screens/ViewInsights';
+import MyBuddiesScreen from './app/screens/MyBuddies';
+import SettingsScreen from './app/screens/Settings';
+import TermsandConditionsScreen from './app/screens/TermsandConditions';
 
 // const App: () => React$Node = () => {
 //   return <View />;
@@ -315,7 +320,51 @@ const AuthStack = createStackNavigator({
     },
   },
 });
-const MainStack = createMaterialTopTabNavigator(
+const ProfileStack = createStackNavigator({
+  Profile: {
+    screen: ProfileScreen,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  ViewInsights: {
+    screen: ViewInsightsScreen,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  MyBuddies: {
+    screen: MyBuddiesScreen,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Settings: {
+    screen: SettingsScreen,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  TermsandConditions: {
+    screen: TermsandConditionsScreen,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  // EditProfile: {
+  //   screen: EditProfileScreen,
+  //   navigationOptions: {
+  //     header: null,
+  //   },
+  // },
+});
+ProfileStack.navigationOptions = {
+  tabBarLabel: 'Profile',
+  tabBarIcon: ({tintColor}) => (
+    <Icon name="md-person" color={tintColor} size={24} />
+  ),
+};
+const MainTabStack = createMaterialTopTabNavigator(
   {
     AllTasks: {
       screen: AllTasksScreen,
@@ -346,12 +395,23 @@ const MainStack = createMaterialTopTabNavigator(
         ),
       },
     },
+    ProfileStack,
+    // Profile: {
+    //   screen: ProfileScreen,
+    //   title: 'Profile',
+    //   navigationOptions: {
+    //     tabBarLabel: 'Profile',
+    //     tabBarIcon: ({tintColor}) => (
+    //       <Icon name="md-person" color={tintColor} size={24} />
+    //     ),
+    //   },
+    // },
   },
   {
     //Router  Config
     initialRouteName: 'AllTasks',
     shifting: true,
-    order: ['AllGroups', 'AllTasks', 'AllNotifications'],
+    order: ['AllGroups', 'AllTasks', 'AllNotifications', 'ProfileStack'],
     tabBarPosition: 'bottom',
     tabBarOptions: {
       activeTintColor: '#00A1ED',
@@ -373,13 +433,16 @@ const MainStack = createMaterialTopTabNavigator(
     },
   },
 );
+MainTabStack.navigationOptions = {
+  header: null,
+};
 
 const AppContainer = createAppContainer(
   createSwitchNavigator(
     {
       AuthLoad: SplashStack,
       Auth: AuthStack,
-      Main: MainStack,
+      Main: MainTabStack,
     },
     {
       initialRouteName: 'AuthLoad',

@@ -1,4 +1,4 @@
-import React, {StyleSheet,Platform} from 'react-native';
+import React, {StyleSheet} from 'react-native';
 
 //3rd Party Libraries
 import {
