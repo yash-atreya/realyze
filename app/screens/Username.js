@@ -5,7 +5,6 @@ import {
   Button,
   TextInput,
   KeyboardAvoidingView,
-  Platform,
 } from 'react-native';
 
 //3rd Party Libraries--------------------------------------
@@ -22,7 +21,7 @@ import {styles, textInput, buttonStyles} from '../../styles';
 import PrimaryButton from '../components/PrimaryButton';
 import Logo from '../components/Svg Components/Logo';
 
-class LogInScreen extends Component {
+class UsernameScreen extends Component {
   constructor(props) {
     super(props);
   }
@@ -44,16 +43,17 @@ class LogInScreen extends Component {
         <KeyboardAvoidingView
           enabled
           behavior="position"
-          keyboardVerticalOffset={Platform.OS === 'ios' ? '54' : '0'}>
+          keyboardVerticalOffset="54"
+          style={{alignSelf: 'center'}}>
           <Text
             style={[
               styles.h1PSBB,
               {fontSize: 24, marginTop: hp('16%'), alignSelf: 'center'},
             ]}>
-            LOGIN/SIGNUP
+            ENTER USERNAME
           </Text>
           <TextInput
-            placeholder="Email-id"
+            placeholder="Username"
             placeholderTextColor="#333647"
             style={[
               textInput.generalTextInput,
@@ -65,23 +65,13 @@ class LogInScreen extends Component {
             returnKeyType="done"
             on
           />
-          <Text style={{marginTop: hp('1%'), alignSelf: 'center'}}>
-            (We use Passwordless Authentication!)
-          </Text>
-          {/* <Button
-          title="Go to MainStack"
-          onPress={() => this.props.navigation.navigate('AllTasks')}
-        /> */}
           <View style={{marginTop: hp('5%')}}>
-            <PrimaryButton title="Verify Email" onPress="Username" />
+            <PrimaryButton title="GET STARTED" onPress="AllTasks" />
           </View>
-          <Text style={{marginTop: hp('1%'), alignSelf: 'center'}}>
-            (Check Your Inbox to go ahead in the app)
-          </Text>
         </KeyboardAvoidingView>
       </View>
     );
   }
 }
 
-export default LogInScreen;
+export default UsernameScreen;

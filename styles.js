@@ -1,4 +1,4 @@
-import React, {StyleSheet} from 'react-native';
+import React, {StyleSheet, Platform} from 'react-native';
 
 //3rd Party Libraries
 import {
@@ -85,6 +85,8 @@ const textInput = StyleSheet.create({
     fontSize: 15,
     borderRadius: Platform.OS === 'ios' ? 11 : 3,
     paddingLeft: wp('1.6'),
+    paddingRight: wp('1.6'),
+    backgroundColor: '#FFFFFF',
     //paddingBottom: hp('1.6%'),
     //paddingBottom: hp('1.47%'),
   },
@@ -97,6 +99,14 @@ const buttonStyles = StyleSheet.create({
     height: 48,
     borderRadius: Platform.OS === 'ios' ? 11 : 3,
     shadowColor: '#102FC6',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  indicatorButton: {
+    width: 109,
+    height: 25,
+    borderRadius: Platform.OS === 'ios' ? 6 : 1,
+    backgroundColor: '#FF8686',
     justifyContent: 'center',
     alignItems: 'center',
   },

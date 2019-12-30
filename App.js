@@ -35,6 +35,7 @@ import ViewInsightsScreen from './app/screens/ViewInsights';
 import MyBuddiesScreen from './app/screens/MyBuddies';
 import SettingsScreen from './app/screens/Settings';
 import TermsandConditionsScreen from './app/screens/TermsandConditions';
+import UsernameScreen from './app/screens/Username';
 
 // const App: () => React$Node = () => {
 //   return <View />;
@@ -46,7 +47,7 @@ class App extends Component {
 
   render() {
     return (
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: '#E9EBF1'}}>
         <AppContainer />
       </SafeAreaView>
     );
@@ -67,45 +68,58 @@ const AuthStack = createStackNavigator({
       header: null,
     },
   },
+  Username: {
+    screen: UsernameScreen,
+    navigationOptions: {
+      header: null,
+    },
+  },
 });
-const ProfileStack = createStackNavigator({
-  Profile: {
-    screen: ProfileScreen,
-    navigationOptions: {
-      header: null,
+const ProfileStack = createStackNavigator(
+  {
+    Profile: {
+      screen: ProfileScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    ViewInsights: {
+      screen: ViewInsightsScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    MyBuddies: {
+      screen: MyBuddiesScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Settings: {
+      screen: SettingsScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    TermsandConditions: {
+      screen: TermsandConditionsScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    // EditProfile: {
+    //   screen: EditProfileScreen,
+    //   navigationOptions: {
+    //     header: null,
+    //   },
+    // },
+  },
+  {
+    cardStyle: {
+      backgroundColor: '#E9EBF1',
     },
   },
-  ViewInsights: {
-    screen: ViewInsightsScreen,
-    navigationOptions: {
-      header: null,
-    },
-  },
-  MyBuddies: {
-    screen: MyBuddiesScreen,
-    navigationOptions: {
-      header: null,
-    },
-  },
-  Settings: {
-    screen: SettingsScreen,
-    navigationOptions: {
-      header: null,
-    },
-  },
-  TermsandConditions: {
-    screen: TermsandConditionsScreen,
-    navigationOptions: {
-      header: null,
-    },
-  },
-  // EditProfile: {
-  //   screen: EditProfileScreen,
-  //   navigationOptions: {
-  //     header: null,
-  //   },
-  // },
-});
+);
 ProfileStack.navigationOptions = {
   tabBarLabel: 'Profile',
   tabBarIcon: ({tintColor}) => (
@@ -171,7 +185,7 @@ const MainTabStack = createMaterialTopTabNavigator(
         fontFamily: 'Raleway-Bold',
       },
       style: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#E9EBF1',
         shadowColor: '#00A1ED',
         //paddingBottom: Platform.OS === 'ios' ? hp('1.3') : hp('0'),
       },
