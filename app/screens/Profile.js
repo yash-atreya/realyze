@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {View, Text, TouchableOpacity, Platform, Button} from 'react-native';
 
+//Custom Components
+import {styles, textInput, buttonStyles} from '../../styles';
+
 //3rd Party Libraries
 import {
   widthPercentageToDP as wp,
@@ -30,8 +33,20 @@ class ProfileScreen extends Component {
   render() {
     return (
       <View>
-        <Text style={{fontFamily: 'Raleway-Bold'}}>Profile Screen</Text>
-        <Icon name="ios-people" color={'#000000'} size={24} />
+
+        {/* Main Screen */}
+        <View>
+          <View
+            style={{
+              marginBottom: hp('2%'),
+              marginTop: hp('0.7%'),
+              marginLeft: wp('5.6%'),
+            }}>
+            <Text style={[styles.h1PSBB, {fontSize: 30, color: '#000000'}]}>
+              Profile
+            </Text>
+          </View>
+        </View>
         <Button
           title="View Insights"
           onPress={() => this.props.navigation.navigate('ViewInsights')}
@@ -45,6 +60,8 @@ class ProfileScreen extends Component {
           onPress={() => this.props.navigation.navigate('Settings')}
         />
         <Button title="Edit Profile" onPress={this.toggleModal} />
+
+        {/* Edit Profile Modal */}
         <BottomModal
           visible={this.state.visible}
           swipeDirection={['up', 'down']} // can be string or an array

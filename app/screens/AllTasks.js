@@ -5,7 +5,6 @@ import {
   Text,
   TouchableOpacity,
   Platform,
-  SafeAreaView,
   Button,
   TextInput,
   FlatList,
@@ -17,6 +16,7 @@ import {
 //Custom Components
 import PrimaryButton from '../components/PrimaryButton';
 import {styles, textInput, buttonStyles} from '../../styles';
+import AllTaskComponent from '../components/AllTasksComponent';
 
 //3rd Party Libraries
 import {
@@ -59,6 +59,7 @@ class AllTasksScreen extends Component {
   render() {
     return (
       <View>
+        {/* New Task Add Button Icon */}
         <View
           style={{
             position: 'absolute',
@@ -73,16 +74,27 @@ class AllTasksScreen extends Component {
             <Icon name="ios-add-circle" color={'#333647'} size={64} />
           </TouchableOpacity>
         </View>
-        <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}>
-          <Text style={{fontFamily: 'Raleway-Bold'}}>All Tasks</Text>
-        </LinearGradient>
-        <FontAwesome5 name="list-ul" color={'#000000'} size={24} />
-        <FlatList
-          data={this.data}
-          renderItem={this._renderItem}
-          keyExtractor={(item, index) => index.toString()}
-        />
 
+        {/* Main Screen */}
+        <View>
+          <View
+            style={{
+              marginBottom: hp('2%'),
+              marginTop: hp('0.7%'),
+              marginLeft: wp('5.6%'),
+            }}>
+            <Text style={[styles.h1PSBB, {fontSize: 30, color: '#000000'}]}>
+              Tasks
+            </Text>
+          </View>
+          {/* <FlatList
+            data={this.data}
+            renderItem={this._renderItem}
+            keyExtractor={(item, index) => index.toString()}
+          /> */}
+          <AllTaskComponent />
+        </View>
+        {/* Create New Task Modal  */}
         <BottomModal
           visible={this.state.visible}
           onTouchOutside={() => {
