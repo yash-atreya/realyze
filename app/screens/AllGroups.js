@@ -16,6 +16,9 @@ import Modal, {
 import Icons from 'react-native-vector-icons/Ionicons';
 import {View, Text, TouchableOpacity, Platform} from 'react-native';
 
+//Custom Components
+import {styles, textInput, buttonStyles} from '../../styles';
+
 //3rd Party Libraries
 import {
   widthPercentageToDP as wp,
@@ -326,6 +329,7 @@ class AllGroupsScreen extends Component {
   render() {
     return (
       <View>
+        {/* New Group Modal */}
         <View
           style={{
             position: 'absolute',
@@ -339,8 +343,20 @@ class AllGroupsScreen extends Component {
             <Icon name="md-add-circle-outline" color={'#333647'} size={64} />
           </TouchableOpacity>
         </View>
-        <Text style={{fontFamily: 'Raleway-Bold'}}>All Groups</Text>
-        <Icon name="ios-people" color={'#000000'} size={24} />
+
+        {/* Main Screen */}
+        <View>
+          <View
+            style={{
+              marginBottom: hp('2%'),
+              marginTop: hp('0.7%'),
+              marginLeft: wp('5.6%'),
+            }}>
+            <Text style={[styles.h1PSBB, {fontSize: 30, color: '#000000'}]}>
+              Groups
+            </Text>
+          </View>
+        </View>
       </View>
     );
   }

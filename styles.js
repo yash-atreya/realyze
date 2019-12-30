@@ -8,6 +8,7 @@ import {
 //while exporting default you can only export one thing
 //export default StyleSheet.create({
 const styles = StyleSheet.create({
+  //White Color
   h1PBW: {
     fontFamily: 'Poppins-Bold',
     color: '#FFFF',
@@ -20,12 +21,16 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
     color: '#FFFF',
   },
-  bcRMW: {
-    fontFamily: 'Raleway-Medium',
-    color: '#FFFF',
-  },
   bcRBW: {
     fontFamily: 'Raleway-Bold',
+    color: '#FFFF',
+  },
+  bcRSBW: {
+    fontFamily: 'Raleway-SemiBold',
+    color: '#FFFF',
+  },
+  bcRMW: {
+    fontFamily: 'Raleway-Medium',
     color: '#FFFF',
   },
   bcRLW: {
@@ -40,6 +45,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-LightItalic',
     color: '#FFFF',
   },
+  //Black Color
   h1PBB: {
     fontFamily: 'Poppins-Bold',
     color: '#333647',
@@ -48,12 +54,16 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
     color: '#333647',
   },
-  bcRMB: {
-    fontFamily: 'Raleway-Medium',
-    color: '#333647',
-  },
   bcRBB: {
     fontFamily: 'Raleway-Bold',
+    color: '#333647',
+  },
+  bcRSBB: {
+    fontFamily: 'Raleway-SemiBold',
+    color: '#333647',
+  },
+  bcRMB: {
+    fontFamily: 'Raleway-Medium',
     color: '#333647',
   },
   bcRLB: {
