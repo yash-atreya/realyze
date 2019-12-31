@@ -19,8 +19,6 @@ class AllNotificationsScreen extends Component {
   render() {
     return (
       <View>
-
-
         {/* Main Screen */}
         <View>
           <View

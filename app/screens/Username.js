@@ -20,6 +20,7 @@ import {styles, textInput, buttonStyles} from '../../styles';
 //Custom Components
 import PrimaryButton from '../components/PrimaryButton';
 import Logo from '../components/Svg Components/Logo';
+import OfflineIndicator from '../components/OfflineComponent';
 
 class UsernameScreen extends Component {
   constructor(props) {
@@ -32,11 +33,8 @@ class UsernameScreen extends Component {
         <View style={{position: 'absolute', left: '-20%', top: '5%'}}>
           <Logo />
         </View>
-        <View>
-          <View style={[buttonStyles.indicatorButton]}>
-            <Text style={[styles.bcRBB, {fontSize: 15}]}>OFFLINE</Text>
-          </View>
-        </View>
+
+        <OfflineIndicator />
         <Text style={[styles.bcRBB, {fontSize: 50, marginTop: hp('11.78%')}]}>
           Welcome
         </Text>

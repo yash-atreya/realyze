@@ -21,6 +21,7 @@ import {styles, textInput, buttonStyles} from '../../styles';
 //Custom Components
 import PrimaryButton from '../components/PrimaryButton';
 import Logo from '../components/Svg Components/Logo';
+import OfflineIndicator from '../components/OfflineComponent';
 
 class LogInScreen extends Component {
   constructor(props) {
@@ -34,9 +35,7 @@ class LogInScreen extends Component {
           <Logo />
         </View>
         <View>
-          <View style={[buttonStyles.indicatorButton]}>
-            <Text style={[styles.bcRBB, {fontSize: 15}]}>OFFLINE</Text>
-          </View>
+          <OfflineIndicator />
         </View>
         <Text style={[styles.bcRBB, {fontSize: 50, marginTop: hp('11.78%')}]}>
           Welcome
