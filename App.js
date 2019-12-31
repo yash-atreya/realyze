@@ -48,7 +48,7 @@ class App extends Component {
   render() {
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: '#E9EBF1'}}>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar backgroundColor="#E9EBF1" barStyle="dark-content" />
         <AppContainer />
       </SafeAreaView>
     );
