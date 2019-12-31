@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
     color: '#FFFF',
   },
+  h1PMW: {
+    fontFamily: 'Poppins-Medium',
+    color: '#FFFF',
+  },
   h1PRW: {
     fontFamily: 'Poppins-Regular',
     color: '#FFFF',
@@ -50,6 +54,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     color: '#333647',
   },
+  h1PSBB: {
+    fontFamily: 'Poppins-SemiBold',
+    color: '#333647',
+  },
+  h1PMB: {
+    fontFamily: 'Poppins-Medium',
+    color: '#333647',
+  },
   h1PRB: {
     fontFamily: 'Poppins-Regular',
     color: '#333647',
@@ -76,10 +88,6 @@ const styles = StyleSheet.create({
   },
   bc2RELiB: {
     fontFamily: 'Poppins-LightItalic',
-    color: '#333647',
-  },
-  h1PSBB: {
-    fontFamily: 'Poppins-SemiBold',
     color: '#333647',
   },
 });
