@@ -119,14 +119,6 @@ const buttonStyles = StyleSheet.create({
     shadowColor: '#102FC6',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  indicatorButton: {
-    width: 109,
-    height: 25,
-    borderRadius: Platform.OS === 'ios' ? 6 : 1,
-    backgroundColor: '#FF8686',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  }
 });
 export {styles, textInput, buttonStyles};
