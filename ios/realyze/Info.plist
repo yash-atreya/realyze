@@ -8,6 +8,8 @@
   	<string>Microphone Permission</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This sample uses the microphone to record your speech and convert it to text.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+  	<string>PhotoLibrary Permission</string>
 	<key>OneSignal_app_groups_key</key>
 	<string>group.com.realyze.onesignal</string>
 	<key>CFBundleDevelopmentRegion</key>
