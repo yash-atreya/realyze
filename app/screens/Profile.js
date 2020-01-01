@@ -6,12 +6,12 @@ import {
   Image,
   TouchableOpacity,
   Platform,
+  ScrollView,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import RNPermissions, {RESULTS} from 'react-native-permissions';
 import auth from '@react-native-firebase/auth';
-import {ScrollView} from 'react-native-gesture-handler';
 
 class ProfileScreen extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class ProfileScreen extends Component {
 
     this.state = {
       image: {
-        uri: null,
+        uri: null, //' '
         width: null,
         height: null,
         mime: null,
@@ -237,23 +237,32 @@ class ProfileScreen extends Component {
   render() {
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>Profile Screen</Text>
-        <View>
-          {this.state.image ? this.renderImage(this.state.image) : null}
-        </View>
-        <Button
-          title="Pick Image"
-          onPress={() => this.pickSingleWithCamera(true)}
-        />
-        <Button title="Delete Account" onPress={() => this.onDeleteAccount()} />
-        <Button
-          title="Edit Profile"
-          onPress={() => this.props.navigation.navigate('EditProfile')}
-        />
-        <Button
-          title="Change Password"
-          onPress={() => this.onChangePassword()}
-        />
+        <ScrollView>
+          <Text>Profile Screen</Text>
+          <View>
+            {this.state.image ? this.renderImage(this.state.image) : null}
+          </View>
+          <Button
+            title="Pick Image"
+            onPress={() => this.pickSingleWithCamera(true)}
+          />
+          <Button
+            title="Delete Account"
+            onPress={() => this.onDeleteAccount()}
+          />
+          <Button
+            title="Edit Profile"
+            onPress={() => this.props.navigation.navigate('EditProfile')}
+          />
+          <Button
+            title="Change Password"
+            onPress={() => this.onChangePassword()}
+          />
+          <Button
+            title="Downloaded Profile"
+            onPress={() => this.props.navigation.navigate('ProfileDownload')}
+          />
+        </ScrollView>
       </View>
     );
   }

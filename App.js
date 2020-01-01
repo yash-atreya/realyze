@@ -32,6 +32,7 @@ import EditTaskScreen from './app/screens/EditTask';
 import TestScreen from './app/screens/Test';
 import ReminderTestScreen from './app/screens/ReminderTest';
 import UserTasksScreen from './app/screens/UserTasks';
+import ProfileDownloadScreen from './app/screens/ProfileDownload';
 
 firestore.CACHE_SIZE_UNLIMITED;
 const requestPermission = async () => {
@@ -129,6 +130,9 @@ const AuthStack = createStackNavigator(
 
 const MainStack = createStackNavigator(
   {
+    ProfileDownload: {
+      screen: ProfileDownloadScreen,
+    },
     Profile: {
       screen: ProfileScreen,
     },
