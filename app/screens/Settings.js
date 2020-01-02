@@ -20,6 +20,7 @@ import {styles, textInput, buttonStyles} from '../../styles';
 
 //Custom Components
 import Header2 from '../components/Header2';
+import IconTabComponent from '../components/IconTabComponent';
 
 class SettingsScreen extends Component {
   constructor(props) {
@@ -38,120 +39,27 @@ class SettingsScreen extends Component {
         {/* Header */}
         <Header2 headerTitle="Settings" onPressBackButton="Profile" />
 
-        <View style={{marginTop: hp('4.43%'), marginLeft: wp('7.73%')}}>
-          <View>
-            <View style={{height: 26}}>
-              <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.navigate('TermsandConditions')
-                }
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-evenly',
-                  flex: 1,
-                }}>
-                <Icon
-                  name="ios-book"
-                  size={24}
-                  color={'#000000'}
-                  style={{flex: 1}}
-                />
-                <Text
-                  style={[
-                    styles.h1PMB,
-                    {
-                      fontSize: 20,
-                      color: '#000000',
-                      flex: 7,
-                    },
-                  ]}>
-                  Terms and Conditions
-                </Text>
-                <Icon
-                  name="ios-arrow-forward"
-                  size={24}
-                  color={'#000000'}
-                  style={{flex: 1}}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={{marginTop: hp('3.2%'), height: 26}}>
-            <TouchableOpacity
-              onPress={() => {
-                this.setState({visible: true});
-                this.code = 'Log Out';
-              }}
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-evenly',
-                flex: 1,
-              }}>
-              <Icon
-                name="md-log-out"
-                size={24}
-                color={'#000000'}
-                style={{flex: 1}}
-              />
-              <Text
-                style={[
-                  styles.h1PMB,
-                  {
-                    fontSize: 20,
-                    color: '#000000',
-                    flex: 7,
-                  },
-                ]}>
-                Log Out
-              </Text>
-              <Icon
-                name="ios-arrow-forward"
-                size={24}
-                color={'#000000'}
-                style={{flex: 1}}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={{marginTop: hp('3.2%'), height: 26}}>
-            <TouchableOpacity
-              onPress={() => {
-                this.setState({visible: true});
-                this.code = 'Delete your account';
-              }}
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-evenly',
-                flex: 1,
-              }}>
-              <Icon2
-                name="delete"
-                size={24}
-                color={'#000000'}
-                style={{flex: 1}}
-              />
-              <Text
-                style={[
-                  styles.h1PMB,
-                  {
-                    fontSize: 20,
-                    color: '#000000',
-                    flex: 7,
-                  },
-                ]}>
-                Delete Account
-              </Text>
-              <Icon
-                name="ios-arrow-forward"
-                size={24}
-                color={'#000000'}
-                style={{flex: 1}}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
+        <IconTabComponent
+          tabTitle="Terms and Conditions"
+          Icon={<Icon name="ios-book" size={24} color={'#000000'} />}
+          onPress={() => this.props.navigation.navigate('TermsandConditions')}
+        />
+        <IconTabComponent
+          tabTitle="Log Out"
+          Icon={<Icon name="md-log-out" size={24} color={'#000000'} />}
+          onPress={() => {
+            this.setState({visible: true});
+            this.code = 'Log Out';
+          }}
+        />
+        <IconTabComponent
+          tabTitle="Delete Account"
+          Icon={<Icon2 name="delete" size={24} color={'#000000'} />}
+          onPress={() => {
+            this.setState({visible: true});
+            this.code = 'Delete your account';
+          }}
+        />
 
         {/* Make Sure Modal */}
         <Modal
@@ -261,21 +169,21 @@ export default SettingsScreen;
   /> */
 }
 
-  // <View
-  //   style={{
-  //     flexDirection: 'row',
-  //     alignItems: 'center',
-  //     marginLeft: wp('7.7%'),
-  //   }}>
-  //   <View>
-  //     <TouchableOpacity
-  //       onPress={() => this.props.navigation.navigate('Profile')}>
-  //       <Icon name="ios-arrow-back" size={34} color={'#000000'} />
-  //     </TouchableOpacity>
-  //   </View>
-  //   <View style={{marginLeft: wp('24%'), alignSelf: 'center'}}>
-  //     <Text style={[styles.h1PSBB, {fontSize: 30, color: '#000000'}]}>
-  //       Settings
-  //     </Text>
-  //   </View>
-  // </View>
+// <View
+//   style={{
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     marginLeft: wp('7.7%'),
+//   }}>
+//   <View>
+//     <TouchableOpacity
+//       onPress={() => this.props.navigation.navigate('Profile')}>
+//       <Icon name="ios-arrow-back" size={34} color={'#000000'} />
+//     </TouchableOpacity>
+//   </View>
+//   <View style={{marginLeft: wp('24%'), alignSelf: 'center'}}>
+//     <Text style={[styles.h1PSBB, {fontSize: 30, color: '#000000'}]}>
+//       Settings
+//     </Text>
+//   </View>
+// </View>

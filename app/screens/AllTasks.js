@@ -13,11 +13,6 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-//Custom Components
-import PrimaryButton from '../components/PrimaryButton';
-import {styles, textInput, buttonStyles} from '../../styles';
-import AllTaskComponent from '../components/AllTasksComponent';
-
 //3rd Party Libraries
 import {
   widthPercentageToDP as wp,
@@ -27,6 +22,13 @@ import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {SlideAnimation, BottomModal, ModalContent} from 'react-native-modals';
+
+//Custom External StyleSheet
+import {styles, textInput, buttonStyles} from '../../styles';
+
+//Custom Components
+import AllTaskComponent from '../components/AllTasksComponent';
+import MainHeader from '../components/MainHeader';
 
 class AllTasksScreen extends Component {
   constructor(props) {
@@ -59,6 +61,16 @@ class AllTasksScreen extends Component {
   render() {
     return (
       <View>
+        {/* Main Screen */}
+        <View>
+          <MainHeader mainHeaderTitle='Tasks' />
+          {/* <FlatList
+            data={this.data}
+            renderItem={this._renderItem}
+            keyExtractor={(item, index) => index.toString()}
+          /> */}
+          <AllTaskComponent />
+        </View>
         {/* New Task Add Button Icon */}
         <View
           style={{
@@ -75,25 +87,6 @@ class AllTasksScreen extends Component {
           </TouchableOpacity>
         </View>
 
-        {/* Main Screen */}
-        <View>
-          <View
-            style={{
-              marginBottom: hp('2%'),
-              marginTop: hp('0.7%'),
-              marginLeft: wp('5.6%'),
-            }}>
-            <Text style={[styles.h1PSBB, {fontSize: 30, color: '#000000'}]}>
-              Tasks
-            </Text>
-          </View>
-          {/* <FlatList
-            data={this.data}
-            renderItem={this._renderItem}
-            keyExtractor={(item, index) => index.toString()}
-          /> */}
-          <AllTaskComponent />
-        </View>
         {/* Create New Task Modal  */}
         <BottomModal
           visible={this.state.visible}
