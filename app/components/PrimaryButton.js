@@ -34,7 +34,7 @@ class PrimaryButton extends React.Component {
           start={{x: 0, y: 0}}
           end={{x: 1, y: 0}}
           colors={['#00A1ED', '#0A3BC6']}
-          style={buttonStyles.buttonBody}>
+          style={[buttonStyles.buttonBody]}>
           {this.code === 1 ? (
             <Text style={[styles.h1PBW, {fontSize: 20}]}>{this.title}</Text>
           ) : (

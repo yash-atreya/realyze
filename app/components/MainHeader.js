@@ -13,15 +13,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 //Custom External StyleSheet
 import {styles, textInput, buttonStyles} from '../../styles';
 
-// This is the header component used for secondary pages
+// This is the header component used for primary pages like the main tabs
 
-class Header2 extends Component {
+class MainHeader extends Component {
   constructor(props) {
     super(props);
-    this.headerTitle = this.props.headerTitle;
-    this.onPressBackButton = this.props.onPressBackButton;
+    this.mainHeaderTitle = this.props.mainHeaderTitle;
   }
-
   render() {
     return (
       // Biggest Parent Container
@@ -33,28 +31,22 @@ class Header2 extends Component {
           marginBottom: hp('3%'),
           //   backgroundColor: 'blue',
         }}>
-        {/* Back Button 1/3 */}
+        {/* Left Spacer Button 1/3 */}
         <View
           style={{
-            flex: 1,
+            flex: 0.5,
             justifyContent: 'center',
             alignItems: 'center',
-            // backgroundColor: 'pink',
-          }}>
-          <TouchableOpacity
-            onPress={() =>
-              this.props.navigation.navigate(`${this.onPressBackButton}`)
-            }>
-            <Icon name="ios-arrow-back" size={34} color={'#000000'} />
-          </TouchableOpacity>
-        </View>
+            backgroundColor: 'pink',
+          }}
+        />
 
         {/* Middle Text Part 2/3 */}
         <View
           style={{
-            flex: 6,
+            flex: 10,
             justifyContent: 'center',
-            alignItems: 'center',
+            alignItems: 'flex-start',
             overflow: 'visible',
             // backgroundColor: 'yellow',
           }}>
@@ -62,23 +54,22 @@ class Header2 extends Component {
             style={[
               styles.h1PSBB,
               {
-                flex: 4.5,
                 fontSize: 30,
                 color: '#000000',
-                alignSelf: 'center',
+                textAlign: 'left',
                 overflow: 'visible',
                 // backgroundColor: 'green',
               },
             ]}>
-            {this.headerTitle}
+            {this.mainHeaderTitle}
           </Text>
         </View>
 
         {/* Right Spacer 3/3 */}
-        <View style={{flex: 1}} />
+        <View style={{flex: 0.5}} />
       </View>
     );
   }
 }
 
-export default withNavigation(Header2);
+export default withNavigation(MainHeader);

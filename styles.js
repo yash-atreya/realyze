@@ -119,6 +119,6 @@ const buttonStyles = StyleSheet.create({
     shadowColor: '#102FC6',
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
 });
 export {styles, textInput, buttonStyles};

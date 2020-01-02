@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {
@@ -26,9 +27,13 @@ import {
   Keyboard,
 } from 'react-native';
 
-//Custom Components
+//Custom External StyleSheet
 import {styles, textInput, buttonStyles} from '../../styles';
+
+//Custom Components
 import PrimaryButton from '../components/PrimaryButton';
+import IconTabComponent from '../components/IconTabComponent';
+import MainHeader from '../components/MainHeader';
 
 //3rd Party Libraries
 import {
@@ -323,78 +328,70 @@ class ProfileScreen extends Component {
     return (
       <View>
         {/* Main Screen Header */}
-        <View>
-          <View
-            style={{
-              marginBottom: hp('2%'),
-              marginTop: hp('0.7%'),
-              marginLeft: wp('5.6%'),
-            }}>
-            <Text style={[styles.h1PSBB, {fontSize: 30, color: '#000000'}]}>
-              Profile
-            </Text>
-          </View>
-        </View>
+        <MainHeader mainHeaderTitle="Profile" />
+        
         {/* Main Screen Body */}
+
+        {/* Setting ProfilePicture and Edit Profile */}
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-around',
-            marginTop: hp('4.6%'),
+            marginBottom: hp('1.6%')
           }}>
+          {/* Settings Icon 1/3 */}
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('Settings')}>
             <Icon name="ios-settings" size={30} />
           </TouchableOpacity>
-          <View style={stylesShape.CircleShapeView} />
+          {/* ProfilePicture Icon 2/3 */}
+          <View style={[stylesShape.CircleShapeView]} />
+
+          {/* EditProfile Icon 3/3 */}
           <TouchableOpacity onPress={this.toggleModal}>
             <FontAwesome5 name="edit" size={26} />
           </TouchableOpacity>
         </View>
 
-        <View
-          style={{
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
-            marginTop: hp('4.6%'),
-            marginLeft: wp('8.5%'),
-          }}>
-          <Text style={[styles.bcRSBB, {fontSize: 16, color: '#000000'}]}>
-            @USERNAME
-          </Text>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('MyBuddies')}
-            style={{flexDirection: 'row', marginTop: hp('1.8%')}}>
-            <Text style={[styles.bcRMB, {fontSize: 16, color: '#000000'}]}>
-              BUDDIES
-            </Text>
-            <Text
-              style={[
-                styles.bcRMB,
-                {fontSize: 16, color: '#000000', marginLeft: wp('4.8%')},
-              ]}>
-              155
-            </Text>
-          </TouchableOpacity>
-          <Text
-            style={[
-              styles.bcRRB,
-              {
-                fontSize: 12,
-                color: '#000000',
-                marginTop: hp('1.8%'),
-                marginRight: wp('13.5%'),
-                textAlign: 'left',
-              },
-            ]}>
-            This is where the bio will be held and shown to everyone lorem ipsum
-            lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          </Text>
-          <View style={{marginTop: hp('2%')}}>
-            <PrimaryButton title="VIEW INSIGHTS" onPress="ViewInsights" />
+        {/* Full name, Username, Buddies, Bio */}
+        <View style={{flexDirection: 'row', backgroundColor:'none', marginBottom: hp('1%')}}>
+          {/* Left Spacer 1/3 */}
+          <View style={{flex: 0.5, backgroundColor: 'none'}} />
+
+          {/* Middle Text Part 2/3 */}
+          <View style={{flex:8, backgroundColor:'none'}}>
+            {/* The color of this View component will only be seen if it is given a specific height */}
+            {/* The Full name cell 1/4 */}
+            <View style={{backgroundColor:'none', marginBottom: hp('2%')}}>
+              <Text style={[styles.h1PMB, {fontSize: 20, color: '#000000', textAlign:'center',}]}>Tanay Jain</Text>
+            </View>
+            {/* Username cell name 2/4 */}
+            <View style={{backgroundColor:'none', marginBottom: hp('1.9%')}}>
+              <Text style={[styles.bcRSBB, {fontSize: 16, color: '#000000', textAlign:'left'}]}>@tanay14.jain</Text>
+            </View>
+            {/* Buddies and no of Buddies 3/4 */}
+            <View style={{backgroundColor:'none', marginBottom: hp('1.9%'), alignItems:'flex-start'}}>
+              {/* If aligning items is left to default (i.e nothing) then it causes the entire cell to be touchable opacity therefor we use flex-start to limit the react of the components */}
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('MyBuddies')} style={{flexDirection: 'row'}}>
+                <Text style={[styles.bcRSBB, {fontSize: 16, color: '#000000', textAlign:'left'}]} >BUDDIES     </Text>
+                <Text style={[styles.bcRSBB, {fontSize: 16, color: '#000000', textAlign:'left'}]}>0</Text>
+              </TouchableOpacity>
+            </View>
+            {/* Bio cell 4/4 */}
+            <View style={{backgroundColor:'none', marginBottom: hp('1.9%')}}>
+              <Text style={[styles.bcRRB, {fontSize: 14, color: '#000000', textAlign:'left'}]}>Not yet updated the Bio</Text>
+            </View>
           </View>
+
+          {/* Right Spacer 3/3 */}
+          <View style={{flex: 0.5, backgroundColor: 'none'}} />
         </View>
+
+        <IconTabComponent
+          tabTitle="View Insights"
+          Icon={<Icon name="ios-stats" size={24} color={'#000000'} />}
+          onPress={() => this.props.navigation.navigate('ViewInsights')}
+        />
 
         {/* Edit Profile Modal */}
         <BottomModal
@@ -457,7 +454,8 @@ class ProfileScreen extends Component {
                     styles.bcRBB,
                     {
                       fontSize: 15,
-                      marginTop: Platform.OS === 'ios' ? hp('2.3%') : hp('1.5%'),
+                      marginTop:
+                        Platform.OS === 'ios' ? hp('2.3%') : hp('1.5%'),
                       color: '#000000',
                     },
                   ]}>
@@ -556,7 +554,8 @@ const stylesShape = StyleSheet.create({
     height: 228,
     borderRadius: 228 / 2,
     borderWidth: 5,
-    borderColor: '#00A1ED',
+    // borderColor: '#00A1ED',
+    borderColor: '#56575D',
     shadowColor: '#00A1ED67',
     shadowOffset: {width: 0, height: 7},
     shadowRadius: 6,
@@ -597,3 +596,43 @@ onPress={() => this.props.navigation.navigate('Settings')}
 {
   /* <ModalContent> */
 }
+{/* <View
+          style={{
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            marginTop: hp('4.6%'),
+            marginLeft: wp('8.5%'),
+          }}>
+          <Text style={[styles.bcRSBB, {fontSize: 16, color: '#000000'}]}>
+            @USERNAME
+          </Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('MyBuddies')}
+            style={{flexDirection: 'row', marginTop: hp('1.8%')}}>
+            <Text style={[styles.bcRMB, {fontSize: 16, color: '#000000'}]}>
+              BUDDIES
+            </Text>
+            <Text
+              style={[
+                styles.bcRMB,
+                {fontSize: 16, color: '#000000', marginLeft: wp('4.8%')},
+              ]}>
+              155
+            </Text>
+          </TouchableOpacity>
+          <Text
+            style={[
+              styles.bcRRB,
+              {
+                fontSize: 12,
+                color: '#000000',
+                marginTop: hp('1.8%'),
+                marginRight: wp('13.5%'),
+                textAlign: 'left',
+              },
+            ]}>
+            This is where the bio will be held and shown to everyone lorem ipsum
+            lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+          </Text>
+        </View> */}

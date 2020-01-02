@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {View, FlatList, Button, Text, TextInput} from 'react-native';
 import auth from '@react-native-firebase/auth';
@@ -16,15 +17,18 @@ import Modal, {
 import Icons from 'react-native-vector-icons/Ionicons';
 import {View, Text, TouchableOpacity, Platform} from 'react-native';
 
-//Custom Components
-import {styles, textInput, buttonStyles} from '../../styles';
-
 //3rd Party Libraries
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+//Custom External StyleSheet
+import {styles, textInput, buttonStyles} from '../../styles';
+
+//Custom Components
+import MainHeader from '../components/MainHeader';
 
 class AllGroupsScreen extends Component {
   constructor(props) {
@@ -329,7 +333,10 @@ class AllGroupsScreen extends Component {
   render() {
     return (
       <View>
-        {/* New Group Modal */}
+        {/* Main Screen Header */}
+        <MainHeader mainHeaderTitle="Groups" />
+
+        {/* New Group Add Button Icon */}
         <View
           style={{
             position: 'absolute',
@@ -344,19 +351,6 @@ class AllGroupsScreen extends Component {
           </TouchableOpacity>
         </View>
 
-        {/* Main Screen */}
-        <View>
-          <View
-            style={{
-              marginBottom: hp('2%'),
-              marginTop: hp('0.7%'),
-              marginLeft: wp('5.6%'),
-            }}>
-            <Text style={[styles.h1PSBB, {fontSize: 30, color: '#000000'}]}>
-              Groups
-            </Text>
-          </View>
-        </View>
       </View>
     );
   }

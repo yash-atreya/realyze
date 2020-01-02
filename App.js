@@ -282,6 +282,7 @@ import LogInScreen from './app/screens/LogIn';
 import AllGroupsScreen from './app/screens/AllGroups';
 import AllTasksScreen from './app/screens/AllTasks';
 import AllNotificationsScreen from './app/screens/AllNotifications';
+import BuddyRequestsScreen from './app/screens/BuddyRequests';
 import ProfileScreen from './app/screens/Profile';
 import ViewInsightsScreen from './app/screens/ViewInsights';
 import MyBuddiesScreen from './app/screens/MyBuddies';
@@ -379,6 +380,34 @@ ProfileStack.navigationOptions = {
     <Icon name="md-person" color={tintColor} size={24} />
   ),
 };
+
+const NotificationsStack = createStackNavigator(
+  {
+    AllNotifications: {
+      screen: AllNotificationsScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    BuddyRequests: {
+      screen: BuddyRequestsScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
+  },
+  {
+    cardStyle: {
+      backgroundColor: '#E9EBF1',
+    },
+  },
+);
+NotificationsStack.navigationOptions = {
+  tabBarLabel: 'Notifications',
+  tabBarIcon: ({tintColor}) => (
+    <Icon name="ios-notifications" color={tintColor} size={24} />
+  ),
+}
 const MainTabStack = createMaterialTopTabNavigator(
   {
     AllTasks: {
@@ -400,16 +429,17 @@ const MainTabStack = createMaterialTopTabNavigator(
         ),
       },
     },
-    AllNotifications: {
-      screen: AllNotificationsScreen,
-      title: 'Notifications',
-      navigationOptions: {
-        tabBarLabel: 'Notifications',
-        tabBarIcon: ({tintColor}) => (
-          <Icon name="ios-notifications" color={tintColor} size={24} />
-        ),
-      },
-    },
+    NotificationsStack,
+    // AllNotifications: {
+    //   screen: AllNotificationsScreen,
+    //   title: 'Notifications',
+    //   navigationOptions: {
+    //     tabBarLabel: 'Notifications',
+    //     tabBarIcon: ({tintColor}) => (
+    //       <Icon name="ios-notifications" color={tintColor} size={24} />
+    //     ),
+    //   },
+    // },
     ProfileStack,
     // Profile: {
     //   screen: ProfileScreen,
@@ -426,7 +456,7 @@ const MainTabStack = createMaterialTopTabNavigator(
     //Router  Config
     initialRouteName: 'AllTasks',
     shifting: true,
-    order: ['AllGroups', 'AllTasks', 'AllNotifications', 'ProfileStack'],
+    order: ['AllGroups', 'AllTasks', 'NotificationsStack', 'ProfileStack'],
     tabBarPosition: 'bottom',
     tabBarOptions: {
       activeTintColor: '#00A1ED',

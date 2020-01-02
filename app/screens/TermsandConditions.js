@@ -22,7 +22,7 @@ class TermsandConditionsScreen extends Component {
   render() {
     return (
       <View>
-        <Header2 headerTitle="T & C" onPressBackButton="Profile"/>
+        <Header2 headerTitle="T & C" onPressBackButton="Settings" />
         <Text>Hello</Text>
       </View>
     );
