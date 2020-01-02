@@ -9,10 +9,10 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 //Custom External StyleSheet
-import {styles, textInput, buttonStyles} from '../../styles';
+// import {styles, textInput, buttonStyles} from '../../styles';
 
 //Custom Components
-import Header2 from '../components/Header2';
+import SecondaryHeader from '../components/SecondaryHeader';
 
 class TermsandConditionsScreen extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class TermsandConditionsScreen extends Component {
   render() {
     return (
       <View>
-        <Header2 headerTitle="T & C" onPressBackButton="Settings" />
+        <SecondaryHeader secondaryHeaderTitle="Terms & Conditions"  />
         <Text>Hello</Text>
       </View>
     );

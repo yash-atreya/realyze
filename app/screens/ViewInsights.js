@@ -10,11 +10,11 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 //Custom External StyleSheet
-import {styles, textInput, buttonStyles} from '../../styles';
+// import {styles, textInput, buttonStyles} from '../../styles';
 
 //Custom Components
-import PrimaryButton from '../components/PrimaryButton';
-import Header2 from '../components/Header2';
+// import PrimaryButton from '../components/PrimaryButton';
+import SecondaryHeader from '../components/SecondaryHeader';
 
 class ViewInsightsScreen extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class ViewInsightsScreen extends Component {
   render() {
     return (
       <View>
-        <Header2 headerTitle="Insights" onPressBackButton="Profile" />
+        <SecondaryHeader secondaryHeaderTitle="Insights" />
         <Text>Hello</Text>
       </View>
     );

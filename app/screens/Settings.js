@@ -16,10 +16,11 @@ import Modal, {
 } from 'react-native-modals';
 
 //Custom External StyleSheet
-import {styles, textInput, buttonStyles} from '../../styles';
+// import {styles, textInput, buttonStyles} from '../../styles';
+import {styles} from '../../styles';
 
 //Custom Components
-import Header2 from '../components/Header2';
+import SecondaryHeader from '../components/SecondaryHeader';
 import IconTabComponent from '../components/IconTabComponent';
 
 class SettingsScreen extends Component {
@@ -37,7 +38,7 @@ class SettingsScreen extends Component {
     return (
       <View>
         {/* Header */}
-        <Header2 headerTitle="Settings" onPressBackButton="Profile" />
+        <SecondaryHeader secondaryHeaderTitle="Settings" />
 
         <IconTabComponent
           tabTitle="Terms and Conditions"

@@ -9,7 +9,8 @@ import {
 import Logo from '../components/Svg Components/Logo';
 
 //Custom External StyleSheet
-import {styles, textInput, buttonStyles} from '../../styles';
+// import {styles, textInput, buttonStyles} from '../../styles';
+import {styles} from '../../styles';
 
 class SplashScreen extends Component {
   constructor(props) {

@@ -18,7 +18,7 @@ import {
 import {styles, textInput, buttonStyles} from '../../styles';
 
 //Custom Components
-import PrimaryButton from '../components/PrimaryButton';
+// import PrimaryButton from '../components/PrimaryButton';
 import IconTabComponent from '../components/IconTabComponent';
 import MainHeader from '../components/MainHeader';
 
@@ -66,17 +66,21 @@ class ProfileScreen extends Component {
             marginBottom: hp('1.6%')
           }}>
           {/* Settings Icon 1/3 */}
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Settings')}>
-            <Icon name="ios-settings" size={30} />
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Settings')}>
+              <Icon name="ios-settings" size={30} />
+            </TouchableOpacity>
+          </View>
           {/* ProfilePicture Icon 2/3 */}
           <View style={[stylesShape.CircleShapeView]} />
 
           {/* EditProfile Icon 3/3 */}
-          <TouchableOpacity onPress={this.toggleModal}>
-            <FontAwesome5 name="edit" size={26} />
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity onPress={this.toggleModal}>
+              <FontAwesome5 name="edit" size={26} />
+            </TouchableOpacity>
+          </View>
         </View>
 
         {/* Full name, Username, Buddies, Bio */}
