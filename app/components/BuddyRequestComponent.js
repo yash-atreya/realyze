@@ -46,6 +46,7 @@ class BuddyRequestComponent extends Component {
         {/* <View style={{flex: 4, flexDirection:'row', backgroundColor: 'purple'}}> */}
         <TouchableOpacity
           // onPress={() => this.props.navigation.navigate(`${this.onPress}`)}
+          onPress={() => this.props.navigation.navigate('StrangerBuddy')}
           style={{
             flex: 4,
             flexDirection: 'row',

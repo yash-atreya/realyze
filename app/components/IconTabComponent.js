@@ -12,7 +12,8 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 //Custom External StyleSheet
-import {styles, textInput, buttonStyles} from '../../styles';
+// import {styles, textInput, buttonStyles} from '../../styles';
+import {styles} from '../../styles';
 
 class IconTabComponent extends Component {
   constructor(props) {
@@ -24,6 +25,8 @@ class IconTabComponent extends Component {
   }
   render() {
     return (
+// Here the entire tab has touchable opacity
+
       // Biggest Parent Container
       <TouchableOpacity
         //   This commented component wont work because if i want to activate a modal then it can cause issue
@@ -32,7 +35,7 @@ class IconTabComponent extends Component {
         style={{
           marginBottom: 24,
           flexDirection: 'row',
-          justifyContent: 'space-around',
+          justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: 'none',
           overflow: 'hidden',
@@ -42,8 +45,6 @@ class IconTabComponent extends Component {
         {/* Icon space 2/5 */}
         <View style={{flex: 1, backgroundColor: 'none', justifyContent:'center', alignItems:'flex-start'}}> 
           {this.Icon}
-          {/* <Icon name="md-log-out" size={24} color={'#000000'}/> */}
-          {/* <Icon name={this.iconName} size={this.iconSize} color={this.iconColor}/> */}
         </View>
         {/* Text space 3/5 */}
         {/* The Children inside this tag given flex default of column therefore justifycontent and align items works in similar fashion of column layout design  */}
@@ -53,7 +54,6 @@ class IconTabComponent extends Component {
         {/* Next Icon space 4/5 */}
         <View style={{flex: 1, backgroundColor: 'none', justifyContent:'center',  alignItems:'flex-end'}}> 
           <Icon name="ios-arrow-forward" size={24} color={'#000000'} />
-            {/* <Icon name={this.iconName} size={this.iconSize} color={this.iconColor}/> */}
 
         </View>
         {/* Right Main Tab Spacer 5/5 */}

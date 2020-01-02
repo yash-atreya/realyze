@@ -15,7 +15,8 @@ import {
 } from 'react-native-responsive-screen';
 
 //Custom External StyleSheet
-import {styles, textInput, buttonStyles} from '../../styles';
+// import {styles, textInput, buttonStyles} from '../../styles';
+import {styles, textInput} from '../../styles';
 
 //Custom Components
 import PrimaryButton from '../components/PrimaryButton';

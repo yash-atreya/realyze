@@ -10,11 +10,10 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 //Custom External StyleSheet
-import {styles, textInput, buttonStyles} from '../../styles';
+// import {styles, textInput, buttonStyles} from '../../styles';
 
 //Custom Components
-import PrimaryButton from '../components/PrimaryButton';
-import Header2 from '../components/Header2';
+import SecondaryHeader from '../components/SecondaryHeader';
 
 class MyBuddiesScreen extends Component {
   constructor(props) {
@@ -24,7 +23,7 @@ class MyBuddiesScreen extends Component {
   render() {
     return (
       <View>
-        <Header2 headerTitle="Buddies" onPressBackButton="Profile" />
+        <SecondaryHeader secondaryHeaderTitle="Buddies" />
         <Text>Hello</Text>
       </View>
     );
