@@ -33,7 +33,7 @@ class NotificationComponent extends Component {
   render() {
     return (
       // Main Container Greatest Parent
-      <View style={{ flexDirection: 'row', backgroundColor: 'none', overflow: 'hidden', marginBottom: 12}}>
+      <View style={{ flexDirection: 'row', backgroundColor: 'none', overflow: 'hidden', marginBottom: 20}}>
         {/* Left Manin  Spacer */}
         <View style={{flex: 0.5, backgroundColor: 'none'}} />
         {/* middle part of column main stack 1/3 */}
