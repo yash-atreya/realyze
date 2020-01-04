@@ -38,7 +38,7 @@ import SettingsScreen from './app/screens/Settings';
 import TermsandConditionsScreen from './app/screens/TermsandConditions';
 import UsernameScreen from './app/screens/Username';
 
-import StrangerBuddyScreen from './app/screens/StrangerBuddy';
+import UserProfileScreen from './app/screens/UserProfile';
 
 // const App: () => React$Node = () => {
 //   return <View />;
@@ -145,8 +145,14 @@ const NotificationsStack = createStackNavigator(
         header: null,
       },
     },
-    StrangerBuddy: {
-      screen: StrangerBuddyScreen,
+    UserProfile: {
+      screen: UserProfileScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    ViewInsights: {
+      screen: ViewInsightsScreen,
       navigationOptions: {
         header: null,
       },

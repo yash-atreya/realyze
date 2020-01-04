@@ -22,7 +22,7 @@ class TermsandConditionsScreen extends Component {
   render() {
     return (
       <View>
-        <SecondaryHeader secondaryHeaderTitle="Terms & Conditions"  />
+        <SecondaryHeader secondaryHeaderTitle="Terms of Service"  />
         <Text>Hello</Text>
       </View>
     );

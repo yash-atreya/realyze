@@ -41,23 +41,23 @@ class IconTabComponent extends Component {
           overflow: 'hidden',
         }}>
         {/* Left Main Tab Spacer 1/5 */}
-        <View style={{flex: 0.6, backgroundColor: 'none'}} /> 
+        <View style={{flex: 0.6, backgroundColor: 'none'}} />
         {/* Icon space 2/5 */}
-        <View style={{flex: 1, backgroundColor: 'none', justifyContent:'center', alignItems:'flex-start'}}> 
+        <View style={{flex: 1, backgroundColor: 'none', justifyContent:'center', alignItems:'flex-start'}}>
           {this.Icon}
         </View>
         {/* Text space 3/5 */}
         {/* The Children inside this tag given flex default of column therefore justifycontent and align items works in similar fashion of column layout design  */}
-        <View style={{flex: 6, backgroundColor: 'none', justifyContent:'center', alignItems:'flex-start'}}> 
+        <View style={{flex: 6, backgroundColor: 'none', justifyContent:'center', alignItems:'flex-start'}}>
           <Text style={[styles.h1PMB, {fontSize: 20, color: '#000000',}]}>{this.tabTitle}</Text>
         </View>
         {/* Next Icon space 4/5 */}
-        <View style={{flex: 1, backgroundColor: 'none', justifyContent:'center',  alignItems:'flex-end'}}> 
+        <View style={{flex: 1, backgroundColor: 'none', justifyContent:'center',  alignItems:'flex-end'}}>
           <Icon name="ios-arrow-forward" size={24} color={'#000000'} />
 
         </View>
         {/* Right Main Tab Spacer 5/5 */}
-        <View style={{flex: 0.6, backgroundColor: 'none'}} /> 
+        <View style={{flex: 0.6, backgroundColor: 'none'}} />
       </TouchableOpacity>
     );
   }
