@@ -8,7 +8,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Modal, {
   SlideAnimation,
   BottomModal,
@@ -41,9 +41,22 @@ class SettingsScreen extends Component {
         <SecondaryHeader secondaryHeaderTitle="Settings" />
 
         <IconTabComponent
-          tabTitle="Terms and Conditions"
+          tabTitle="Terms of Service"
           Icon={<Icon name="ios-book" size={24} color={'#000000'} />}
           onPress={() => this.props.navigation.navigate('TermsandConditions')}
+        />
+        <IconTabComponent
+          tabTitle="Privacy Policy"
+          Icon={<MaterialCommunityIcon name="security" size={24} color={'#000000'} />}
+          onPress={() => this.props.navigation.navigate('TermsandConditions')}
+        />
+        <IconTabComponent
+          tabTitle="Feature Request"
+          Icon={<Icon name="md-git-pull-request" size={24} color={'#000000'} />}
+          onPress={() => {
+            this.setState({visible: true});
+            this.code = 'Delete your account';
+          }}
         />
         <IconTabComponent
           tabTitle="Log Out"
@@ -55,7 +68,7 @@ class SettingsScreen extends Component {
         />
         <IconTabComponent
           tabTitle="Delete Account"
-          Icon={<Icon2 name="delete" size={24} color={'#000000'} />}
+          Icon={<MaterialCommunityIcon name="delete" size={24} color={'#000000'} />}
           onPress={() => {
             this.setState({visible: true});
             this.code = 'Delete your account';

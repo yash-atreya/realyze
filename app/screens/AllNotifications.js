@@ -17,6 +17,7 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import MainHeader from '../components/MainHeader';
 import PrimaryButton from '../components/PrimaryButton';
 import IconTabComponent from '../components/IconTabComponent';
+import NotificationComponent from '../components/NotificationComponent';
 
 class AllNotificationsScreen extends Component {
   constructor(props) {
@@ -33,6 +34,8 @@ class AllNotificationsScreen extends Component {
           Icon={<FeatherIcon name="user-plus" size={24} color={'#000000'} />}
           onPress={() => this.props.navigation.navigate('BuddyRequests')}
         />
+        <NotificationComponent />
+        <NotificationComponent />
         {/* <PrimaryButton title='BUDDY REQUESTS' onPress='BuddyRequests' /> */}
       </View>
     );

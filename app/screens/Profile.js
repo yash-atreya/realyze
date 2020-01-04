@@ -367,7 +367,7 @@ class ProfileScreen extends Component {
             {/* The color of this View component will only be seen if it is given a specific height */}
             {/* The Full name cell 1/4 */}
             <View style={{backgroundColor:'none', marginBottom: hp('2%')}}>
-              <Text style={[styles.h1PMB, {fontSize: 20, color: '#000000', textAlign:'center',}]}>Tanay Jain</Text>
+              <Text style={[styles.h1PMB, {fontSize: 20, color: '#000000', textAlign:'center'}]}>Tanay Jain</Text>
             </View>
             {/* Username cell name 2/4 */}
             <View style={{backgroundColor:'none', marginBottom: hp('1.9%')}}>
@@ -558,8 +558,9 @@ const stylesShape = StyleSheet.create({
     height: 228,
     borderRadius: 228 / 2,
     borderWidth: 5,
-    // borderColor: '#00A1ED',
-    borderColor: '#56575D',
+    borderColor: '#00A1ED',
+    // borderColor: '#56575D',
+    // borderColor: '#333647',
     shadowColor: '#00A1ED67',
     shadowOffset: {width: 0, height: 7},
     shadowRadius: 6,
