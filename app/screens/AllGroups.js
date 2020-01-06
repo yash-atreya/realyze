@@ -10,10 +10,11 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 //Custom External StyleSheet
-import {styles, textInput, buttonStyles} from '../../styles';
+// import {styles, textInput, buttonStyles} from '../../styles';
 
 //Custom Components
 import MainHeader from '../components/MainHeader';
+import GroupComponent from '../components/GroupComponent';
 
 class AllGroupsScreen extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class AllGroupsScreen extends Component {
             <Icon name="md-add-circle-outline" color={'#333647'} size={64} />
           </TouchableOpacity>
         </View>
-
+        <GroupComponent groupName="HOT MOMS CLUB" />
       </View>
     );
   }
