@@ -31,7 +31,7 @@ class AllNotificationsScreen extends Component {
         <MainHeader mainHeaderTitle="Notifications" />
         <IconTabComponent
           tabTitle="Buddy Requests"
-          Icon={<FeatherIcon name="user-plus" size={24} color={'#000000'} />}
+          Icon={<Icon name="md-person-add" size={24} color={'#000000'} />}
           onPress={() => this.props.navigation.navigate('BuddyRequests')}
         />
         <NotificationComponent />

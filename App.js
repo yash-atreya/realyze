@@ -35,10 +35,12 @@ import ProfileScreen from './app/screens/Profile';
 import ViewInsightsScreen from './app/screens/ViewInsights';
 import MyBuddiesScreen from './app/screens/MyBuddies';
 import SettingsScreen from './app/screens/Settings';
-import TermsandConditionsScreen from './app/screens/TermsandConditions';
+import TermsOfServiceScreen from './app/screens/TermsOfService';
+import PrivacyPolicyScreen from './app/screens/PrivacyPolicy';
 import UsernameScreen from './app/screens/Username';
 
 import UserProfileScreen from './app/screens/UserProfile';
+import SearchAddBuddyScreen from './app/screens/SearchAddBuddy';
 
 // const App: () => React$Node = () => {
 //   return <View />;
@@ -87,6 +89,12 @@ const ProfileStack = createStackNavigator(
         header: null,
       },
     },
+    SearchAddBuddy: {
+      screen: SearchAddBuddyScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
     ViewInsights: {
       screen: ViewInsightsScreen,
       navigationOptions: {
@@ -105,8 +113,14 @@ const ProfileStack = createStackNavigator(
         header: null,
       },
     },
-    TermsandConditions: {
-      screen: TermsandConditionsScreen,
+    TermsOfService: {
+      screen: TermsOfServiceScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    PrivacyPolicy: {
+      screen: PrivacyPolicyScreen,
       navigationOptions: {
         header: null,
       },

@@ -23,6 +23,12 @@ import PrimaryButton from '../components/PrimaryButton';
 class UserProfileScreen extends Component {
   constructor(props) {
     super(props);
+
+  //=================STATE==============
+    this.state = {
+      isBuddy: false,
+      isRequestSent: true,
+    }
   }
 
   render() {
@@ -73,8 +79,9 @@ class UserProfileScreen extends Component {
           {/* Right Spacer 3/3 */}
           <View style={{flex: 0.5, backgroundColor: 'none'}} />
         </View>
-
-        <IconTabComponent
+          {this.state.isBuddy ? (
+            <>
+          <IconTabComponent
           tabTitle="View Insights"
           Icon={<Icon name="ios-stats" size={24} color={'#000000'} />}
           onPress={() => this.props.navigation.navigate('ViewInsights')}
@@ -83,10 +90,15 @@ class UserProfileScreen extends Component {
           tabTitle="Shared Tasks"
           Icon={<FontAwesome5Icon name="tasks" size={24} color={'#000000'} />}
           onPress={() => this.props.navigation.navigate('ViewInsights')}
-        />
-
+        /> 
+        </>) : (null)}
+       
         <View style={{flexDirection: 'row', justifyContent:'space-around', alignItems:'center'}} >
-          <PrimaryButton title="Send Request" />
+          {this.state.isRequestSent ? (
+            <PrimaryButton title="Revoke Request" onPressPrimaryButton={() => console.log('Revoke Request')}/>
+          ) : (
+              <PrimaryButton title="Send Request" />
+          )}
         </View>
       </View>
     );

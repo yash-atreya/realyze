@@ -19,8 +19,7 @@ class PrimaryButton extends React.Component {
     super(props);
     this.title = this.props.title;
     this.code = this.props.navigation.getParam('code');
-    this.onPress = this.props.onPress;
-    this.navigation = this.props.navigation;
+    this.onPressPrimaryButton = this.props.onPressPrimaryButton;
   }
   render() {
     return (
@@ -28,7 +27,8 @@ class PrimaryButton extends React.Component {
       //   <View style={{flex: 0.5}} />
       // <View style={{flex: 8}}>
       <TouchableOpacity
-        onPress={() => this.props.navigation.navigate(`${this.onPress}`)}
+        // onPress={() => this.props.navigation.navigate(`${this.onPress}`)}
+        onPress={this.onPressPrimaryButton}
         style={{
           shadowColor: '#102FC6',
           shadowOpacity: 0.3,

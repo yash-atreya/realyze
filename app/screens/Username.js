@@ -98,7 +98,7 @@ class UsernameScreen extends Component {
 
               <View style={{ justifyContent:'center', backgroundColor:'none'}}>
                 <View>
-                  <PrimaryButton title="Get Started" onPress="AllTasks" />
+                  <PrimaryButton title="Get Started" onPressPrimaryButton={()=> this.props.navigation.navigate('AllTasks')} />
                 </View>
                 <Text style={{marginBottom: hp('1%'), alignSelf: 'center'}}>
                   {/* Error of Get Started */}
@@ -177,7 +177,7 @@ export default UsernameScreen;
             ref={input => (this.usernameInput = input)}
           />
           <View style={{marginTop: hp('5%')}}>
-            <PrimaryButton title="GET STARTED" onPress="AllTasks" />
+            <PrimaryButton title="GET STARTED"  />
           </View>
         </KeyboardAvoidingView>
       </View>
