@@ -19,7 +19,6 @@ import {View, Text, TouchableOpacity, Platform, Button} from 'react-native';
 import {
   TouchableOpacity,
   Platform,
-  Button,
   StyleSheet,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -48,6 +47,7 @@ import Modal, {
   ModalContent,
 } from 'react-native-modals';
 import LinearGradient from 'react-native-linear-gradient';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 
 //Cutom Screens
 
@@ -329,7 +329,13 @@ class ProfileScreen extends Component {
       <View>
         {/* Main Screen Header */}
         <MainHeader mainHeaderTitle="Profile" />
-        
+
+        {/* Search Buddy */}
+        <IconTabComponent
+          tabTitle="Add Buddies"
+          Icon={<FeatherIcon name="user-plus" size={24} color={'#000000'} />}
+          onPress={() => this.props.navigation.navigate('SearchAddBuddy')}
+        /> 
         {/* Main Screen Body */}
 
         {/* Setting ProfilePicture and Edit Profile */}

@@ -1,10 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 
 //3rd Party Libraries
 import {
@@ -20,8 +16,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 // import PrimaryButton from '../components/PrimaryButton';
 import SecondaryHeader from '../components/SecondaryHeader';
 import ProfileComponent from '../components/ProfileComponent';
+import { TextInput } from 'react-native-gesture-handler';
+import { textInput } from '../../styles';
 
-class BuddyRequestsScreen extends Component {
+class SearchAddBuddyScreen extends Component {
   constructor(props) {
     super(props);
   }
@@ -29,15 +27,14 @@ class BuddyRequestsScreen extends Component {
   render() {
     return (
       <View>
-        <SecondaryHeader secondaryHeaderTitle="Requests" />
-        <ScrollView>
-          <ProfileComponent />
-          <ProfileComponent />
-          <ProfileComponent />
-        </ScrollView>
+        <SecondaryHeader secondaryHeaderTitle="Search Buddies" />
+        <TextInput
+          style={[textInput.generalTextInput, {alignSelf: 'center'}]}
+          placeholder="Search"
+        />
       </View>
     );
   }
 }
 
-export default BuddyRequestsScreen;
+export default SearchAddBuddyScreen;

@@ -175,7 +175,7 @@ class LogInScreen extends Component {
               </View>
               <View style={{flex:2, justifyContent:'center', backgroundColor:'none'}}>
                 <View>
-                  <PrimaryButton title="Verify Email" onPress="Username" />
+                  <PrimaryButton title="Verify Email" onPressPrimaryButton={()=> this.props.navigation.navigate('Username')} />
                 </View>
                 <Text style={{marginTop: hp('1%'), alignSelf: 'center'}}>
                   (Check Your Inbox to go ahead in the app)

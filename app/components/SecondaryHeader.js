@@ -50,7 +50,7 @@ class SecondaryHeader extends Component {
         {/* Text space 3/5 */}
         {/* The Children inside this tag given flex default of column therefore justifycontent and align items works in similar fashion of column layout design  */}
         <View style={{flex: 6, backgroundColor: 'none', justifyContent:'center', alignItems:'center'}}>
-          <Text style={[styles.h1PSBB,, {fontSize: 30, color: '#000000', textAlign:'center'}]}>{this.secondaryHeaderTitle}</Text>
+          <Text style={[styles.h1PSBB,, {fontSize: 28, color: '#000000', textAlign:'center'}]}>{this.secondaryHeaderTitle}</Text>
         </View>
 
         {/* Right Main Tab Spacer 4/4 */}

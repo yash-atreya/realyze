@@ -43,12 +43,12 @@ class SettingsScreen extends Component {
         <IconTabComponent
           tabTitle="Terms of Service"
           Icon={<Icon name="ios-book" size={24} color={'#000000'} />}
-          onPress={() => this.props.navigation.navigate('TermsandConditions')}
+          onPress={() => this.props.navigation.navigate('TermsOfService')}
         />
         <IconTabComponent
           tabTitle="Privacy Policy"
           Icon={<MaterialCommunityIcon name="security" size={24} color={'#000000'} />}
-          onPress={() => this.props.navigation.navigate('TermsandConditions')}
+          onPress={() => this.props.navigation.navigate('PrivacyPolicy')}
         />
         <IconTabComponent
           tabTitle="Feature Request"

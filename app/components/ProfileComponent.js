@@ -16,7 +16,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 // import {styles, textInput, buttonStyles} from '../../styles';
 import {styles} from '../../styles';
 
-class BuddyRequestComponent extends Component {
+class ProfileComponent extends Component {
   constructor(props) {
     super(props);
     this.headerTitle = this.props.headerTitle;
@@ -140,10 +140,11 @@ const stylesShape = StyleSheet.create({
   },
 });
 
-export default withNavigation(BuddyRequestComponent);
+export default withNavigation(ProfileComponent);
+
 // //Clicking Yes
 // <TouchableOpacity>
-//   <Icon name="ios-checkmark-circle-outline" color="#FF0000" size={42} />
+// <Icon name="ios-checkmark-circle-outline" color="#0DE51E" size={42} />
 // </TouchableOpacity>
 // //Clicking No diapperar the tab
 
