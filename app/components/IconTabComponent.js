@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity, Platform, Button} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 
 //3rd Party Libraries
 import {withNavigation} from 'react-navigation';
@@ -41,7 +41,7 @@ class IconTabComponent extends Component {
           overflow: 'hidden',
         }}>
         {/* Left Main Tab Spacer 1/5 */}
-        <View style={{flex: 0.6, backgroundColor: 'none'}} />
+        <View style={{flex: 0.5, backgroundColor: 'none'}} />
         {/* Icon space 2/5 */}
         <View style={{flex: 1, backgroundColor: 'none', justifyContent:'center', alignItems:'flex-start'}}>
           {this.Icon}
@@ -49,7 +49,7 @@ class IconTabComponent extends Component {
         {/* Text space 3/5 */}
         {/* The Children inside this tag given flex default of column therefore justifycontent and align items works in similar fashion of column layout design  */}
         <View style={{flex: 6, backgroundColor: 'none', justifyContent:'center', alignItems:'flex-start'}}>
-          <Text style={[styles.h1PMB, {fontSize: 20, color: '#000000',}]}>{this.tabTitle}</Text>
+          <Text style={[styles.h1PMB, {fontSize: 20, color: '#000000'}]}>{this.tabTitle}</Text>
         </View>
         {/* Next Icon space 4/5 */}
         <View style={{flex: 1, backgroundColor: 'none', justifyContent:'center',  alignItems:'flex-end'}}>
@@ -57,7 +57,7 @@ class IconTabComponent extends Component {
 
         </View>
         {/* Right Main Tab Spacer 5/5 */}
-        <View style={{flex: 0.6, backgroundColor: 'none'}} />
+        <View style={{flex: 0.5, backgroundColor: 'none'}} />
       </TouchableOpacity>
     );
   }

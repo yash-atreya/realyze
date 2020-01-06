@@ -11,9 +11,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 //Custom External StyleSheet
 // import {styles, textInput, buttonStyles} from '../../styles';
+import {textInput} from '../../styles';
 
 //Custom Components
 import SecondaryHeader from '../components/SecondaryHeader';
+import { TextInput } from 'react-native-gesture-handler';
 
 class MyBuddiesScreen extends Component {
   constructor(props) {
@@ -24,6 +26,9 @@ class MyBuddiesScreen extends Component {
     return (
       <View>
         <SecondaryHeader secondaryHeaderTitle="Buddies" />
+        <View style={[textInput.generalTextInput, {marginBottom: 24, alignSelf:'center',  justifyContent:'center'}]}>
+          <TextInput placeholder="Search" />
+        </View>
         <Text>Hello</Text>
       </View>
     );

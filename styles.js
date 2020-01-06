@@ -93,9 +93,9 @@ const styles = StyleSheet.create({
 });
 const textInput = StyleSheet.create({
   generalTextInput: {
-    // width: wp('84.26'),
+    width: wp('88.8'),
     // height: Platform.OS === 'ios' ? hp('4.92') : hp('6'),
-    width: 328,
+    // width: 328,
     height: 40,
     borderColor: '#00A1EDC4',
     borderWidth: 1,
@@ -111,9 +111,9 @@ const textInput = StyleSheet.create({
 });
 const buttonStyles = StyleSheet.create({
   buttonBody: {
-    // width: wp('84.26'),
+    width: wp('84.26'),
     // height: hp('5.9%'),
-    width: 328,
+    // width: 328,
     height: 48,
     borderRadius: Platform.OS === 'ios' ? 11 : 3,
     shadowColor: '#102FC6',
