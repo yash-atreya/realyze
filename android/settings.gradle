@@ -21,7 +21,9 @@ project(':@react-native-firebase_storage').projectDir = new File(rootProject.pro
 //Cloud Functions
 include ':@react-native-firebase_functions'
 project(':@react-native-firebase_functions').projectDir = new File(rootProject.projectDir, './../node_modules/@react-native-firebase/functions/android')
-
+//Dynamic Links
+include ':@react-native-firebase_dynamic-links'
+project(':@react-native-firebase_dynamic-links').projectDir = new File(rootProject.projectDir, './../node_modules/@react-native-firebase/dynamic-links/android')
 //Firebase Messaging
 include ':@react-native-firebase_messaging'
 project(':@react-native-firebase_messaging').projectDir = new File(rootProject.projectDir, './../node_modules/@react-native-firebase/messaging/android')

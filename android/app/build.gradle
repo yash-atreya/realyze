@@ -218,6 +218,8 @@ dependencies {
     implementation project(path: ":@react-native-firebase_messaging")
     //Firebase Storage
     implementation project(path: ":@react-native-firebase_storage")
+    //Dynamic Links
+    implementation project(path: ":@react-native-firebase_dynamic-links")
     //RNDateTimePicker
     //implementation project(':react-native-datetimepicker')
 

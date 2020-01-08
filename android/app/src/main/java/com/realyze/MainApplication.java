@@ -30,6 +30,8 @@ import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
 import io.invertase.firebase.firestore.ReactNativeFirebaseFirestorePackage;
 //Cloud Functions
 import io.invertase.firebase.functions.ReactNativeFirebaseFunctionsPackage;
+//Dynamic Links
+import io.invertase.firebase.dynamiclinks.ReactNativeFirebaseDynamicLinksPackage;
 //RNDateTimePicker
 //import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
 
@@ -55,6 +57,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
           new ReactNativeFirebaseFunctionsPackage();
           new ReactNativeFirebaseMessagingPackage();
           new ReactNativeFirebaseStoragePackage();
+          new ReactNativeFirebaseDynamicLinksPackage();
           //new RNDateTimePickerPackage();
           return packages;
         }
