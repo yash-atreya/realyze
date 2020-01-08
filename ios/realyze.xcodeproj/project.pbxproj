@@ -18,12 +18,10 @@
 		2DCD954D1E0B4F2C00145EB5 /* realyzeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* realyzeTests.m */; };
 		4EAE0AC130912774850B868D /* libPods-realyze-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6632D7F586AAB250B7526150 /* libPods-realyze-tvOS.a */; };
 		84740E226A6F808EAFF288C4 /* libPods-realyze-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E00460111229448173F8AD6A /* libPods-realyze-tvOSTests.a */; };
-		8986DE4F238B18F7001B8F5F /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8986DE4E238B18F7001B8F5F /* NotificationService.m */; };
-		8986DE53238B18F7001B8F5F /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8986DE4B238B18F7001B8F5F /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8986DE5E238B31F9001B8F5F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8986DE5D238B31F9001B8F5F /* GoogleService-Info.plist */; };
 		8986DE5F238B31F9001B8F5F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8986DE5D238B31F9001B8F5F /* GoogleService-Info.plist */; };
+		89F348EC23C5FF88003E0E87 /* libRNPermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F348EB23C5FF88003E0E87 /* libRNPermissions.a */; };
 		90A51E66746239418A97B72E /* libPods-realyzeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A2A254049C51ABAB2D028B /* libPods-realyzeTests.a */; };
-		B21FFB7F98BB3490D7161E00 /* libPods-realyze-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE42D6DA1F6EC9F867E9338 /* libPods-realyze-OneSignalNotificationServiceExtension.a */; };
 		D92D750102930FF57FC38672 /* libPods-realyze.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB88DD8FD6E658003AF5DBB6 /* libPods-realyze.a */; };
 /* End PBXBuildFile section */
 
@@ -42,12 +40,12 @@
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "realyze-tvOS";
 		};
-		8986DE51238B18F7001B8F5F /* PBXContainerItemProxy */ = {
+		89F348E923C5FF61003E0E87 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8986DE4A238B18F7001B8F5F;
-			remoteInfo = OneSignalNotificationServiceExtension;
+			containerPortal = 89F348E523C5FF60003E0E87 /* RNPermissions.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNPermissions;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -58,7 +56,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				8986DE53238B18F7001B8F5F /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,16 +81,10 @@
 		404C6914F2AD7253049C548A /* Pods-realyze-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-realyze-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-realyze-tvOSTests/Pods-realyze-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6632D7F586AAB250B7526150 /* libPods-realyze-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-realyze-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E7FB60B6507DF791831D66A /* Pods-realyzeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-realyzeTests.debug.xcconfig"; path = "Target Support Files/Pods-realyzeTests/Pods-realyzeTests.debug.xcconfig"; sourceTree = "<group>"; };
-		6EE42D6DA1F6EC9F867E9338 /* libPods-realyze-OneSignalNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-realyze-OneSignalNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C67A69202DAA72C9818B316 /* Pods-realyze-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-realyze-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-realyze-OneSignalNotificationServiceExtension/Pods-realyze-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		8986DE15238B1515001B8F5F /* realyze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = realyze.entitlements; path = realyze/realyze.entitlements; sourceTree = "<group>"; };
-		8986DE4B238B18F7001B8F5F /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		8986DE4D238B18F7001B8F5F /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
-		8986DE4E238B18F7001B8F5F /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
-		8986DE50238B18F7001B8F5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8986DE57238B237D001B8F5F /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		8986DE5D238B31F9001B8F5F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		9A177FBBE6D14F5AAA82DF39 /* Pods-realyze-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-realyze-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-realyze-OneSignalNotificationServiceExtension/Pods-realyze-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		89F348E523C5FF60003E0E87 /* RNPermissions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNPermissions.xcodeproj; path = "../node_modules/react-native-permissions/ios/RNPermissions.xcodeproj"; sourceTree = "<group>"; };
+		89F348EB23C5FF88003E0E87 /* libRNPermissions.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNPermissions.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A18FC9142A3B446CB92F8E04 /* Pods-realyze.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-realyze.release.xcconfig"; path = "Target Support Files/Pods-realyze/Pods-realyze.release.xcconfig"; sourceTree = "<group>"; };
 		AFC8F4BBF7E97E2BB1ECC92F /* Pods-realyze.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-realyze.debug.xcconfig"; path = "Target Support Files/Pods-realyze/Pods-realyze.debug.xcconfig"; sourceTree = "<group>"; };
 		B1A2A254049C51ABAB2D028B /* libPods-realyzeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-realyzeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89F348EC23C5FF88003E0E87 /* libRNPermissions.a in Frameworks */,
 				D92D750102930FF57FC38672 /* libPods-realyze.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,14 +127,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				84740E226A6F808EAFF288C4 /* libPods-realyze-tvOSTests.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8986DE48238B18F7001B8F5F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B21FFB7F98BB3490D7161E00 /* libPods-realyze-OneSignalNotificationServiceExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,13 +169,13 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89F348EB23C5FF88003E0E87 /* libRNPermissions.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				FB88DD8FD6E658003AF5DBB6 /* libPods-realyze.a */,
 				6632D7F586AAB250B7526150 /* libPods-realyze-tvOS.a */,
 				E00460111229448173F8AD6A /* libPods-realyze-tvOSTests.a */,
 				B1A2A254049C51ABAB2D028B /* libPods-realyzeTests.a */,
-				6EE42D6DA1F6EC9F867E9338 /* libPods-realyze-OneSignalNotificationServiceExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -199,6 +183,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				89F348E523C5FF60003E0E87 /* RNPermissions.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -209,7 +194,6 @@
 				13B07FAE1A68108700A75B9A /* realyze */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* realyzeTests */,
-				8986DE4C238B18F7001B8F5F /* OneSignalNotificationServiceExtension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				E7719CDF11668768370E2A89 /* Pods */,
@@ -226,20 +210,16 @@
 				00E356EE1AD99517003FC87E /* realyzeTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* realyze-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* realyze-tvOSTests.xctest */,
-				8986DE4B238B18F7001B8F5F /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8986DE4C238B18F7001B8F5F /* OneSignalNotificationServiceExtension */ = {
+		89F348E623C5FF60003E0E87 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8986DE57238B237D001B8F5F /* OneSignalNotificationServiceExtension.entitlements */,
-				8986DE4D238B18F7001B8F5F /* NotificationService.h */,
-				8986DE4E238B18F7001B8F5F /* NotificationService.m */,
-				8986DE50238B18F7001B8F5F /* Info.plist */,
+				89F348EA23C5FF61003E0E87 /* libRNPermissions.a */,
 			);
-			path = OneSignalNotificationServiceExtension;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		E7719CDF11668768370E2A89 /* Pods */ = {
@@ -253,8 +233,6 @@
 				1F44A9DE2622CD69C3858FE9 /* Pods-realyze-tvOSTests.release.xcconfig */,
 				6E7FB60B6507DF791831D66A /* Pods-realyzeTests.debug.xcconfig */,
 				1D20C9CB81D3404F93ADA7EB /* Pods-realyzeTests.release.xcconfig */,
-				9A177FBBE6D14F5AAA82DF39 /* Pods-realyze-OneSignalNotificationServiceExtension.debug.xcconfig */,
-				7C67A69202DAA72C9818B316 /* Pods-realyze-OneSignalNotificationServiceExtension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -298,7 +276,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				8986DE52238B18F7001B8F5F /* PBXTargetDependency */,
 			);
 			name = realyze;
 			productName = realyze;
@@ -344,25 +321,6 @@
 			productReference = 2D02E4901E0B4A5D006451C7 /* realyze-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8986DE4A238B18F7001B8F5F /* OneSignalNotificationServiceExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8986DE54238B18F7001B8F5F /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
-			buildPhases = (
-				5DD1440492B553972CEEC074 /* [CP] Check Pods Manifest.lock */,
-				8986DE47238B18F7001B8F5F /* Sources */,
-				8986DE48238B18F7001B8F5F /* Frameworks */,
-				8986DE49238B18F7001B8F5F /* Resources */,
-				FE7467C1438E91E242D1C2BB /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = OneSignalNotificationServiceExtension;
-			productName = OneSignalNotificationServiceExtension;
-			productReference = 8986DE4B238B18F7001B8F5F /* OneSignalNotificationServiceExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -389,11 +347,6 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
-					8986DE4A238B18F7001B8F5F = {
-						CreatedOnToolsVersion = 11.2.1;
-						DevelopmentTeam = 4D4NYZN576;
-						ProvisioningStyle = Automatic;
-					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "realyze" */;
@@ -408,16 +361,31 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 89F348E623C5FF60003E0E87 /* Products */;
+					ProjectRef = 89F348E523C5FF60003E0E87 /* RNPermissions.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* realyze */,
 				00E356ED1AD99517003FC87E /* realyzeTests */,
 				2D02E47A1E0B4A5D006451C7 /* realyze-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* realyze-tvOSTests */,
-				8986DE4A238B18F7001B8F5F /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		89F348EA23C5FF61003E0E87 /* libRNPermissions.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNPermissions.a;
+			remoteRef = 89F348E923C5FF61003E0E87 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
@@ -447,13 +415,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2D02E48E1E0B4A5D006451C7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8986DE49238B18F7001B8F5F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -529,28 +490,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-realyze-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5DD1440492B553972CEEC074 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-realyze-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -703,60 +642,6 @@
 			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		FE7467C1438E91E242D1C2BB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-realyze-OneSignalNotificationServiceExtension/Pods-realyze-OneSignalNotificationServiceExtension-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/QBImagePickerController/QBImagePicker.bundle",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
-				"${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RSKImageCropperStrings.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Cpp.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-realyze-OneSignalNotificationServiceExtension/Pods-realyze-OneSignalNotificationServiceExtension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -794,14 +679,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8986DE47238B18F7001B8F5F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8986DE4F238B18F7001B8F5F /* NotificationService.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -814,11 +691,6 @@
 			isa = PBXTargetDependency;
 			target = 2D02E47A1E0B4A5D006451C7 /* realyze-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
-		};
-		8986DE52238B18F7001B8F5F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8986DE4A238B18F7001B8F5F /* OneSignalNotificationServiceExtension */;
-			targetProxy = 8986DE51238B18F7001B8F5F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1134,62 +1006,6 @@
 			};
 			name = Release;
 		};
-		8986DE55238B18F7001B8F5F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9A177FBBE6D14F5AAA82DF39 /* Pods-realyze-OneSignalNotificationServiceExtension.debug.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 4D4NYZN576;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.realyze.OneSignalNotificationServiceExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		8986DE56238B18F7001B8F5F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7C67A69202DAA72C9818B316 /* Pods-realyze-OneSignalNotificationServiceExtension.release.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 4D4NYZN576;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.realyze.OneSignalNotificationServiceExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1234,15 +1050,6 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8986DE54238B18F7001B8F5F /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8986DE55238B18F7001B8F5F /* Debug */,
-				8986DE56238B18F7001B8F5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -40,7 +40,7 @@ target 'realyze' do
   pod 'react-native-netinfo', :path => '../node_modules/@react-native-community/netinfo'
   pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker/RNDateTimePicker.podspec'
 
-  pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
+  # pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
 
   pod 'react-native-appearance', :path => '../node_modules/react-native-appearance'
 
@@ -59,9 +59,9 @@ target 'realyze' do
     # Pods for testing
   end
   
-  target 'OneSignalNotificationServiceExtension' do
-    pod 'OneSignal', '>= 2.9.3', '< 3.0'
-  end
+  # target 'OneSignalNotificationServiceExtension' do
+  #   pod 'OneSignal', '>= 2.9.3', '< 3.0'
+  # end
   
   post_install do |installer|
     installer.pods_project.targets.each do |target|
