@@ -58,7 +58,7 @@ class UsernameScreen extends Component {
               behavior="position"
               keyboardVerticalOffset={Platform.OS === 'ios' ? '54' : '0'}>
 
-              <View style={{ justifyContent:'center', backgroundColor:'none'}}>
+              <View style={{ justifyContent:'center', marginBottom: hp('1.2%'), backgroundColor:'none'}}>
                 <Text style={[styles.h1PSBB, {fontSize: 24}]}>
                   Enter Full Name :
                 </Text>
@@ -72,12 +72,10 @@ class UsernameScreen extends Component {
                   returnKeyType="next"
                   onSubmitEditing={() => this.usernameInput.focus()}
                 />
-                <Text style={{marginBottom: hp('1%'), alignSelf: 'center'}}>
-                  {/* Empty for error message of Full Name Text Input */}(Please fill this blank)
-                </Text>
+                <Text style={[styles.bcRMB, {color:'red', fontSize: 12}]}> Error Message will show here</Text>
               </View>
 
-              <View style={{ justifyContent:'center', backgroundColor:'none'}}>
+              <View style={{ justifyContent:'center', marginBottom: hp('2%'), backgroundColor:'none'}}>
                 <Text style={[styles.h1PSBB, {fontSize: 24}]}>
                   Enter Username :
                 </Text>
@@ -91,18 +89,14 @@ class UsernameScreen extends Component {
                   returnKeyType="done"
                   ref={input => (this.usernameInput = input)}
                 />
-                <Text style={{marginBottom: hp('1.2%'), alignSelf: 'center'}}>
-                  {/* Empty for error message of Full Name Text Input */}(Please fill this blank)
-                </Text>
+                <Text style={[styles.bcRMB, {color:'red', fontSize: 12}]}> Error Message will show here</Text>
               </View>
 
-              <View style={{ justifyContent:'center', backgroundColor:'none'}}>
+              <View style={{ justifyContent:'center', marginBottom: hp('1.2%'), backgroundColor:'none'}}>
                 <View>
-                  <PrimaryButton title="Get Started" onPressPrimaryButton={()=> this.props.navigation.navigate('AllTasks')} />
+                  <PrimaryButton title="Get Started" onPressPrimaryButton={()=> this.props.navigation.navigate('AllTasksStack')} />
                 </View>
-                <Text style={{marginBottom: hp('1%'), alignSelf: 'center'}}>
-                  {/* Error of Get Started */}
-                </Text>
+                <Text style={[styles.bcRMB, {color:'red', fontSize: 12}]}> Error Message will show here</Text>
               </View>
             </KeyboardAvoidingView>
 
@@ -118,66 +112,71 @@ class UsernameScreen extends Component {
 
 export default UsernameScreen;
 
-      <View style={{flex: 1, alignItems: 'center', backgroundColor:'#E9EBF1'}}>
-        {/* Offline Indicator Position Absolute */}
-        <View style={{position:'absolute', alignSelf:'center'}}>
-          <OfflineIndicator />
-        </View>
-        {/* Logo Position Absolute */}
-        <View style={{position: 'absolute', left: '70%', top: '0%'}}>
-          <Logo />
-        </View>
 
-        <Text style={[styles.bcRBB, {fontSize: 50, marginTop: hp('11.78%'), marginBottom:hp('16%')}]}>
-          Welcome
-        </Text>
-        <KeyboardAvoidingView
-          enabled
-          behavior="position"
-          keyboardVerticalOffset="54"
-          style={{alignSelf: 'center'}}>
-          <Text
-            style={[
-              styles.h1PSBB,
-              {fontSize: 24, alignSelf: 'center'},
-            ]}>
-            ENTER FULL NAME
-          </Text>
-          <TextInput
-            placeholder="Full Name"
-            placeholderTextColor="#333647"
-            style={[
-              textInput.generalTextInput,
-              {marginTop: hp('2.339%'), color: '#333647'},
-            ]}
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="default"
-            returnKeyType="next"
-            onSubmitEditing={() => this.usernameInput.focus()}
-          />
-          <Text
-            style={[
-              styles.h1PSBB,
-              {fontSize: 24, marginTop: hp('16%'), alignSelf: 'center'},
-            ]}>
-            ENTER USERNAME
-          </Text>
-          <TextInput
-            placeholder="Username"
-            placeholderTextColor="#333647"
-            style={[
-              textInput.generalTextInput,
-              {marginTop: hp('2.339%'), color: '#333647'},
-            ]}
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="email-address"
-            returnKeyType="done"
-            ref={input => (this.usernameInput = input)}
-          />
-          <View style={{marginTop: hp('5%')}}>
-            <PrimaryButton title="GET STARTED"  />
-          </View>
-        </KeyboardAvoidingView>
-      </View>
+      //  <Text style={{marginBottom: hp('1.2%'), alignSelf: 'center'}}>
+       //           {/* Empty for error message of Full Name Text Input */}(Please fill this blank)
+       //         </Text>
+
+      // <View style={{flex: 1, alignItems: 'center', backgroundColor:'#E9EBF1'}}>
+      //   {/* Offline Indicator Position Absolute */}
+      //   <View style={{position:'absolute', alignSelf:'center'}}>
+      //     <OfflineIndicator />
+      //   </View>
+      //   {/* Logo Position Absolute */}
+      //   <View style={{position: 'absolute', left: '70%', top: '0%'}}>
+      //     <Logo />
+      //   </View>
+
+      //   <Text style={[styles.bcRBB, {fontSize: 50, marginTop: hp('11.78%'), marginBottom:hp('16%')}]}>
+      //     Welcome
+      //   </Text>
+      //   <KeyboardAvoidingView
+      //     enabled
+      //     behavior="position"
+      //     keyboardVerticalOffset="54"
+      //     style={{alignSelf: 'center'}}>
+      //     <Text
+      //       style={[
+      //         styles.h1PSBB,
+      //         {fontSize: 24, alignSelf: 'center'},
+      //       ]}>
+      //       ENTER FULL NAME
+      //     </Text>
+      //     <TextInput
+      //       placeholder="Full Name"
+      //       placeholderTextColor="#333647"
+      //       style={[
+      //         textInput.generalTextInput,
+      //         {marginTop: hp('2.339%'), color: '#333647'},
+      //       ]}
+      //       autoCapitalize="none"
+      //       autoCorrect={false}
+      //       keyboardType="default"
+      //       returnKeyType="next"
+      //       onSubmitEditing={() => this.usernameInput.focus()}
+      //     />
+      //     <Text
+      //       style={[
+      //         styles.h1PSBB,
+      //         {fontSize: 24, marginTop: hp('16%'), alignSelf: 'center'},
+      //       ]}>
+      //       ENTER USERNAME
+      //     </Text>
+      //     <TextInput
+      //       placeholder="Username"
+      //       placeholderTextColor="#333647"
+      //       style={[
+      //         textInput.generalTextInput,
+      //         {marginTop: hp('2.339%'), color: '#333647'},
+      //       ]}
+      //       autoCapitalize="none"
+      //       autoCorrect={false}
+      //       keyboardType="email-address"
+      //       returnKeyType="done"
+      //       ref={input => (this.usernameInput = input)}
+      //     />
+      //     <View style={{marginTop: hp('5%')}}>
+      //       <PrimaryButton title="GET STARTED"  />
+      //     </View>
+      //   </KeyboardAvoidingView>
+      // </View>

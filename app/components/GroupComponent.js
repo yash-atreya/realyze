@@ -59,7 +59,7 @@ class GroupComponent extends Component {
         {/* Text space 3/5 */}
         {/* The Children inside this tag given flex default of column therefore justifycontent and align items works in similar fashion of column layout design  */}
         <View style={{flex: 5, backgroundColor: 'none', justifyContent:'center', alignItems:'flex-start'}}>
-          <Text style={[styles.bcRBB, {fontSize: 20, color: '#000000'}]}>{this.groupName}</Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.bcRBB, {fontSize: 20, color: '#000000'}]}>{this.groupName}</Text>
         </View>
         
         {/* Next Icon space 4/5 */}

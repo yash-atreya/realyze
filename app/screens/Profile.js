@@ -30,7 +30,7 @@ import {
 import {styles, textInput, buttonStyles} from '../../styles';
 
 //Custom Components
-// import PrimaryButton from '../components/PrimaryButton';
+import PrimaryButton from '../components/PrimaryButton';
 import IconTabComponent from '../components/IconTabComponent';
 import MainHeader from '../components/MainHeader';
 
@@ -45,6 +45,7 @@ import Modal, {
   SlideAnimation,
   BottomModal,
   ModalContent,
+  ModalFooter,
 } from 'react-native-modals';
 import LinearGradient from 'react-native-linear-gradient';
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -317,12 +318,12 @@ class ProfileScreen extends Component {
         </ScrollView>
   }
   state = {
-    visible: false,
+    editProfileVisible: false,
     text: '',
   };
-  toggleModal = () => {
-    this.setState({visible: !this.state.visible});
-  };
+  // toggleModal = () => {
+  //   this.setState({visible: !this.state.visible});
+  // };
 
   render() {
     return (
@@ -357,7 +358,7 @@ class ProfileScreen extends Component {
 
           {/* EditProfile Icon 3/3 */}
           <View>
-            <TouchableOpacity onPress={this.toggleModal}>
+            <TouchableOpacity onPress={()=>this.setState({editProfileVisible: true})}>
               <FontAwesome5 name="edit" size={26} />
             </TouchableOpacity>
           </View>
@@ -402,17 +403,21 @@ class ProfileScreen extends Component {
           Icon={<Icon name="ios-stats" size={24} color={'#000000'} />}
           onPress={() => this.props.navigation.navigate('ViewInsights')}
         />
+        <IconTabComponent
+          tabTitle="Share Profile"
+          Icon={<Icon name="ios-share-alt" size={24} color={'#000000'} />}
+        />
 
         {/* Edit Profile Modal */}
         <BottomModal
-          visible={this.state.visible}
+          visible={this.state.editProfileVisible}
           onTouchOutside={() => {
-            this.setState({visible: false});
+            this.setState({editProfileVisible: false});
           }}
           swipeDirection={['up', 'down']} // can be string or an array
           swipeThreshold={200} // default 100
           onSwipeOut={event => {
-            this.setState({visible: false});
+            this.setState({editProfileVisible: false});
           }}
           modalAnimation={
             new SlideAnimation({
@@ -423,15 +428,185 @@ class ProfileScreen extends Component {
           width={wp('100%')}
           height={hp('91.2%')}
           modalStyle={{
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
+            borderTopLeftRadius: 18,
+            borderTopRightRadius: 18,
             backgroundColor: '#B5BBC6',
           }}
           hasBackdrop={true}
           hideModalContentWhileAnimating={true}>
-          {/* <ModalContent> */}
-          <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <View style={{flex: 1, marginLeft: wp('6.13%')}}>
+           <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+              <View style={{flex:1, flexDirection:'row'}}>
+                <View style={{flex: 0.5}} />
+                <View style={{flex:8, flexDirection:'column', backgroundColor:'none'}}>
+                  <View style={{flex:0.02,  backgroundColor:'none'}} />
+                  <Text style={[styles.h1PSBB, {fontSize: 30, color: '#000000'}]}>Edit Profile</Text>
+                  <View style={{flex:0.03,  backgroundColor:'none'}} />
+                  <View style={{flexDirection:'row', alignItems:'center', justifyContent:'flex-start'}}>
+                    <View style={[stylesShape.CircleShapeView2]} />
+                    <View style={{flex:0.3}} />
+                    <TouchableOpacity>
+                      <Text style={[styles.bcRBB,{fontSize: 14, color: '#000000', textDecorationLine:'underline', textDecorationColor:'#00A1ED'}]}>
+                        Change Profile Photo
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={{flex:0.03,  backgroundColor:'none'}} />
+                  <KeyboardAvoidingView style={{flexDirection:'column'}}>
+                    <Text style={[styles.bcRBB, {fontSize: 15, color:'#000000'}]}>Username: </Text>
+                    <TextInput
+                      placeholder="Username"
+                      placeholderTextColor="#333647"
+                      style={[textInput.generalTextInput, {color: '#333647', backgroundColor: '#FFFFFF', alignSelf:'center'}]}
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      keyboardType="default"
+                      returnKeyType="next"
+                      onSubmitEditing={() => this.bioInput.focus()}
+                    />
+                    <Text style={[styles.bcRMB, {color:'red', fontSize: 12}]}> Error Message will show here</Text>
+                  </KeyboardAvoidingView>
+                  <View style={{flex:0.03,  backgroundColor:'none'}} />
+                  <KeyboardAvoidingView style={{flexDirection:'column'}}>
+                    <Text style={[styles.bcRBB, {fontSize: 15, color:'#000000'}]}>Bio: </Text>
+                    <TextInput
+                      multiline={true}
+                      blurOnSubmit={true}
+                      onSubmitEditing={() => {Keyboard.dismiss();}}
+                      placeholder="Bio (Max Characters 200)"
+                      maxLength={200}
+                      placeholderTextColor="#333647"
+                      style={[
+                        textInput.generalTextInput,
+                        {color: '#333647', backgroundColor: '#FFFFFF', height: hp('16.25%'), textAlignVertical: 'top', alignSelf:'center'}]}
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      keyboardType="default"
+                      returnKeyType="done"
+                      ref={input => (this.bioInput = input)}
+                    />
+                    <Text style={[styles.bcRMB, {color:'red', fontSize: 12}]}> Error Message will show here</Text>
+                  </KeyboardAvoidingView>
+                  <View style={{flex:0.03,  backgroundColor:'none'}} />
+                  <View style={{flex: 1, backgroundColor:'none', justifyContent:'flex-end'}}>
+                    <PrimaryButton onPressPrimaryButton={()=> this.setState({editProfileVisible: false})}  title="UPDATE" />
+                  </View>
+                  <View style={{flex: 0.2, backgroundColor:'none'}} />
+                </View>
+                <View style={{flex: 0.5}} />
+              </View>
+            </TouchableWithoutFeedback>
+        </BottomModal>
+      </View>
+    );
+  }
+}
+const stylesShape = StyleSheet.create({
+  CircleShapeView: {
+    width: 228,
+    height: 228,
+    borderRadius: 228 / 2,
+    borderWidth: 5,
+    borderColor: '#00A1ED',
+    // borderColor: '#56575D',
+    // borderColor: '#333647',
+    shadowColor: '#00A1ED67',
+    shadowOffset: {width: 0, height: 7},
+    shadowRadius: 6,
+  },
+  CircleShapeView2: {
+    width: 88,
+    height: 88,
+    borderRadius: 88 / 2,
+    borderWidth: 4,
+    borderColor: '#00A1ED',
+    shadowColor: '#00A1ED67',
+    shadowOffset: {width: 0, height: 7},
+    shadowRadius: 6,
+  },
+});
+
+export default ProfileScreen;
+
+
+
+{/* <TouchableOpacity
+  onPress={()=> this.setState({editProfileVisible: false})}
+  style={{shadowColor: '#102FC6',shadowOpacity: 0.3,shadowOffset: {width: 0, height: 7},shadowRadius: 11,}}>
+  <LinearGradient
+    start={{x: 0, y: 0}}
+    end={{x: 1, y: 0}}
+    colors={['#00A1ED', '#0A3BC6']}
+    style={[buttonStyles.buttonBody,{alignSelf:'center'}]}>
+    <Text style={[styles.h1PBW, {fontSize: 24}]}>UPDATE</Text>
+  </LinearGradient>
+</TouchableOpacity> */}
+{
+  /* <Button
+title="Settings"
+onPress={() => this.props.navigation.navigate('Settings')}
+/>
+<Button title="Edit Profile" onPress={this.toggleModal} /> */
+}
+{
+  /* <Button
+          title="My Buddies"
+          onPress={() => this.props.navigation.navigate('MyBuddies')}
+        /> */
+}
+{
+  /* <Button
+          title="View Insights"
+          onPress={() => this.props.navigation.navigate('ViewInsights')}
+        /> */
+}
+{
+  /* <ModalContent> */
+}
+{/* <View
+          style={{
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            marginTop: hp('4.6%'),
+            marginLeft: wp('8.5%'),
+          }}>
+          <Text style={[styles.bcRSBB, {fontSize: 16, color: '#000000'}]}>
+            @USERNAME
+          </Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('MyBuddies')}
+            style={{flexDirection: 'row', marginTop: hp('1.8%')}}>
+            <Text style={[styles.bcRMB, {fontSize: 16, color: '#000000'}]}>
+              BUDDIES
+            </Text>
+            <Text
+              style={[
+                styles.bcRMB,
+                {fontSize: 16, color: '#000000', marginLeft: wp('4.8%')},
+              ]}>
+              155
+            </Text>
+          </TouchableOpacity>
+          <Text
+            style={[
+              styles.bcRRB,
+              {
+                fontSize: 12,
+                color: '#000000',
+                marginTop: hp('1.8%'),
+                marginRight: wp('13.5%'),
+                textAlign: 'left',
+              },
+            ]}>
+            This is where the bio will be held and shown to everyone lorem ipsum
+            lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+          </Text>
+        </View> */}
+
+
+
+
+{/* <View style={{flex: 1, marginLeft: wp('6.13%')}}>
               <View>
                 <Text
                   style={[
@@ -527,6 +702,7 @@ class ProfileScreen extends Component {
                 />
               </KeyboardAvoidingView>
               {/* {console.log(this.state.text)} */}
+            //   <ModalFooter>
               <TouchableOpacity
                 onPress={() => this.passData()}
                 style={{
@@ -534,7 +710,7 @@ class ProfileScreen extends Component {
                   shadowOpacity: 0.3,
                   shadowOffset: {width: 0, height: 7},
                   shadowRadius: 11,
-                  marginTop: Platform.OS === 'ios' ? hp('20%') : hp('20%'),
+                  // marginTop: Platform.OS === 'ios' ? hp('20%') : hp('20%'),
                   marginRight: 0,
                 }}>
                 <LinearGradient
@@ -551,99 +727,5 @@ class ProfileScreen extends Component {
                   <Text style={[styles.h1PBW, {fontSize: 24}]}>SAVE</Text>
                 </LinearGradient>
               </TouchableOpacity>
-            </View>
-          </TouchableWithoutFeedback>
-        </BottomModal>
-      </View>
-    );
-  }
-}
-const stylesShape = StyleSheet.create({
-  CircleShapeView: {
-    width: 228,
-    height: 228,
-    borderRadius: 228 / 2,
-    borderWidth: 5,
-    borderColor: '#00A1ED',
-    // borderColor: '#56575D',
-    // borderColor: '#333647',
-    shadowColor: '#00A1ED67',
-    shadowOffset: {width: 0, height: 7},
-    shadowRadius: 6,
-  },
-  CircleShapeView2: {
-    width: 110,
-    height: 110,
-    borderRadius: 110 / 2,
-    borderWidth: 4,
-    borderColor: '#00A1ED',
-    shadowColor: '#00A1ED67',
-    shadowOffset: {width: 0, height: 7},
-    shadowRadius: 6,
-  },
-});
-
-export default ProfileScreen;
-
-{
-  /* <Button
-title="Settings"
-onPress={() => this.props.navigation.navigate('Settings')}
-/>
-<Button title="Edit Profile" onPress={this.toggleModal} /> */
-}
-{
-  /* <Button
-          title="My Buddies"
-          onPress={() => this.props.navigation.navigate('MyBuddies')}
-        /> */
-}
-{
-  /* <Button
-          title="View Insights"
-          onPress={() => this.props.navigation.navigate('ViewInsights')}
-        /> */
-}
-{
-  /* <ModalContent> */
-}
-{/* <View
-          style={{
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
-            marginTop: hp('4.6%'),
-            marginLeft: wp('8.5%'),
-          }}>
-          <Text style={[styles.bcRSBB, {fontSize: 16, color: '#000000'}]}>
-            @USERNAME
-          </Text>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('MyBuddies')}
-            style={{flexDirection: 'row', marginTop: hp('1.8%')}}>
-            <Text style={[styles.bcRMB, {fontSize: 16, color: '#000000'}]}>
-              BUDDIES
-            </Text>
-            <Text
-              style={[
-                styles.bcRMB,
-                {fontSize: 16, color: '#000000', marginLeft: wp('4.8%')},
-              ]}>
-              155
-            </Text>
-          </TouchableOpacity>
-          <Text
-            style={[
-              styles.bcRRB,
-              {
-                fontSize: 12,
-                color: '#000000',
-                marginTop: hp('1.8%'),
-                marginRight: wp('13.5%'),
-                textAlign: 'left',
-              },
-            ]}>
-            This is where the bio will be held and shown to everyone lorem ipsum
-            lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          </Text>
-        </View> */}
+            //   </ModalFooter>
+            // </View> */}

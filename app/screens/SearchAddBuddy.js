@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, TextInput} from 'react-native';
 
 //3rd Party Libraries
 import {
@@ -11,13 +11,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 //Custom External StyleSheet
 // import {styles, textInput, buttonStyles} from '../../styles';
+import {textInput} from '../../styles';
 
 //Custom Components
 // import PrimaryButton from '../components/PrimaryButton';
 import SecondaryHeader from '../components/SecondaryHeader';
 import ProfileComponent from '../components/ProfileComponent';
-import { TextInput } from 'react-native-gesture-handler';
-import { textInput } from '../../styles';
 
 class SearchAddBuddyScreen extends Component {
   constructor(props) {
@@ -29,6 +28,7 @@ class SearchAddBuddyScreen extends Component {
       <View>
         <SecondaryHeader secondaryHeaderTitle="Search Buddies" />
         <TextInput
+          placeholderTextColor="#333647"
           style={[textInput.generalTextInput, {alignSelf: 'center'}]}
           placeholder="Search"
         />

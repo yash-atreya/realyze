@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
@@ -16,12 +15,12 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 // import {styles, textInput, buttonStyles} from '../../styles';
 import {styles} from '../../styles';
 
-class ProfileComponent extends Component {
+class BuddyAddComponent extends Component {
   constructor(props) {
     super(props);
     this.headerTitle = this.props.headerTitle;
     this.onPressBackButton = this.props.onPressBackButton;
-    this.onPressUserProfile = this.props.onPressUserProfile
+    this.onUserProfilePress = this.props.onUserProfilePress;
   }
 
   render() {
@@ -36,14 +35,11 @@ class ProfileComponent extends Component {
           marginBottom: 12,
         }}>
         {/* Left Main Spacer, First Part of the main container 1/4*/}
-        <View style={{flex: 0.5, backgroundColor: 'none'}} />
+        {/* <View style={{flex: 0.5, backgroundColor: 'pink'}} /> */}
 
         {/* Profile and Text main container, Second Part of the main container 2/4 */}
         {/* <View style={{flex: 4, flexDirection:'row', backgroundColor: 'purple'}}> */}
-        <TouchableOpacity
-          // onPress={() => this.props.navigation.navigate(`${this.onPress}`)}
-          // onPress={() => this.props.navigation.navigate('UserProfile')}
-          onPress={this.onPressUserProfile}
+        <View
           style={{
             flex: 6,
             flexDirection: 'row',
@@ -106,7 +102,7 @@ class ProfileComponent extends Component {
           {/* d-part-inside Second Main Part*/}
           {/* Middle Spacer between text and icon*/}
           <View style={{flex: 0.03, backgroundColor: 'none'}} />
-        </TouchableOpacity>
+        </View>
         {/* </View> */}
 
         {/* Checkboxex, Third Part of the main container 3/4 */}
@@ -114,30 +110,27 @@ class ProfileComponent extends Component {
           style={{
             flex: 2,
             // backgroundColor: 'purple',
-            justifyContent: 'space-around',
+            justifyContent: 'flex-end',
             alignItems: 'center',
             flexDirection: 'row',
           }}>
           <TouchableOpacity>
-            <Icon name="ios-checkmark" color="#0DE51E" size={61} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Icon name="ios-close" color="#FF0000" size={61} />
+            <MaterialIcon name="add-box" color="#000000" size={40} />
           </TouchableOpacity>
         </View>
 
         {/* Right Main Spacer 4/4 */}
-        <View style={{flex: 0.5, backgroundColor: 'none'}} />
+        {/* <View style={{flex: 0.5, backgroundColor: 'pink'}} /> */}
       </View>
     );
   }
 }
 const stylesShape = StyleSheet.create({
   CircleShapeView: {
-    width: 60,
-    height: 60,
-    borderRadius: 60 / 2,
-    borderWidth: 3,
+    width: 48,
+    height: 48,
+    borderRadius: 48 / 2,
+    borderWidth: 2,
     // borderColor: '#56575D',
     borderColor: '#00A1ED',
     shadowColor: '#00A1ED67',
@@ -146,33 +139,8 @@ const stylesShape = StyleSheet.create({
   },
 });
 
-export default ProfileComponent;
+export default BuddyAddComponent;
 
-// //Clicking Yes
-// <TouchableOpacity>
-// <Icon name="ios-checkmark-circle-outline" color="#0DE51E" size={42} />
-// </TouchableOpacity>
-// //Clicking No diapperar the tab
-
-// //Send Request
-// <TouchableOpacity>
-//  <FeatherIcon name="user-plus" color="#000000" size={34} />
-// </TouchableOpacity>
-// //Request Sent
-// <TouchableOpacity>
-//  <Icon name="ios-checkmark-circle-outline" color="#000000" size={42} />
-// </TouchableOpacity>
-
-// //Add User to Group
-// <TouchableOpacity>
-//  <MaterialIcon name="add-box" color="#000000" size={42} />
-// </TouchableOpacity>
-// //User Added to Group
-// <TouchableOpacity>
-//  <Icon name="ios-checkbox" color="#000000" size={42} />
-// </TouchableOpacity>
-
-//If in My Buddies Page to go tho his page
-// <TouchableOpacity>
-//   <Icon name="ios-arrow-forward" size={34} color={'#000000'} />
-// </TouchableOpacity>
+//If Buddy Already Added then
+// change <MaterialIcon name="add-box" color="#000000" size={40} />
+{/* <Icon name="ios-checkbox" color="#000000" size={40} /> */}

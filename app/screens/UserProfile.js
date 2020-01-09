@@ -17,10 +17,11 @@ import {
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import Modal, {BottomModal, SlideAnimation} from 'react-native-modals';
 
 //Custom External StyleSheet
 // import {styles, textInput, buttonStyles} from '../../styles';
-import {styles} from '../../styles';
+import {styles, buttonStyles} from '../../styles';
 
 //Custom Components
 import BuddyHeader from '../components/BuddyHeader';
@@ -150,13 +151,14 @@ class UserProfileScreen extends Component {
     this.state = {
       isBuddy: false,
       isRequestSent: true,
-    }
+      moreOptionVisibility: false,
+    };
   }
 
   render() {
     return (
       <View>
-        <BuddyHeader buddyUsername="yashatreya.ya" />
+        <BuddyHeader buddyUsername="yashatreya.ya" onPressMoreButton={() => this.setState({moreOptionVisibility: true})} />
         {/* Setting ProfilePicture and Edit Profile */}
         <View
           style={{
@@ -222,6 +224,54 @@ class UserProfileScreen extends Component {
               <PrimaryButton title="Send Request" />
           )}
         </View>
+
+
+        {/* More Options Button Modal */}
+        <BottomModal
+          visible={this.state.moreOptionVisibility}
+          onTouchOutside={() => {
+            this.setState({moreOptionVisibility: false});
+          }}
+          height={hp('30%')}
+          swipeDirection={['up', 'down']} // can be string or an array
+          swipeThreshold={200} // default 100
+          onSwipeOut={event => {
+            this.setState({moreOptionVisibility: false});
+          }}
+          modalAnimation={
+            new SlideAnimation({
+              slideFrom: 'bottom',
+            })
+          }
+          modalStyle={{
+            borderTopLeftRadius: 0,
+            borderTopRightRadius: 0,
+            backgroundColor: 'transparent',
+            flexDirection: 'column',
+          }}>
+          <View style={{flexDirection:'row', alignItems:'center', backgroundColor:'none', flex:1}}>
+            <View style={{flex:0.5}} />
+            <View style={{flex:8, flexDirection:'column'}}>
+              <View style={{flex:1, justifyContent:'center'}}>
+              <TouchableOpacity style={[buttonStyles.buttonBody, {backgroundColor:'#00A1ED'}]}>
+                <Text style={[styles.h1PBW, {fontSize: 20, color:'#FFFFFF'}]}>Share Profile</Text>
+              </TouchableOpacity>
+              </View>
+              <View style={{flex:1, justifyContent:'center'}}>
+              <TouchableOpacity style={[buttonStyles.buttonBody, {backgroundColor:'#00A1ED'}]}>
+                <Text style={[styles.h1PBW, {fontSize: 20, color:'#FFFFFF'}]}>Remove Buddy</Text>
+              </TouchableOpacity>
+              </View>
+              <View style={{flex:2, justifyContent:'center'}}>
+              <TouchableOpacity onPress={() => this.setState({moreOptionVisibility: false})}
+              style={[buttonStyles.buttonBody, {backgroundColor:'#00A1ED'}]}>
+                <Text style={[styles.h1PBW, {fontSize: 20, color:'#FFFFFF'}]}>Cancel</Text>
+              </TouchableOpacity>
+              </View>
+            </View>
+            <View style={{flex: 0.5}} />
+          </View>
+        </BottomModal>
       </View>
     );
   }
