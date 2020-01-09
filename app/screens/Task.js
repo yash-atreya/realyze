@@ -661,6 +661,18 @@ class TaskScreen extends Component {
 
             <View style={{marginBottom: 20}}>
               <Text style={[styles.h1PBB, {fontSize: 16}]}>Logs: </Text>
+              <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+              <TextInput
+              placeholder="Log your Progress (Max Characters 140)" 
+              style={[textInput.generalTextInput, {width: wp('75%')}]} 
+              maxLength={140}
+              returnKeyType="done" />
+              <View style={{alignSelf:'center'}}>
+                <TouchableOpacity style={{backgroundColor:'#00A1EDC4', width: wp('12%'), height: 40, alignItems:'center', justifyContent:'center', borderRadius: Platform.OS === 'ios' ? 5 : 1}}>
+                  <Text style={[styles.bcRBB, {color:'white'}]}>Log it</Text>
+                </TouchableOpacity>
+              </View>
+              </View>
             </View>
             
             <View style={{marginBottom: 20}}>
