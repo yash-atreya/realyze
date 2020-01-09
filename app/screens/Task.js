@@ -35,6 +35,7 @@ import AllTasksComponent from '../components/AllTasksComponent';
 import BuddyHeader from '../components/BuddyHeader';
 import UserProfileName from '../components/UserProfileNameComponent';
 import ReminderVoicemail from '../components/ReminderVoicemailComponent';
+import { ScrollView } from 'react-native-gesture-handler';
 
 var Sound = require('react-native-sound');
 const audioRecorderPlayer = new AudioRecorderPlayer();
@@ -639,6 +640,7 @@ class TaskScreen extends Component {
     return (
       <View>
         <BuddyHeader buddyUsername="Task" onPressMoreButton={()=> this.setState({moreOptionsVisible: true})} />
+        <ScrollView>
         <AllTasksComponent />
         <View style={{flexDirection: 'row'}}>
           <View style={{flex: 0.5}} />
@@ -657,10 +659,18 @@ class TaskScreen extends Component {
               <UserProfileName/>
             </View>
 
-            <Text style={[styles.h1PBB, {fontSize: 16}]}>Logs: </Text>
+            <View style={{marginBottom: 20}}>
+              <Text style={[styles.h1PBB, {fontSize: 16}]}>Logs: </Text>
+            </View>
+            
+            <View style={{marginBottom: 20}}>
+              <Text style={[styles.h1PBB, {fontSize: 16}]}>Reminders: </Text>
+            </View>
+
           </View>
           <View style={{flex: 0.5}} />
         </View>
+        </ScrollView>
         <ReminderVoicemail />
 
         {/* More Options Button Modal */}
