@@ -111,7 +111,7 @@ const textInput = StyleSheet.create({
 });
 const buttonStyles = StyleSheet.create({
   buttonBody: {
-    width: wp('84.26'),
+    width: wp('88.8'),
     // height: hp('5.9%'),
     // width: 328,
     height: 48,

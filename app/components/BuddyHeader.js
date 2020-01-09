@@ -19,7 +19,7 @@ class BuddyHeader extends Component {
   constructor(props) {
     super(props);
     this.buddyUsername = this.props.buddyUsername;
-    this.onPress = this.props.onPressMoreButton;
+    this.onPressMoreButton = this.props.onPressMoreButton;
   }
   render() {
     return (
@@ -48,7 +48,10 @@ class BuddyHeader extends Component {
         {/* Text space 3/5 */}
         {/* The Children inside this tag given flex default of column therefore justifycontent and align items works in similar fashion of column layout design  */}
         <View style={{flex: 6, backgroundColor: 'none', justifyContent:'center', alignItems:'center'}}>
-          <Text style={[styles.h1PMB, {fontSize: 20, color: '#000000', textAlign:'center'}]}>{this.buddyUsername}</Text>
+          <Text 
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={[styles.h1PMB, {fontSize: 20, color: '#000000', textAlign:'center'}]}>{this.buddyUsername}</Text>
         </View>
         
         {/* Next Icon space 4/5 */}

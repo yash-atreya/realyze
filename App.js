@@ -41,6 +41,7 @@ import UsernameScreen from './app/screens/Username';
 
 import UserProfileScreen from './app/screens/UserProfile';
 import SearchAddBuddyScreen from './app/screens/SearchAddBuddy';
+import TaskScreen from './app/screens/Task';
 
 // const App: () => React$Node = () => {
 //   return <View />;
@@ -183,18 +184,49 @@ NotificationsStack.navigationOptions = {
   tabBarIcon: ({tintColor}) => (
     <Icon name="ios-notifications" color={tintColor} size={24} />
   ),
-}
-const MainTabStack = createMaterialTopTabNavigator(
+};
+
+const AllTasksStack = createStackNavigator(
   {
     AllTasks: {
       screen: AllTasksScreen,
       navigationOptions: {
-        tabBarLabel: 'Tasks',
-        tabBarIcon: ({tintColor}) => (
-          <FontAwesome5 name="list-ul" color={tintColor} size={24} />
-        ),
+        header: null,
       },
     },
+    Task: {
+      screen: TaskScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
+  },
+  {
+    cardStyle: {
+      backgroundColor: '#E9EBF1',
+    },
+  },
+);
+
+AllTasksStack.navigationOptions = {
+  tabBarLabel: 'All Tasks',
+  tabBarIcon: ({tintColor}) => (
+    <FontAwesome5 name="list-ul" color={tintColor} size={24} />
+  ),
+};
+
+const MainTabStack = createMaterialTopTabNavigator(
+  {
+    AllTasksStack,
+    // AllTasks: {
+    //   screen: AllTasksScreen,
+    //   navigationOptions: {
+    //     tabBarLabel: 'Tasks',
+    //     tabBarIcon: ({tintColor}) => (
+    //       <FontAwesome5 name="list-ul" color={tintColor} size={24} />
+    //     ),
+    //   },
+    // },
     AllGroups: {
       screen: AllGroupsScreen,
       title: 'Groups',
@@ -230,9 +262,9 @@ const MainTabStack = createMaterialTopTabNavigator(
   },
   {
     //Router  Config
-    initialRouteName: 'AllTasks',
+    initialRouteName: 'AllTasksStack',
     shifting: true,
-    order: ['AllGroups', 'AllTasks', 'NotificationsStack', 'ProfileStack'],
+    order: ['AllGroups', 'AllTasksStack', 'NotificationsStack', 'ProfileStack'],
     tabBarPosition: 'bottom',
     tabBarOptions: {
       activeTintColor: '#00A1ED',

@@ -38,12 +38,15 @@ class NotificationComponent extends Component {
         <View style={{flex: 0.5, backgroundColor: 'none'}} />
         {/* middle part of column main stack 1/3 */}
         <View style={{flex: 8, flexDirection: 'column'}}>
-          
           {/* Task title of column main Stack */}
           <TouchableOpacity>
-            <Text>
-            <Text style={[styles.bcRBB, {fontSize: 12, color:'#000000'}]}>Task: </Text>  
-            <Text style={[styles.bcRMB, {fontSize: 12, color:'#000000'}]}>This is the task cajnsjvnjand andjna sjnfd djnvajk</Text>
+            <Text numberOfLines={1} ellipsizeMode="tail">
+              <Text style={[styles.bcRBB, {fontSize: 12, color: '#000000'}]}>
+                Task:{' '}
+              </Text>
+              <Text style={[styles.bcRMB, {fontSize: 12, color: '#000000'}]}>
+                This is the task cajnsjvnjand andjna sjnfd djnvajk
+              </Text>
             </Text>
           </TouchableOpacity>
 

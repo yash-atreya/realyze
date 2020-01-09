@@ -94,3 +94,7 @@ class LogInScreen extends Component {
 }
 
 export default LogInScreen;
+
+
+//    Instead Of "We use Passwordless Authentication" show the following text below if an error is detected
+// <Text style={[styles.bcRMB, {color:'red', fontSize: 12, marginBottom: hp('1.2%')}]}> Error Message will show here</Text>

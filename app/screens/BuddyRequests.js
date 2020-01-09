@@ -31,9 +31,9 @@ class BuddyRequestsScreen extends Component {
       <View>
         <SecondaryHeader secondaryHeaderTitle="Requests" />
         <ScrollView>
-          <ProfileComponent />
-          <ProfileComponent />
-          <ProfileComponent />
+          <ProfileComponent onPressUserProfile={()=> this.props.navigation.navigate('UserProfile')}/>
+          <ProfileComponent onPressUserProfile={()=> this.props.navigation.navigate('UserProfile')}/>
+          <ProfileComponent onPressUserProfile={()=> this.props.navigation.navigate('UserProfile')}/>
         </ScrollView>
       </View>
     );

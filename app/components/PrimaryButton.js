@@ -18,7 +18,7 @@ class PrimaryButton extends React.Component {
   constructor(props) {
     super(props);
     this.title = this.props.title;
-    this.code = this.props.navigation.getParam('code');
+    // this.code = this.props.navigation.getParam('code');
     this.onPressPrimaryButton = this.props.onPressPrimaryButton;
   }
   render() {
@@ -43,11 +43,12 @@ class PrimaryButton extends React.Component {
           end={{x: 1, y: 0}}
           colors={['#00A1ED', '#0A3BC6']}
           style={[buttonStyles.buttonBody]}>
-          {this.code === 1 ? (
+          {/* {this.code === 1 ? (
             <Text style={[styles.h1PBW, {fontSize: 20}]}>{this.title}</Text>
           ) : (
             <Text style={[styles.h1PBW, {fontSize: 24}]}>{this.title}</Text>
-          )}
+          )} */}
+          <Text style={[styles.h1PBW, {fontSize: 22}]}>{this.title}</Text>
         </LinearGradient>
       </TouchableOpacity>
       //   </View>
@@ -68,4 +69,4 @@ const buttonStyles = StyleSheet.create({
   },
 });
 
-export default withNavigation(PrimaryButton);
+export default PrimaryButton;
