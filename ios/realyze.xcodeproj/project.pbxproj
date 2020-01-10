@@ -20,6 +20,7 @@
 		84740E226A6F808EAFF288C4 /* libPods-realyze-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E00460111229448173F8AD6A /* libPods-realyze-tvOSTests.a */; };
 		8986DE5E238B31F9001B8F5F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8986DE5D238B31F9001B8F5F /* GoogleService-Info.plist */; };
 		8986DE5F238B31F9001B8F5F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8986DE5D238B31F9001B8F5F /* GoogleService-Info.plist */; };
+		89A5EFA423C851D400CCB9E1 /* realyze.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 8986DE15238B1515001B8F5F /* realyze.entitlements */; };
 		89F348EC23C5FF88003E0E87 /* libRNPermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F348EB23C5FF88003E0E87 /* libRNPermissions.a */; };
 		90A51E66746239418A97B72E /* libPods-realyzeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A2A254049C51ABAB2D028B /* libPods-realyzeTests.a */; };
 		D92D750102930FF57FC38672 /* libPods-realyze.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB88DD8FD6E658003AF5DBB6 /* libPods-realyze.a */; };
@@ -400,6 +401,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89A5EFA423C851D400CCB9E1 /* realyze.entitlements in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				8986DE5E238B31F9001B8F5F /* GoogleService-Info.plist in Resources */,
@@ -535,6 +537,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-realyze/Pods-realyze-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/QBImagePickerController/QBImagePicker.bundle",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
@@ -551,10 +554,12 @@
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+				"${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
@@ -571,6 +576,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RSKImageCropperStrings.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Cpp.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
