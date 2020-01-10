@@ -195,7 +195,6 @@ android {
 dependencies {
     implementation project(':react-native-sound')
     implementation project(':react-native-appearance')
-    implementation project(':react-native-onesignal')
     implementation project(':@react-native-community_netinfo')
     //
     implementation fileTree(dir: "libs", include: ["*.jar"])
