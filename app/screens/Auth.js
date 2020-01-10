@@ -17,7 +17,7 @@ class AuthScreen extends Component {
     var actionCodeSettings = {
       // URL you want to redirect back to. The domain (www.example.com) for this
       // URL must be whitelisted in the Firebase Console.
-      url: 'https://realyze-07.firebaseapp.com',
+      url: 'https://realyze.page.link/authentication_link',
       // This must be true.
       handleCodeInApp: true,
       iOS: {
@@ -43,29 +43,29 @@ class AuthScreen extends Component {
     }
   }
 
-  handleAuthLink = async link => {
-    console.log('link: ', link.url);
+  //   handleAuthLink = async link => {
+  //     console.log('link: ', link.url);
 
-    if (auth().isSignInWithEmailLink(link)) {
-      console.log('link is tru');
-      try {
-        await auth()
-          .signInWithEmailLink(`${this.state.email}`, link.url)
-          .then(() => {
-            console.log('USer created');
-          })
-          .catch(err => {
-            console.log('EROR: ', err);
-          });
-      } catch (err) {
-        console.log('err: ', err);
-      }
-    } else {
-      console.log('link is false');
-    }
-  };
+  //     if (auth().isSignInWithEmailLink(link)) {
+  //       console.log('link is tru');
+  //       try {
+  //         await auth()
+  //           .signInWithEmailLink(`${this.state.email}`, link.url)
+  //           .then(() => {
+  //             console.log('USer created');
+  //           })
+  //           .catch(err => {
+  //             console.log('EROR: ', err);
+  //           });
+  //       } catch (err) {
+  //         console.log('err: ', err);
+  //       }
+  //     } else {
+  //       console.log('link is false');
+  //     }
+  //   };
 
-  authLink = dynamicLinks().onLink(this.handleAuthLink);
+  //   authLink = dynamicLinks().onLink(this.handleAuthLink);
 
   render() {
     return (
@@ -81,3 +81,4 @@ class AuthScreen extends Component {
     );
   }
 }
+export default AuthScreen;

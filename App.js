@@ -34,6 +34,8 @@ import TestScreen from './app/screens/Test';
 import ReminderTestScreen from './app/screens/ReminderTest';
 import UserTasksScreen from './app/screens/UserTasks';
 import ProfileDownloadScreen from './app/screens/ProfileDownload';
+import AuthScreen from './app/screens/Auth';
+import AsyncStorage from '@react-native-community/async-storage';
 
 firestore.CACHE_SIZE_UNLIMITED;
 const requestPermission = async () => {
@@ -115,8 +117,27 @@ const AuthLoadingScreen = props => {
   );
 };
 
-const handleLink = link => {
+const handleLink = async link => {
   console.log('opened Link: ', link.url);
+  if (auth().isSignInWithEmailLink(link.url)) {
+    console.log('link is tru');
+    try {
+      const email = await AsyncStorage.getItem('email');
+      console.log('email: ', email);
+      await auth()
+        .signInWithEmailLink(`${email}`, link.url)
+        .then(() => {
+          console.log('USer created');
+        })
+        .catch(err => {
+          console.log('EROR: ', err);
+        });
+    } catch (err) {
+      console.log('err: ', err);
+    }
+  } else {
+    console.log('link is false');
+  }
 };
 
 const link = dynamicLinks().onLink(handleLink);
@@ -129,9 +150,12 @@ const AuthStack = createStackNavigator(
     SignUp: {
       screen: SignUpScreen,
     },
+    Auth: {
+      screen: AuthScreen,
+    },
   },
   {
-    initialRouteName: 'LogIn',
+    initialRouteName: 'Auth',
   },
 );
 
