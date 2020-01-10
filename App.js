@@ -6,6 +6,7 @@ import auth from '@react-native-firebase/auth';
 import messaging from '@react-native-firebase/messaging';
 import firestore from '@react-native-firebase/firestore';
 import functions from '@react-native-firebase/functions';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
 
 //SCREEN IMPORTS
 import LogInScreen from './app/screens/LogIn';
@@ -113,6 +114,12 @@ const AuthLoadingScreen = props => {
     </View>
   );
 };
+
+const handleLink = link => {
+  console.log('opened Link: ', link.url);
+};
+
+const link = dynamicLinks().onLink(handleLink);
 
 const AuthStack = createStackNavigator(
   {

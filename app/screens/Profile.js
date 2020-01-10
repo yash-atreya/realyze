@@ -4,7 +4,7 @@ import {
   Text,
   Button,
   Image,
-  TouchableOpacity,
+  Share,
   Platform,
   ScrollView,
 } from 'react-native';
@@ -12,6 +12,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import RNPermissions, {RESULTS} from 'react-native-permissions';
 import auth from '@react-native-firebase/auth';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
 
 class ProfileScreen extends Component {
   constructor(props) {
@@ -234,6 +235,19 @@ class ProfileScreen extends Component {
     this.props.navigation.navigate('ReAuth', {code: 3});
   }
 
+  onShareProfile() {
+    dynamicLinks()
+      .buildLink({
+        link: 'https://realyze-07.firebaseapp.com',
+        domainUriPrefix: 'https://realyze.page.link',
+      })
+      .then(link => {
+        Share.share({
+          message: `Follow this link: ${link}`,
+        });
+      });
+  }
+
   render() {
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -262,6 +276,7 @@ class ProfileScreen extends Component {
             title="Downloaded Profile"
             onPress={() => this.props.navigation.navigate('ProfileDownload')}
           />
+          <Button title="Share" onPress={() => this.onShareProfile()} />
         </ScrollView>
       </View>
     );
